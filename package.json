@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "nuxt dev --open",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "serve": "sirv .output/public"
   },
   "devDependencies": {
     "@nuxt/content": "^2.0.1",
