@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
   },
-  modules: ['@nuxt/content'],
+  modules: ['@nuxt/content', '@nuxtjs/robots'],
   nitro: {
     prerender: {
       routes: ['/sitemap.xml'],
