@@ -3,7 +3,7 @@ const { data } = await useAsyncData('articles', () => queryContent('/blog').sort
 </script>
 
 <template>
-  <main>
+  <main :class="$style.test">
     <h1>Index</h1>
     <div>
       <h3 v-for="article in data" :key="article._id">
@@ -12,5 +12,6 @@ const { data } = await useAsyncData('articles', () => queryContent('/blog').sort
         </NuxtLink>
       </h3>
     </div>
+    <input type="text" class="placeholder-red-700" placeholder="asbc" />
   </main>
 </template>
