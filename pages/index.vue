@@ -3,7 +3,7 @@ const { data } = await useAsyncData('articles', () => queryContent('/blog').sort
 </script>
 
 <template>
-  <main :class="$style.test">
+  <main>
     <h1>Index</h1>
     <div>
       <h3 v-for="article in data" :key="article._id">
