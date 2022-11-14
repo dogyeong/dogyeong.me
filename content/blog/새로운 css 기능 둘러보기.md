@@ -1,0 +1,65 @@
+최근에 [State of CSS 2022](https://web.dev/state-of-css-2022/)를 봤는데, 거기에 소개된 기능 중 현재 최신 브라우저에서 사용해 볼 만 하면서, 주관적으로 유용해 보이는 것들을 소개한다.
+
+## [@layer](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer)
+
+전역 스타일 간에 우선순위를 지정할 수 있는 새로운 방법이다.
+
+규칙들을 간단히 살펴보면 다음과 같다.
+
+- 레이어에 속하지 않는 css 규칙은 레이어에 속해있는 규칙보다 우선순위가 높다.
+- `@layer theme, app;` 과 같은 방식으로 레이어간의 우선순위를 지정할 수 있다. 뒤에 명시된 레이어의 우선순위가 높다.
+- [CSS 명시도](https://developer.mozilla.org/ko/docs/Web/CSS/Specificity)가 낮더라도, 우선순위가 높은 레이어의 스타일이 적용된다.
+- `@layer { ... }` 처럼 익명 레이어를 선언할 수 있다. 익명 레이어는 이름이 있는 레이어보다 우선순위가 높고, 익명 레이어 사이에서는 뒤에 선언된 익명 레이어의 우선순위가 높다.
+
+아래 예시를 브라우저 개발자 도구에서 보면, 레이어별로 우선순위가 어떻게 되는지 확인할 수 있다. 
+
+```css
+@layer theme, app;
+
+div {
+  background: yellow;
+}
+
+@layer {
+  div {
+    background: violet;
+  }
+}
+
+@layer app {
+  div {
+    background: green;
+  }
+}
+
+@layer theme {
+  div#box {
+    background: blue;
+  }
+}
+
+@layer {
+  div {
+    background: orange;
+  }
+}
+```
+![](https://velog.velcdn.com/images/shroad1802/post/403a0ad7-71ab-4cec-9fb3-84d946a2dba4/image.png)
+
+## [accent-color](https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color)
+
+몇몇 UI 입력 요소들의 색상을 조절할 수 있는 속성이다. 원래 체크박스같은 입력폼의 스타일을 수정하는 방법들이 까다로웠는데, `accent-color`의 등장으로 간단하게 브랜딩 할 수 있게 되었다.
+
+예시
+
+```css
+body {
+  accent-color: red;
+}
+```
+
+![](https://velog.velcdn.com/images/shroad1802/post/2a013cdc-b86f-472c-99f8-038098525ebe/image.png)
+
+
+
+
