@@ -12,6 +12,5 @@ const { data } = await useAsyncData('articles', () => queryContent('/blog').sort
         </NuxtLink>
       </h3>
     </div>
-    <input type="text" class="placeholder-red-700" placeholder="asbc" />
   </main>
 </template>
