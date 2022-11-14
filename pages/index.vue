@@ -6,11 +6,13 @@ const { data } = await useAsyncData('articles', () => queryContent('/blog').sort
   <main>
     <h1>Index</h1>
     <div>
-      <h3 v-for="article in data" :key="article._id">
-        <NuxtLink :to="article._path">
-          {{ article.title }}
-        </NuxtLink>
-      </h3>
+      <PostCard
+        v-for="article in data"
+        :key="article._id"
+        :to="article._path"
+        image-src="/images/sample.jpeg"
+        :title="article.title"
+      />
     </div>
   </main>
 </template>
