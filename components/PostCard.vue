@@ -5,9 +5,9 @@ defineProps<{ title: string; to: string; imageSrc: string }>()
 <template>
   <article :class="$style.wrapper">
     <NuxtLink :to="to" :class="$style.link">
-      <sapn :class="$style.imgWrapper">
+      <span :class="$style.imgWrapper">
         <img :src="imageSrc" :class="$style.img" />
-      </sapn>
+      </span>
       <span :class="$style.dimmed" />
       <h3 :class="$style.title">{{ title }}</h3>
     </NuxtLink>
@@ -85,6 +85,6 @@ defineProps<{ title: string; to: string; imageSrc: string }>()
   padding: 32px;
   font-size: 32px;
   font-weight: 400;
-  color: white;
+  color: $grey-0;
 }
 </style>
