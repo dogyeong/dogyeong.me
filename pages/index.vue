@@ -6,13 +6,15 @@ const { data } = await useAsyncData('articles', () => queryContent('/blog').sort
   <main>
     <h1>Index</h1>
     <div>
-      <PostCard
-        v-for="article in data"
-        :key="article._id"
-        :to="article._path"
-        image-src="/images/sample.jpeg"
-        :title="article.title"
-      />
+      <PostCardList>
+        <PostCard
+          v-for="article in data"
+          :key="article._id"
+          :to="article._path || '/'"
+          :image-src="article.thumbnail || '/images/sample.jpeg'"
+          :title="article.title || ''"
+        />
+      </PostCardList>
     </div>
   </main>
 </template>
