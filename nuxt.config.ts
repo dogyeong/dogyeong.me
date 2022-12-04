@@ -9,4 +9,18 @@ export default defineNuxtConfig({
       routes: ['/sitemap.xml'],
     },
   },
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/assets/styles.scss" as *;',
+        },
+      },
+    },
+  },
+  content: {
+    highlight: {
+      theme: 'github-dark',
+    },
+  },
 })
