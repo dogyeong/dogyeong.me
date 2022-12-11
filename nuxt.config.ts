@@ -4,6 +4,9 @@ export default defineNuxtConfig({
     strict: true,
   },
   modules: ['@nuxt/content', '@nuxtjs/robots', 'nuxt-svgo'],
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
+  },
   nitro: {
     prerender: {
       routes: ['/sitemap.xml'],
