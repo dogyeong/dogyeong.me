@@ -3,11 +3,17 @@ import '~/assets/reset.scss'
 </script>
 
 <template>
-  <div>
+  <div :class="$style.wrapper">
     <HeaderBar />
     <NuxtPage />
   </div>
 </template>
+
+<style lang="scss" module>
+.wrapper {
+  background-color: $grey-9;
+}
+</style>
 
 <style>
 .page-enter-active,
