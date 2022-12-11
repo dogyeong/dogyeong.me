@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
   },
-  modules: ['@nuxt/content', '@nuxtjs/robots'],
+  modules: ['@nuxt/content', '@nuxtjs/robots', 'nuxt-svgo'],
   nitro: {
     prerender: {
       routes: ['/sitemap.xml'],
@@ -21,6 +21,20 @@ export default defineNuxtConfig({
   content: {
     highlight: {
       theme: 'github-dark',
+    },
+  },
+  svgo: {
+    svgoConfig: {
+      plugins: [
+        { name: 'removeDimensions', params: true },
+        { name: 'removeViewBox', params: false },
+        {
+          name: 'removeAttrs',
+          params: {
+            attrs: ['svg:fill', 'path:fill'],
+          },
+        },
+      ],
     },
   },
 })
