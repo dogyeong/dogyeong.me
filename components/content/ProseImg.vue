@@ -1,7 +1,3 @@
-<template>
-  <img :src="src" :alt="alt" :width="width" :height="height" />
-</template>
-
 <script setup lang="ts">
 defineProps({
   src: {
@@ -22,3 +18,15 @@ defineProps({
   },
 })
 </script>
+
+<template>
+  <img :src="src" :alt="alt" :width="width" :height="height" :class="$style.img" />
+</template>
+
+<style lang="scss" module>
+.img {
+  padding: 2rem 0;
+  width: 100%;
+  object-fit: cover;
+}
+</style>
