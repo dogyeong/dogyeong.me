@@ -1,5 +1,5 @@
 <template>
-  <h3 :id="id">
+  <h3 :id="id" :class="$style.h3">
     <a v-if="generate" :href="`#${id}`">
       <slot />
     </a>
@@ -14,3 +14,11 @@ const heading = 3
 const { anchorLinks } = useRuntimeConfig().public.content
 const generate = anchorLinks?.depth >= heading && !anchorLinks?.exclude.includes(heading)
 </script>
+
+<style lang="scss" module>
+.h3 {
+  font-size: 1.625rem;
+  font-weight: 500;
+  color: $grey-1;
+}
+</style>
