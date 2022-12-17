@@ -3,15 +3,17 @@ import '~/assets/reset.scss'
 </script>
 
 <template>
-  <div :class="$style.wrapper">
+  <div>
     <HeaderBar />
     <NuxtPage />
   </div>
 </template>
 
-<style lang="scss" module>
-.wrapper {
+<style lang="scss">
+html,
+body {
   background-color: $grey-9;
+  min-height: 100vh;
 }
 </style>
 
