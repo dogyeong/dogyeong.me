@@ -6,7 +6,7 @@
 
 <style lang="scss" module>
 .blockquote {
-  background-color: $grey-8;
+  background-color: lighten($grey-9, 4%);
   margin-bottom: 2.5rem;
   padding: 2rem;
   border: 0;

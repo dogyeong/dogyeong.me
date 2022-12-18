@@ -20,5 +20,9 @@ const generate = anchorLinks?.depth >= heading && !anchorLinks?.exclude.includes
   font-size: 1.625rem;
   font-weight: 500;
   color: $grey-1;
+
+  a:hover {
+    text-decoration: underline;
+  }
 }
 </style>

@@ -22,5 +22,9 @@ const generate = anchorLinks?.depth >= heading && !anchorLinks?.exclude.includes
   margin-top: 5rem;
   margin-bottom: 2.5rem;
   color: $grey-1;
+
+  a:hover {
+    text-decoration: underline;
+  }
 }
 </style>
