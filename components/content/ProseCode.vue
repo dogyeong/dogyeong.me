@@ -36,6 +36,7 @@ export default defineComponent({
   background-color: darken($grey-9, 4%);
   border-radius: 0.5rem;
   font-size: 0.875rem;
+  overflow-x: auto;
 }
 </style>
 
