@@ -24,12 +24,26 @@ export default defineComponent({
 </script>
 
 <template>
-  <slot />
+  <div :class="$style.codeblock">
+    <slot />
+  </div>
 </template>
+
+<style lang="scss" module>
+.codeblock {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: darken($grey-9, 4%);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+}
+</style>
 
 <style>
 pre code .line {
   display: block;
   min-height: 1rem;
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 400;
 }
 </style>
