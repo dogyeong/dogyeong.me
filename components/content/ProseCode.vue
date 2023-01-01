@@ -37,6 +37,7 @@ export default defineComponent({
   border-radius: 0.5rem;
   font-size: 0.875rem;
   overflow-x: auto;
+  color: $grey-5;
 }
 </style>
 
