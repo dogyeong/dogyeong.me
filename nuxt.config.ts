@@ -24,6 +24,20 @@ export default defineNuxtConfig({
   content: {
     highlight: {
       theme: 'github-dark',
+      preload: [
+        'bash',
+        'css',
+        'html',
+        'javascript',
+        'json',
+        'markdown',
+        'scss',
+        'typescript',
+        'jsx',
+        'tsx',
+        'yaml',
+        'vue',
+      ],
     },
   },
   svgo: {
