@@ -26,26 +26,53 @@ export default defineComponent({
 <template>
   <div :class="$style.codeblock">
     <slot />
+    <span :class="$style.lang">{{ language }}</span>
   </div>
 </template>
 
 <style lang="scss" module>
 .codeblock {
-  padding: 2rem 1rem;
+  padding: 2rem 0;
   margin-bottom: 2rem;
   background-color: darken($grey-9, 4%);
   border-radius: 0.5rem;
   font-size: 0.875rem;
   overflow-x: auto;
   color: $grey-5;
+  counter-reset: code-line;
+  line-height: 1.4;
+  position: relative;
+}
+
+.lang {
+  position: absolute;
+  bottom: 8px;
+  right: 24px;
+  display: inline-block;
+  font-size: 0.75rem;
+  text-align: right;
+  font-family: 'Source Code Pro', monospace;
+  color: $grey-6;
 }
 </style>
 
-<style>
+<style lang="scss">
 pre code .line {
   display: block;
   min-height: 1rem;
   font-family: 'Source Code Pro', monospace;
   font-weight: 400;
+  counter-increment: code-line;
+
+  &::before {
+    content: counter(code-line);
+    display: inline-block;
+    width: 2rem;
+    padding: 0;
+    margin: 0;
+    padding-right: 1.5rem;
+    text-align: right;
+    color: $grey-7;
+  }
 }
 </style>
