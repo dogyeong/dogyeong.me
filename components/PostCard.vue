@@ -6,9 +6,10 @@ defineProps<{ title: string; to: string; imageSrc: string }>()
   <article :class="$style.wrapper">
     <NuxtLink :to="to" :class="$style.link">
       <span :class="$style.imgWrapper">
-        <img :src="imageSrc" :class="$style.img" />
+        <span :class="$style.img">
+          <img :src="imageSrc" />
+        </span>
       </span>
-      <span :class="$style.dimmed" />
       <h3 :class="$style.title">{{ title }}</h3>
     </NuxtLink>
   </article>
@@ -17,74 +18,59 @@ defineProps<{ title: string; to: string; imageSrc: string }>()
 <style lang="scss" module>
 .wrapper {
   width: 100%;
-  height: calc(100vw * 9 / 16);
-
-  @media (min-width: 768px) {
-    height: calc(100vw * 9 / 16 / 2);
-  }
 }
 
 .link {
   position: relative;
-  display: flex;
+  display: block;
   width: 100%;
   height: 100%;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  font-size: min(3rem, 5.6vw);
 
-  &:hover {
-    .imgWrapper {
-      transform: scale(1.1);
-      transform-origin: center center;
-    }
-
-    .dimmed {
-      opacity: 1;
-    }
+  @media ($desktop) {
+    font-size: 2rem;
   }
 }
 
-.dimmed {
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0.66);
-  transition: opacity 0.2s;
-  pointer-events: none;
-}
-
 .imgWrapper {
-  display: flex;
+  display: block;
+  position: relative;
+  padding-top: 62.5%;
   width: 100%;
-  height: 100%;
   transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-  transform: scale(1.02);
 }
 
 .img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 1;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .title {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  padding: 32px;
-  font-size: 32px;
-  font-weight: 400;
+  position: relative;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: inherit;
+  font-weight: 600;
   color: $grey-0;
+  margin-top: -0.7em;
+  z-index: 3;
+  padding: 0 32px;
+  word-break: keep-all;
 }
 </style>
