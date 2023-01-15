@@ -12,11 +12,6 @@
   grid-template-columns: repeat(1, 1fr);
   row-gap: 34vh;
   column-gap: 32px;
-  padding: 16px;
-
-  @media ($tablet) {
-    padding: 32px;
-  }
 
   @media ($desktop) {
     grid-template-columns: repeat(2, 1fr);

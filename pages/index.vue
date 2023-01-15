@@ -3,7 +3,7 @@ const { data } = await useAsyncData('articles', () => queryContent('/blog').sort
 </script>
 
 <template>
-  <main>
+  <main :class="$style.main">
     <PostCardList>
       <PostCard
         v-for="article in data"
@@ -15,3 +15,10 @@ const { data } = await useAsyncData('articles', () => queryContent('/blog').sort
     </PostCardList>
   </main>
 </template>
+
+<style lang="scss" module>
+.main {
+  margin: 0 10vw;
+  padding: 120px 0;
+}
+</style>
