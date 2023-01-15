@@ -13,6 +13,7 @@
   border-radius: 0.5rem;
   font-style: italic;
   font-weight: 400;
+  white-space: pre-wrap;
 
   p {
     margin: 0;
