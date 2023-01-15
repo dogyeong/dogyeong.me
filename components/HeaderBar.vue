@@ -17,10 +17,15 @@ import Logo from '~/assets/svg/logo.svg'
 
 .logoWrapper {
   position: fixed;
-  top: 32px;
-  left: 32px;
+  top: 16px;
+  left: 16px;
   z-index: 100;
-  display: block;
+  display: flex;
+
+  @media ($tablet) {
+    top: 32px;
+    left: 32px;
+  }
 
   .logo {
     width: 32px;
