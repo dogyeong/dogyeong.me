@@ -1,5 +1,10 @@
 <script setup lang="ts">
-defineProps<{ title: string; to: string; imageSrc: string }>()
+defineProps<{
+  title: string
+  to: string
+  imageSrc: string
+  publishedAt?: Date
+}>()
 </script>
 
 <template>
@@ -7,10 +12,20 @@ defineProps<{ title: string; to: string; imageSrc: string }>()
     <NuxtLink :to="to" :class="$style.link">
       <span :class="$style.imgWrapper">
         <span :class="$style.img">
-          <img :src="imageSrc" />
+          <img :src="imageSrc" :alt="title" />
         </span>
       </span>
-      <h3 :class="$style.title">{{ title }}</h3>
+      <div :class="$style.description">
+        <h2 :class="$style.title">{{ title }}</h2>
+        <time
+          v-if="publishedAt"
+          :datetime="publishedAt.toISOString()"
+          :class="$style.publishedAt"
+          aria-label="publish date"
+        >
+          {{ publishedAt.toLocaleDateString() }}
+        </time>
+      </div>
     </NuxtLink>
   </article>
 </template>
@@ -60,6 +75,10 @@ defineProps<{ title: string; to: string; imageSrc: string }>()
   }
 }
 
+.description {
+  padding: 0 32px;
+}
+
 .title {
   display: flex;
   position: relative;
@@ -70,7 +89,12 @@ defineProps<{ title: string; to: string; imageSrc: string }>()
   color: $grey-0;
   margin-top: -0.7em;
   z-index: 3;
-  padding: 0 32px;
   word-break: keep-all;
+}
+
+.publishedAt {
+  font-size: 1rem;
+  font-weight: 300;
+  color: $grey-2;
 }
 </style>
