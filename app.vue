@@ -12,7 +12,7 @@ import '~/assets/reset.scss'
 <style lang="scss">
 html,
 body {
-  background-color: $grey-9;
+  background-color: rgb(8, 11, 22);
   min-height: 100vh;
 }
 </style>
