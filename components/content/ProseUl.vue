@@ -10,4 +10,8 @@
   padding-left: 1.625rem;
   list-style-type: disc;
 }
+
+li > .ul {
+  margin-bottom: 0;
+}
 </style>
