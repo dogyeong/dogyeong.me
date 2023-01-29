@@ -4,6 +4,8 @@ publishedAt: 2021-08-20
 
 # Chrome 92버전의 새로운 기능
 
+:PublishDate{date="2021-08-20"}
+
 > 크롬 92에서 등장한 새로운 기능/기술들을 알아보자
 > 자세한 내용은 아래 문서 참조
 > https://v8.dev/blog/v8-release-92 > https://www.chromestatus.com/features/schedule
@@ -18,7 +20,6 @@ publishedAt: 2021-08-20
 
 ```js
 ;['apple', 'banana', 'orange'].at(-1) // orange
-
 ;[('apple', 'banana', 'orange')].at(-2) // banana
 
 'abced'.at(-4) // 'b'

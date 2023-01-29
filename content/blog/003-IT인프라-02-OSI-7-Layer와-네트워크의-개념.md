@@ -4,6 +4,8 @@ publishedAt: 2020-03-27
 
 # \[IT인프라\] 02. OSI 7 Layer와 네트워크의 개념
 
+:PublishDate{date="2020-03-27"}
+
 > 본 글은 [강의영상](https://www.youtube.com/watch?v=laBzCcF1414)을 보고 정리한 글입니다.
 
 ### 네트워크 & OSI 7 Layer

@@ -4,6 +4,8 @@ publishedAt: 2021-03-17
 
 # JavaScript - Scope
 
+:PublishDate{date="2021-03-17"}
+
 ## 스코프란?
 
 참조 대상이 되는 식별자(변수, 함수 등)를 찾아내기 위한 규칙

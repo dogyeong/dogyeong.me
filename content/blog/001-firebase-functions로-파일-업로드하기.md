@@ -4,6 +4,8 @@ publishedAt: 2020-03-23
 
 # firebase functions로 파일 업로드하기
 
+:PublishDate{date="2020-03-23"}
+
 ## 파일을 읽을 수 없다?
 
 이미지파일을 브라우저에서 서버로 전송하기 위해서는 폼에 `enctype="multipart/form-data"` 를 추가해서 인코딩 타입을 multipart로 해줘야 한다. 그리고 이러한 `multipart/form-data`를 서버에서 다루기 위해 node.js 에서는 `multer`라는 미들웨어를 주로 사용한다고 한다.

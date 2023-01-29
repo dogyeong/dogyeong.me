@@ -4,6 +4,8 @@ publishedAt: 2021-09-06
 
 # Environment Record
 
+:PublishDate{date="2021-09-06"}
+
 > ECMAScript의 명세 중 Environment Record에 대해 정리해봤습니다.
 > ECMAScript 2022를 기준으로 작성하고자 했고, 틀린 점은 댓글로 알려주시면 감사하겠습니다.
 

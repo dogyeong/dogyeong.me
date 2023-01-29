@@ -4,6 +4,8 @@ publishedAt: 2021-12-26
 
 # Building an awesome image loading experience
 
+:PublishDate{date="2021-12-26"}
+
 > Kent C. Dodds의 [Building an awesome image loading experience](https://kentcdodds.com/blog/building-an-awesome-image-loading-experience)를 번역한 글입니다.
 
 <br>

@@ -4,6 +4,8 @@ publishedAt: 2020-04-23
 
 # Promise(1) - 프로미스의 이해
 
+:PublishDate{date="2020-04-23"}
+
 ## 콜백 함수 vs 프로미스
 
 ```javascript

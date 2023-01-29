@@ -4,6 +4,8 @@ publishedAt: 2020-12-12
 
 # CSRF
 
+:PublishDate{date="2020-12-12"}
+
 ## csrf란?
 
 > Cross-site request forgery, 사이트 간 요청 위조

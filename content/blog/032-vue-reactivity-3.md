@@ -4,6 +4,8 @@ publishedAt: 2022-03-06
 
 # Vue Reactivity (3)
 
+:PublishDate{date="2022-03-06"}
+
 이전 편에서는 vue의 반응성 시스템과 reactive API를 구현해보았다.
 
 이번 편에서는 추가적으로 `ref`, `computed API`를 구현해보자.
