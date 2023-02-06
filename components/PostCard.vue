@@ -12,7 +12,7 @@ defineProps<{
     <NuxtLink :to="to" :class="$style.link">
       <span :class="$style.imgWrapper">
         <span :class="$style.img">
-          <img :src="imageSrc" :alt="title" />
+          <img :src="imageSrc" :alt="title" loading="lazy" />
         </span>
       </span>
       <div :class="$style.description">
