@@ -52,7 +52,7 @@ requestData1()
 - 이행됨(fullfilled) : 수행이 정상적으로 끝났고, 결괏값을 가지고 있음
 - 거부됨(rejected) : 수행이 비정상적으로 끝났음
 
-![](https://images.velog.io/images/shroad1802/post/929eedc6-d2f1-4acb-b1ab-07b861a1c45f/1.png)
+![](/images/006-01.png)
 
 ## 프로미스 생성하는 방법
 

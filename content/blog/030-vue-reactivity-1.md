@@ -232,7 +232,7 @@ trigger(sheet, 'a')
 
 내용 중 dep, depsMap, targetMap을 추가하는 부분에서 effect를 관리하는 방식이 살짝 복잡해졌는데, 이해하기 쉽도록 그림으로 표현해보면 다음과 같다.
 
-![](https://images.velog.io/images/shroad1802/post/eda4ffec-8d40-4e7b-b624-626e913ef875/image.png)
+![](/images/030-01.png)
 
 ### 정리
 

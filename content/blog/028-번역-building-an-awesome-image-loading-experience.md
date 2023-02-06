@@ -170,7 +170,7 @@ function getImgProps(
 
 이건 멋진 설정이며 제가 이미지 로딩 경험 작업을 할 때 영감을 얻기 위해 봤습니다. blurhash/캔버스 접근 방식의 정말 멋진 점은 이미지에 필요한 데이터의 크기가 정말 작다는 것입니다. 예를 들어, 이미지의 멋진 블러 효과를 위해 blurhash 클라이언트 라이브러리에 이것만 전달하면 됩니다: `LGFFaXYk^6#M@-5c,1J5@[or[Q6.`
 
-![](https://images.velog.io/images/shroad1802/post/3b57d7db-2923-4d2a-96b5-d80cab764fa9/image.png)
+![](https://res.cloudinary.com/kentcdodds-com/image/upload/f_auto,q_auto,dpr_2.0,w_1600/kentcdodds.com/content/blog/building-an-awesome-image-loading-experience/blurhash)
 
 솔직히, 마법처럼 너무 멋진 일입니다. 🧙
 
@@ -206,7 +206,7 @@ data:image/webp;base64,UklGRhQBAABXRUJQVlA4IAgBAAAQDQCdASpkAEMAPrFGmko7qyWhsls9U
 
 불행하게도, 이렇게 확대하게 되면 매우 픽셀화되어 보입니다.
 
-![](https://images.velog.io/images/shroad1802/post/6423efd2-651c-4477-ba6f-5e22f9d873ee/image.png)
+![](https://res.cloudinary.com/kentcdodds-com/image/upload/f_auto,q_auto,dpr_2.0,w_1600/kentcdodds.com/content/blog/building-an-awesome-image-loading-experience/pixelated-placeholder)
 
 구원은 있었습니다! 저는 이것을 base64 이미지 뒤의 DOM에 끼워넣었고, 우리는 만반의 준비를 갖췄습니다.
 
@@ -222,7 +222,7 @@ backdrop-filter: blur(24px);
 
 그러면 우리는 멋진 블러 효과를 얻을 수 있습니다:
 
-![](https://images.velog.io/images/shroad1802/post/8718dad5-d49f-4776-98ff-e2b61686fab7/image.png)
+![](https://res.cloudinary.com/kentcdodds-com/image/upload/f_auto,q_auto,dpr_2.0,w_1600/kentcdodds.com/content/blog/building-an-awesome-image-loading-experience/blurred-placeholder)
 
 좋습니다!
 

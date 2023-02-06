@@ -65,7 +65,7 @@ console.log(y) // 0
 자바스크립트는 렉시컬 스코핑을 기반으로 스코프 체인이 형성된다.
 **렉시컬 스코프** : 함수가 정의된 것을 기준으로 스코프가 만들어지는 것
 
-자세한 내용은 [Environment Record](https://velog.io/@shroad1802/environment-record) 참조 ㅎ
+자세한 내용은 [Environment Record](/blog/023-environment-record) 참조 ㅎ
 
 ## 참조 및 출처
 

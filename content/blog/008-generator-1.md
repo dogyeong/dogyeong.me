@@ -24,7 +24,7 @@ const gen = generatorFunc()
 ```
 
 - `gen`은 제너레이터 객체이다
-  ![](https://images.velog.io/images/shroad1802/post/ca221127-8999-419e-a388-e8f2807ba88d/1.png)
+  ![](/images/008-01.png)
 
 ## next
 
@@ -48,7 +48,7 @@ console.log(gen.next())
 console.log(gen.next())
 ```
 
-![](https://images.velog.io/images/shroad1802/post/12d4e0f6-6728-41d7-b911-7a8d88acf124/2.png)
+![](/images/008-02.png)
 
 - 제너레이터 함수를 실행하면 제너레이터 객체만 반환되고 실제로 함수 내부 코드는 실행되지 않는다
 - `next` 메소드를 호출하면 `yield` 키워드를 만날 때까지 실행되고, 만나면 데이터 객체를 반환한다
@@ -78,7 +78,7 @@ console.log(gen.return('abc'))
 console.log(gen.next())
 ```
 
-![](https://images.velog.io/images/shroad1802/post/a52b952c-5057-483c-9ba0-c3b5178012e9/3.png)
+![](/images/008-03.png)
 
 ## throw
 
@@ -105,7 +105,7 @@ console.log(gen.next())
 console.log(gen.throw('some error'))
 ```
 
-![](https://images.velog.io/images/shroad1802/post/4986537b-adaf-4a82-af7f-dfc301af42d0/4.png)
+![](/images/008-04.png)
 
 ## 제너레이터는 iterable이다
 
@@ -116,7 +116,7 @@ console.log(gen.throw('some error'))
   해당 함수를 호출해서 반환받은 반복자는 자기 자신이다
   → 제너레이터는 iterator이면서 iterable이다
 
-![](https://images.velog.io/images/shroad1802/post/d874ee9f-1a17-44db-bf6d-79c00ea996f4/5.png)
+![](/images/008-05.png)
 
 - 배열도 iterable이며, 제너레이터는 배열과 같이 `for of`문과 전개 연산자`...`에서 사용할 수 있다
 - 둘 다 iterator를 얻어서 next메소드를 호출하면서 done 속성값이 참이 될 때까지 반복한다

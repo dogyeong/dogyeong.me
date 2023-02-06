@@ -22,7 +22,8 @@ async function getData() {
 }
 ```
 
-![](https://images.velog.io/images/shroad1802/post/ce688e4a-73d8-4504-98dd-7d57450556b8/1.png)![](https://images.velog.io/images/shroad1802/post/7bdce07c-a31e-43bf-8c7c-5e6350c9932c/2.png)
+![](/images/005-01.png)
+![](/images/005-02.png)
 
 ### 프로미스를 반환한다면, 그 프로미스를 그대로 반환한다
 
@@ -32,7 +33,7 @@ async function getData() {
 }
 ```
 
-![](https://images.velog.io/images/shroad1802/post/ef0a453c-7862-4f76-808d-d329ec15d494/3.png)
+![](/images/005-03.png)
 
 ### async await 함수 내부에서 예외가 발생하면, rejected 상태의 프로미스를 반환한다
 
@@ -42,7 +43,7 @@ async function getData() {
 }
 ```
 
-![](https://images.velog.io/images/shroad1802/post/15f38d84-572d-43c8-8dd5-5e6c372c0e09/4.png)
+![](/images/005-04.png)
 
 ### await 키워드를 사용하는 방법
 

@@ -76,10 +76,10 @@ bar() // still 20
 ```
 
 `with`문 진입 전에는 다음과 같은 상황일 것이다.
-![](https://images.velog.io/images/shroad1802/post/4b0bae19-5526-4d90-a08d-35f8acb7b734/image.png)
+![](/images/025-01.png)
 
 `with`문 진입하여 `bar` 함수 할당되고 난 후에는 다음처럼 `Lexical Environment`가 하나 더 추가된 상황일 것이다.
-![](https://images.velog.io/images/shroad1802/post/cc288210-966a-42a5-877f-d33fca492d0f/image.png)
+![](/images/025-02.png)
 
 - 렉시컬 스코프 법칙에 의해서 `foo` 함수는 `VariableEnvironment`를 스코프로 가지기 때문에 a 값이 `10`이 되고, `bar` 함수는 `LexicalEnvrionment`를 스코프로 가져서 `a` 값이 20이 된다.
 
@@ -113,7 +113,7 @@ Foo()
 `console.log()`가 실행될 때의 Execution Context와 Environment를 그려보면 다음처럼 될 것이다.
 블록문이 새로운 `Lexical Environment`를 생성하여 스코프 체인 앞에 추가한 것을 볼 수 있다. 그렇기 때문에 `b`값이 3으로 출력되는 것이다.
 
-![](https://images.velog.io/images/shroad1802/post/26bf715f-39d9-44c7-9c2a-6514be0944c7/image.png)
+![](/images/025-03.png)
 
 ### ES2021
 
@@ -126,7 +126,7 @@ Foo()
 
 일반적인 함수 호출을 하는 경우 다음처럼 구성될 것이다.
 
-![](https://images.velog.io/images/shroad1802/post/dce6889c-2082-4aec-af51-2e1cdac04d76/image.png)
+![](/images/025-04.png)
 
 ## 식별자 바인딩 탐색과정
 
