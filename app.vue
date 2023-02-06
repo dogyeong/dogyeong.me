@@ -1,5 +1,7 @@
-<script>
+<script setup lang="ts">
 import '~/assets/reset.scss'
+
+useHead({ htmlAttrs: { lang: 'ko' } })
 </script>
 
 <template>
