@@ -5,7 +5,7 @@ import Logo from '~/assets/svg/logo.svg'
 <template>
   <header :class="$style.header">
     <NuxtLink to="/" :class="$style.logoWrapper">
-      <Logo :class="$style.logo" />
+      <Logo :class="$style.logo" aria-label="Go Home" />
     </NuxtLink>
   </header>
 </template>
