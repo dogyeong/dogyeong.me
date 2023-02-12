@@ -1,5 +1,6 @@
 ---
 publishedAt: 2022-02-19
+thumbnail: /images/030-thumb.png
 ---
 
 # Vue Reactivity (1)
