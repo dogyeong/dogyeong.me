@@ -1,5 +1,6 @@
 ---
 publishedAt: 2021-08-09
+thumbnail: /images/020-thumb.png
 ---
 
 # Node.js 정리해보기
