@@ -1,5 +1,6 @@
 ---
 publishedAt: 2021-08-28
+thumbnail: /images/022-thumb.png
 ---
 
 # 자바스크립트의 private

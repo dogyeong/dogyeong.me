@@ -1,5 +1,6 @@
 ---
 publishedAt: 2021-09-06
+thumbnail: /images/023-thumb.png
 ---
 
 # Environment Record

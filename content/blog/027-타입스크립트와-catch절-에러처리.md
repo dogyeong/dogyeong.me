@@ -1,5 +1,6 @@
 ---
 publishedAt: 2021-11-28
+thumbnail: /images/027-thumb.png
 ---
 
 # 타입스크립트와 catch절 에러 처리

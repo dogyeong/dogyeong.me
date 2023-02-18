@@ -1,5 +1,6 @@
 ---
 publishedAt: 2021-09-12
+thumbnail: /images/024-thumb.png
 ---
 
 # iterable protocol, iterator protocol
