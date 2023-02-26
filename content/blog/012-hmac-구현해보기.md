@@ -1,5 +1,6 @@
 ---
 publishedAt: 2020-12-17
+thumbnail: /images/012-thumb.png
 ---
 
 # HMAC 구현해보기 (feat. 함수형 프로그래밍)

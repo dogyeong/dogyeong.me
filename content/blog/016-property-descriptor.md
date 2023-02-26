@@ -1,5 +1,6 @@
 ---
 publishedAt: 2021-04-11
+thumbnail: /images/016-thumb.png
 ---
 
 # JavaScript - Property Descriptor

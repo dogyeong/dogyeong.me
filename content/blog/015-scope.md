@@ -1,5 +1,6 @@
 ---
 publishedAt: 2021-03-17
+thumbnail: /images/015-thumb.png
 ---
 
 # JavaScript - Scope

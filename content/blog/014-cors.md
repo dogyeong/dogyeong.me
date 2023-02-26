@@ -1,5 +1,6 @@
 ---
 publishedAt: 2021-01-18
+thumbnail: /images/014-thumb.png
 ---
 
 # CORS

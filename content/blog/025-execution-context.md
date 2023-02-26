@@ -1,5 +1,6 @@
 ---
 publishedAt: 2021-09-26
+thumbnail: /images/025-thumb.png
 ---
 
 # Execution Context

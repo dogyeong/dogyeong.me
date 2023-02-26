@@ -1,5 +1,6 @@
 ---
 publishedAt: 2021-08-20
+thumbnail: /images/021-thumb.png
 ---
 
 # Chrome 92버전의 새로운 기능
