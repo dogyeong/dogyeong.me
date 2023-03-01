@@ -14,7 +14,15 @@
   overflow-wrap: break-word;
 
   > * {
-    grid-column: 3 / span 8;
+    grid-column: 1 / span 12;
+
+    @media ($tablet) {
+      grid-column: 2 / span 10;
+    }
+
+    @media ($desktop) {
+      grid-column: 3 / span 8;
+    }
   }
 }
 </style>
