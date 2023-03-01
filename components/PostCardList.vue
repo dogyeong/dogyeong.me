@@ -10,10 +10,12 @@
 .section {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  row-gap: 34vh;
+  row-gap: 40px;
   column-gap: 32px;
+  max-width: 1280px;
+  margin: 0 auto;
 
-  @media ($desktop) {
+  @media ($tablet) {
     grid-template-columns: repeat(2, 1fr);
     row-gap: 20vh;
   }

@@ -43,10 +43,10 @@ defineProps<{
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  font-size: min(3rem, 5.6vw);
+  font-size: 24px;
 
   @media ($desktop) {
-    font-size: 2rem;
+    font-size: 32px;
   }
 }
 
