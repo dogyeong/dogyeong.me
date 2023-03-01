@@ -7,6 +7,8 @@ thumbnail: /images/011-thumb.png
 
 :PublishDate{:date="publishedAt"}
 
+:PostThumbnail{:src="thumbnail"}
+
 ## csrf란?
 
 > Cross-site request forgery, 사이트 간 요청 위조

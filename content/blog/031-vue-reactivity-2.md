@@ -7,6 +7,8 @@ thumbnail: /images/030-thumb.png
 
 :PublishDate{:date="publishedAt"}
 
+:PostThumbnail{:src="thumbnail"}
+
 이전 편에서 vue 반응성의 기초가 되는 track, trigger, dep, depsMap, targetMap을 구현하였다.
 
 이 요소들을 활용해서 이번 편에서는 자동으로 track, trigger가 호출되도록 하여 실질적으로 반응성 시스템이라고 할 수 있는 부분을 구현해보자.

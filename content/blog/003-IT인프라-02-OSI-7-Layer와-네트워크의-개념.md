@@ -7,6 +7,8 @@ draft: true
 
 :PublishDate{:date="publishedAt"}
 
+:PostThumbnail{:src="thumbnail"}
+
 > 본 글은 [강의영상](https://www.youtube.com/watch?v=laBzCcF1414)을 보고 정리한 글입니다.
 
 ### 네트워크 & OSI 7 Layer

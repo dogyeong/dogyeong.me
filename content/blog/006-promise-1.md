@@ -6,6 +6,8 @@ publishedAt: 2020-04-23
 
 :PublishDate{:date="publishedAt"}
 
+:PostThumbnail{:src="thumbnail"}
+
 ## 콜백 함수 vs 프로미스
 
 ```javascript

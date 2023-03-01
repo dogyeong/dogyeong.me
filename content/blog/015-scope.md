@@ -7,6 +7,8 @@ thumbnail: /images/015-thumb.png
 
 :PublishDate{:date="publishedAt"}
 
+:PostThumbnail{:src="thumbnail"}
+
 ## 스코프란?
 
 참조 대상이 되는 식별자(변수, 함수 등)를 찾아내기 위한 규칙

@@ -7,6 +7,8 @@ thumbnail: /images/012-thumb.png
 
 :PublishDate{:date="publishedAt"}
 
+:PostThumbnail{:src="thumbnail"}
+
 ## HMAC 구현 (feat. PF)
 
 [HMAC](https://ko.wikipedia.org/wiki/HMAC)을 직접 구현해보고 적용하였다..! 처음에 생성 과정을 봤을 때는 이게 뭔가 싶었는데 지금은 이해를 다 하고 있으니까 생각보다 쉽게 코드로 구현할 수 있었다. 그래서 마스터 세션에서 본 함수형 프로그래밍도 나름대로 적용해보고 재미있었던 경험이었다.

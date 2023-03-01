@@ -7,6 +7,8 @@ thumbnail: /images/027-thumb.png
 
 :PublishDate{:date="publishedAt"}
 
+:PostThumbnail{:src="thumbnail"}
+
 자바스크립트는 어떤 값이든 에러로 던질 수 있다.
 
 ```ts

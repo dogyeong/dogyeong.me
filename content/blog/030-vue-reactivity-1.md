@@ -7,6 +7,8 @@ thumbnail: /images/030-thumb.png
 
 :PublishDate{:date="publishedAt"}
 
+:PostThumbnail{:src="thumbnail"}
+
 Vue의 핵심요소라고 할 수 있는 반응성 시스템을 단계별로 구현해 볼 것이다.
 
 이번 편에서는 반응성을 구현하기 위해 필요한 기본요소들을 구현해보자

@@ -7,6 +7,8 @@ thumbnail: /images/021-thumb.png
 
 :PublishDate{:date="publishedAt"}
 
+:PostThumbnail{:src="thumbnail"}
+
 > 크롬 92에서 등장한 새로운 기능/기술들을 알아보자
 > 자세한 내용은 아래 문서 참조
 > https://v8.dev/blog/v8-release-92 > https://www.chromestatus.com/features/schedule

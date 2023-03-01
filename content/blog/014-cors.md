@@ -7,6 +7,8 @@ thumbnail: /images/014-thumb.png
 
 :PublishDate{:date="publishedAt"}
 
+:PostThumbnail{:src="thumbnail"}
+
 동일 출처 정책은 악의적인 사이트에서 다른 사이트의 리소스에 접근하는 것을 막아주지만, 정상적인 접근까지 모두 차단해버린다. 모던 웹 어플리케이션에서는 다른 출처에 공개돼 있는 데이터를 활용하는 경우가 굉장히 많은데, SOP는 이런 경우에도 모든 요청을 차단한다.
 
 개발자들은 이런 제한을 피해가기 위해 [JSONP](https://stackoverflow.com/questions/2067472/what-is-jsonp-and-why-was-it-created)같은 방법을 사용하기도 했지만, 곧 **CORS**가 표준적인 방법으로 등장했다.

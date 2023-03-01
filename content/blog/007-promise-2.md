@@ -6,6 +6,8 @@ publishedAt: 2020-04-26
 
 :PublishDate{:date="publishedAt"}
 
+:PostThumbnail{:src="thumbnail"}
+
 ## Promise.all
 
 - 여러 개의 프로미스를 병렬로 처리할 때 사용한다
