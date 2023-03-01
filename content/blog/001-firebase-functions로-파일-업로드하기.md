@@ -1,5 +1,6 @@
 ---
 publishedAt: 2020-03-23
+draft: true
 ---
 
 # firebase functions로 파일 업로드하기

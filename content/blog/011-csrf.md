@@ -1,5 +1,6 @@
 ---
 publishedAt: 2020-12-12
+thumbnail: /images/011-thumb.png
 ---
 
 # CSRF

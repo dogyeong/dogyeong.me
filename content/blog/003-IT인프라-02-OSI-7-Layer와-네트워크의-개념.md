@@ -1,5 +1,6 @@
 ---
 publishedAt: 2020-03-27
+draft: true
 ---
 
 # \[IT인프라\] 02. OSI 7 Layer와 네트워크의 개념

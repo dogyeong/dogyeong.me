@@ -1,5 +1,6 @@
 ---
 publishedAt: 2020-05-05
+thumbnail: /images/008-thumb.png
 ---
 
 # Generator(1) - 제너레이터 이해하기

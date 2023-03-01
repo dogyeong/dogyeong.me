@@ -1,8 +1,9 @@
 ---
 publishedAt: 2020-05-18
+thumbnail: /images/008-thumb.png
 ---
 
-# Generator(2) - 제너레이터 활용하기 🚀
+# Generator(2) - 제너레이터 활용하기
 
 :PublishDate{date="2020-05-18"}
 
