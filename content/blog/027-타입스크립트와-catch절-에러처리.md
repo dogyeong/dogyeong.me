@@ -5,7 +5,7 @@ thumbnail: /images/027-thumb.png
 
 # 타입스크립트와 catch절 에러 처리
 
-:PublishDate{date="2021-11-28"}
+:PublishDate{:date="publishedAt"}
 
 자바스크립트는 어떤 값이든 에러로 던질 수 있다.
 

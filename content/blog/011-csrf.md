@@ -5,7 +5,7 @@ thumbnail: /images/011-thumb.png
 
 # CSRF
 
-:PublishDate{date="2020-12-12"}
+:PublishDate{:date="publishedAt"}
 
 ## csrf란?
 

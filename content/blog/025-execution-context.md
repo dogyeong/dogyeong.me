@@ -5,7 +5,7 @@ thumbnail: /images/025-thumb.png
 
 # Execution Context
 
-:PublishDate{date="2021-09-26"}
+:PublishDate{:date="publishedAt"}
 
 > Execution Context는 자바스크립트 코어에서 가장 중요한 부분 중 하나인데, 구글링해보면 옛날 자료를 기반으로 한게 대부분입니다. (절반정도가 ES3...)
 > 그래서 ECMAScript 명세와 여러 포스팅들을 종합해서 최신 자바스크립트(ES2022) Execution Context 동작을 정리하고자 했습니다.

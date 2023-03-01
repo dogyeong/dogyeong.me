@@ -5,7 +5,7 @@ thumbnail: /images/008-thumb.png
 
 # Generator(2) - 제너레이터 활용하기
 
-:PublishDate{date="2020-05-18"}
+:PublishDate{:date="publishedAt"}
 
 제너레이터, iterator, iterable을 이용하면 함수형 프로그래밍의 대표적인 함수를 쉽게 구현할 수 있다.
 

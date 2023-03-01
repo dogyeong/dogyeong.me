@@ -5,7 +5,7 @@ thumbnail: /images/021-thumb.png
 
 # Chrome 92버전의 새로운 기능
 
-:PublishDate{date="2021-08-20"}
+:PublishDate{:date="publishedAt"}
 
 > 크롬 92에서 등장한 새로운 기능/기술들을 알아보자
 > 자세한 내용은 아래 문서 참조

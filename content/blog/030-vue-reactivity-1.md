@@ -5,7 +5,7 @@ thumbnail: /images/030-thumb.png
 
 # Vue Reactivity (1)
 
-:PublishDate{date="2022-02-19"}
+:PublishDate{:date="publishedAt"}
 
 Vue의 핵심요소라고 할 수 있는 반응성 시스템을 단계별로 구현해 볼 것이다.
 

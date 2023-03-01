@@ -5,7 +5,7 @@ thumbnail: /images/015-thumb.png
 
 # JavaScript - Scope
 
-:PublishDate{date="2021-03-17"}
+:PublishDate{:date="publishedAt"}
 
 ## 스코프란?
 

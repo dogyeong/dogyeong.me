@@ -5,7 +5,7 @@ dratf: true
 
 # Text hover effect
 
-:PublishDate{date="2020-08-24"}
+:PublishDate{:date="publishedAt"}
 
 [자바스크립트 컨퍼런스](https://jsconfkorea.com/) 사이트의 인터랙션을 따라해보았다.
 

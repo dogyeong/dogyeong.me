@@ -5,7 +5,7 @@ thumbnail: /images/024-thumb.png
 
 # iterable protocol, iterator protocol
 
-:PublishDate{date="2021-09-12"}
+:PublishDate{:date="publishedAt"}
 
 > ES2015 자바스크립트에서는 이터러블 프로토콜(iterable protocol), 이터레이터 프로토콜(iterator protocol)이라는 개념들이 추가되었다.
 > 프로토콜은 규칙이라는 것으로, 해당 프로토콜을 따른다면 어떤 객체라도 이터러블, 이터레이터가 될 수 있다.

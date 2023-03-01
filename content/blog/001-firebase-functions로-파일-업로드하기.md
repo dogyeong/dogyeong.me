@@ -5,7 +5,7 @@ draft: true
 
 # firebase functions로 파일 업로드하기
 
-:PublishDate{date="2020-03-23"}
+:PublishDate{:date="publishedAt"}
 
 ## 파일을 읽을 수 없다?
 

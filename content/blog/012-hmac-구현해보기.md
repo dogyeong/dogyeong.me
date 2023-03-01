@@ -5,7 +5,7 @@ thumbnail: /images/012-thumb.png
 
 # HMAC 구현해보기 (feat. 함수형 프로그래밍)
 
-:PublishDate{date="2020-12-17"}
+:PublishDate{:date="publishedAt"}
 
 ## HMAC 구현 (feat. PF)
 

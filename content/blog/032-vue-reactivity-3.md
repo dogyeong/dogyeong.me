@@ -5,7 +5,7 @@ thumbnail: /images/030-thumb.png
 
 # Vue Reactivity (3)
 
-:PublishDate{date="2022-03-06"}
+:PublishDate{:date="publishedAt"}
 
 이전 편에서는 vue의 반응성 시스템과 reactive API를 구현해보았다.
 

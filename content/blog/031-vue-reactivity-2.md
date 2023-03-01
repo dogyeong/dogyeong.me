@@ -5,7 +5,7 @@ thumbnail: /images/030-thumb.png
 
 # Vue Reactivity (2)
 
-:PublishDate{date="2022-02-28"}
+:PublishDate{:date="publishedAt"}
 
 이전 편에서 vue 반응성의 기초가 되는 track, trigger, dep, depsMap, targetMap을 구현하였다.
 

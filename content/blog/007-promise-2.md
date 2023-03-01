@@ -4,7 +4,7 @@ publishedAt: 2020-04-26
 
 # Promise(2) - 프로미스 활용하기
 
-:PublishDate{date="2020-04-26"}
+:PublishDate{:date="publishedAt"}
 
 ## Promise.all
 
