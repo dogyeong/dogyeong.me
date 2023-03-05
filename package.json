@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "generate-thumbnail-placeholder": "node ./generate-thumbnail-placeholder.js",
     "dev": "nuxt dev --open",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -24,6 +25,11 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@nuxtjs/robots": "^2.5.0"
+    "@nuxtjs/robots": "^2.5.0",
+    "sqip": "^1.0.0-alpha.38",
+    "sqip-plugin-blur": "^1.0.0-alpha.39",
+    "sqip-plugin-data-uri": "^1.0.0-alpha.39",
+    "sqip-plugin-primitive": "^1.0.0-alpha.40",
+    "sqip-plugin-svgo": "^1.0.0-alpha.40"
   }
 }
