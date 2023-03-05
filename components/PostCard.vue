@@ -4,6 +4,7 @@ defineProps<{
   to: string
   imageSrc: string
   publishedAt?: Date
+  thumbnailPlaceholder?: string
 }>()
 </script>
 
@@ -12,7 +13,7 @@ defineProps<{
     <NuxtLink :to="to" :class="$style.link">
       <span :class="$style.imgWrapper">
         <span :class="$style.img">
-          <img :src="imageSrc" :alt="title" loading="lazy" />
+          <BlurrableImage :src="imageSrc" :alt="title" :placeholder-data-uri="thumbnailPlaceholder" />
         </span>
       </span>
       <div :class="$style.description">
@@ -55,7 +56,6 @@ defineProps<{
   position: relative;
   padding-top: 62.5%;
   width: 100%;
-  transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .img {
@@ -67,6 +67,7 @@ defineProps<{
   border-radius: 8px;
   overflow: hidden;
   z-index: 1;
+  background-size: cover;
 
   img {
     width: 100%;

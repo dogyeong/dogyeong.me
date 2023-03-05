@@ -12,6 +12,7 @@ const { data } = await useAsyncData('articles', () => queryContent('/blog').sort
         :image-src="article.thumbnail || '/images/sample.jpeg'"
         :title="article.title || ''"
         :published-at="article.publishedAt ? new Date(article.publishedAt) : undefined"
+        :thumbnail-placeholder="article.thumbnailPlaceholder"
       />
     </PostCardList>
   </main>
