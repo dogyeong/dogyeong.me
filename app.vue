@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import '~/assets/reset.scss'
 
-useHead({ htmlAttrs: { lang: 'ko' } })
+useHead({ htmlAttrs: { lang: 'ko' }, title: 'dogyeong.dev' })
 </script>
 
 <template>
