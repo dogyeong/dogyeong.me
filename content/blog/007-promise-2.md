@@ -1,5 +1,6 @@
 ---
 publishedAt: 2020-04-26
+thumbnail: /images/006-thumb.png
 ---
 
 # Promise(2) - 프로미스 활용하기

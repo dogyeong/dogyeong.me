@@ -1,5 +1,6 @@
 ---
 publishedAt: 2021-12-26
+thumbnail: /images/028-thumb.jpeg
 ---
 
 # Building an awesome image loading experience

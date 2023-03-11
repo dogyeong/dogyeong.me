@@ -1,5 +1,6 @@
 ---
 publishedAt: 2020-04-18
+thumbnail: /images/005-thumb.png
 ---
 
 # async await
