@@ -27,7 +27,7 @@ async function run() {
           input: path.join(__dirname, './public', imageFilePath),
           plugins: [
             { name: 'sqip-plugin-primitive', options: { numberOfPrimitives: 8 } },
-            { name: 'sqip-plugin-blur', options: { blur: 16 } },
+            { name: 'sqip-plugin-blur', options: { blur: 8 } },
             'sqip-plugin-svgo',
             'sqip-plugin-data-uri',
           ],

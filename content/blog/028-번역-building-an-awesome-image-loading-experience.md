@@ -1,6 +1,7 @@
 ---
 publishedAt: 2021-12-26
 thumbnail: /images/028-thumb.jpeg
+thumbnailPlaceholder: WILL_BE_REPLACED
 ---
 
 # Building an awesome image loading experience

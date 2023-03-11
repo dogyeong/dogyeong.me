@@ -1,6 +1,7 @@
 ---
 publishedAt: 2020-04-18
 thumbnail: /images/005-thumb.png
+thumbnailPlaceholder: WILL_BE_REPLACED
 ---
 
 # async await

@@ -1,6 +1,7 @@
 ---
 publishedAt: 2020-04-23
 thumbnail: /images/006-thumb.png
+thumbnailPlaceholder: WILL_BE_REPLACED
 ---
 
 # Promise(1) - 프로미스의 이해
