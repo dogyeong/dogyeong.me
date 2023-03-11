@@ -38,8 +38,6 @@ Array, TypedArray, String 형식의 데이터에서 사용할 수 있다.
 - [MDN - Array.prototype.at()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at)
 - [MDN - String.prototype.at()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/at)
 
-<br />
-
 ## Shared Pointer Compression Cage
 
 V8엔진은 64비트 플랫폼에서 포인터 압축(Pointer Compression)이라는 최적화 기법을 사용한다. 힙 메모리에 저장되는 포인터에 주소를 32비트의 오프셋만 저장함으로써 메모리를 절약하는 방법이다. 대신 32비트로 저장할 수 있는 최대 크기인 4GB로 메모리 사이즈가 제한된다는 단점이 있다.
@@ -50,8 +48,6 @@ V8 9.2버전에서는 한 프로세스 내의 스레드들이 4GB의 메모리�
 ### 참고
 
 - [V8 blog - pointer compression](https://v8.dev/blog/pointer-compression)
-
-<br />
 
 ## `crypto.randomUUID()`
 

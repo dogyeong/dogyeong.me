@@ -12,15 +12,11 @@ thumbnailPlaceholder: WILL_BE_REPLACED
 
 > Kent C. Dodds의 [Building an awesome image loading experience](https://kentcdodds.com/blog/building-an-awesome-image-loading-experience)를 번역한 글입니다.
 
-<br>
-
 제 사이트에서 다양한 페이지(특히 블로그 포스트)들을 열 때,이미지가 흐릿하게 시작되고 로드되면 전체 이미지가 페이드인되는 것을 보셨을 겁니다. 아래는 이러한 경험을 보여주는 영상입니다.
 
 [https://res.cloudinary.com/kentcdodds-com/video/upload/kentcdodds.com/content/blog/building-an-awesome-image-loading-experience/blurred-image-load_zzqqnt.mp4](https://res.cloudinary.com/kentcdodds-com/video/upload/kentcdodds.com/content/blog/building-an-awesome-image-loading-experience/blurred-image-load_zzqqnt.mp4)
 
 이러한 작업을 하기 위해 제가 해야 했던 것들을 설명하고, 제가 하는 방식과 최고의 이미지 앱([unsplash.com](http://unsplash.com/))이 하는 방식을 비교해 보겠습니다.
-
-<br>
 
 ## **Layout shift**
 
@@ -37,8 +33,6 @@ TL;DR:
 ```
 
 이것이 이미지가 로드되는 동안 레이아웃 시프트가 발생하지 않게 하는 데 필요한 전부입니다(이에 대한 자세한 내용은 **[Setting Height And Width On Images Is Important Again](https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-again/)**에서 읽어보세요).
-
-<br>
 
 ## **`sizes`, `srcset`, and Cloudinary**
 
@@ -148,8 +142,6 @@ function getImgProps(
 
 우리는 `imageBuilder`같은 것에 대해 알아볼 시간이 많이 없습니다. 이것은 단지 타입세이프한 방식으로 cloudinary URL을 생성하기 위해 [cloudinary-build-url](https://npm.im/cloudinary-build-url) 기반으로 조금 추상화한 것입니다. 제 요점은 Cloudinary를 사용하면 디바이스와 화면 크기에 적합한 크기의 이미지를 쉽게 제공할 수 있으므로 빠르게 로드하고 데이터를 절약할 수 있다는 것입니다!
 
-<br>
-
 ## Unsplash's placeholder
 
 만약 여기까지 하고 멈추면 사용자는 이미지가 로드되기 전까지 빈 공간을 보게 될 것입니다. 일종의 placeholder를 보여주는 것이 훨씬 좋습니다. 여러분들도 분명히 웹에서 본 적이 있을 것입니다. 저는 Medium에서 이러한 것을 처음 봤습니다.
@@ -179,8 +171,6 @@ function getImgProps(
 솔직히, 마법처럼 너무 멋진 일입니다. 🧙
 
 여기에서의 궁극적인 목표는 전체 해상도 이미지가 로드되는 동안 사용자에게 좋은 경험을 제공하기 위해 필요한 데이터 양을 최소화하는 것입니다. 속도와 우수한 사용자 경험의 균형입니다.
-
-<br>
 
 ## **The kentcdodds.com image placeholder**
 
@@ -229,8 +219,6 @@ backdrop-filter: blur(24px);
 ![](https://res.cloudinary.com/kentcdodds-com/image/upload/f_auto,q_auto,dpr_2.0,w_1600/kentcdodds.com/content/blog/building-an-awesome-image-loading-experience/blurred-placeholder)
 
 좋습니다!
-
-<br>
 
 ## **Fading in the image onload**
 

@@ -63,8 +63,6 @@ for (let i = 0; i < s.size; i++) {
 
 어떻게 이런게 가능할까? 그것은 `Array`, `Map`, `Set`이 이터러블이기 때문이다.
 
-<br />
-
 ## 이터러블(iterable)
 
 이터러블은 이터러블 프로토콜을 따르는 객체를 의미한다.
@@ -117,8 +115,6 @@ function forOf(iterable) {
 - TypedArray
 - Map
 - Set
-
-<br />
 
 ## 이터레이터(iterator)
 
@@ -212,8 +208,6 @@ for (const v of iterable) {
 // 2 4 6 8 10
 ```
 
-<br />
-
 ## 그래서 어떤 점이 좋은가?
 
 형태의 컬렉션들을 같은 문법으로 순회할 수 있고, 그로 인해 자바스크립트의 다형성을 더욱 잘 활용할 수 있게 해주고 코드를 더 간단하게 작성할 수 있게 되었다.
@@ -226,8 +220,6 @@ for (const v of iterable) {
 ;[...[1, 2, 3], ...new Set([4, 5, 6, 7]), ...'abcd']
 // [1, 2, 3, 4, 5, 6, 7, 'a', 'b', 'c', 'd']
 ```
-
-<br />
 
 ## Reference
 

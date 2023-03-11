@@ -17,8 +17,9 @@ const generate = anchorLinks?.depth >= heading && !anchorLinks?.exclude.includes
 
 <style lang="scss" module>
 .h3 {
-  font-size: 1.625rem;
+  font-size: 1.5rem;
   font-weight: 500;
+  margin-bottom: 1rem;
   color: $grey-1;
 
   a:hover {

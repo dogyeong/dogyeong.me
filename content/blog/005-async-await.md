@@ -14,8 +14,6 @@ thumbnailPlaceholder: WILL_BE_REPLACED
 
 **async await는 비동기 상태를 값으로 다룰 수 없기 때문에 프로미스를 완전히 대체하는 것은 아니다!**
 
----
-
 ## async await의 이해 🤔
 
 ### asyn await 함수는 프로미스를 반환한다
@@ -99,8 +97,6 @@ async function getDataAsync() {
   return asyncFunc3(data1, data2);
 }
 ```
-
----
 
 ## async await 활용하기 🚀
 

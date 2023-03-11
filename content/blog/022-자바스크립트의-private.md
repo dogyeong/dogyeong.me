@@ -32,8 +32,6 @@ obj.public // 'foo'
 
 그렇지만 시간이 지나면서 다른 방법들도 등장했고 만약 모듈을 만들어서 배포하는 경우, 사용자들이 모든 필드에 접근할 수 있는 것은 큰 문제이기 때문에 사용하지 않는 것이 좋다. [에어비앤비 스타일 가이드](https://airbnb.io/javascript/#naming--leading-underscore)에서도 밑줄을 사용하지 않도록 하고 있다.
 
-<br />
-
 ## 2. closure
 
 정의된 스코프의 환경을 참조하는 클로저의 특징을 활용하면 외부에서 접근할 수 없도록 은닉할 수 있다.
@@ -58,8 +56,6 @@ obj.public // 'foo'
 `ObjFactory`가 생성하는 객체의 클로저(`public` 게터)에서 private 값에 접근할 수 있지만 외부에서는 접근하려고 하면 `undefined`로 출력되면서 접근할 수 없는 것을 볼 수 있다.
 
 객체 인스턴스가 생성될 때마다 서로 다른 클로저 함수가 만들어지기 때문에 인스턴스를 많이 생성할 경우 메모리 문제가 생길 수 있다.
-
-<br />
 
 ## 3. Symbol
 
@@ -86,8 +82,6 @@ obj[Symbol('private')] // undefined
 ```js
 Object.getOwnPropertySymbols(obj) // [Symbol(private)]
 ```
-
-<br />
 
 ## 4. WeakMap
 
@@ -138,8 +132,6 @@ obj1.public === obj2.public // true
 const privates = new WeakMap()
 ```
 
-<br />
-
 ## 5. Private class fields (`#`)
 
 ES2019부터 클래스에 private field가 추가되었다.
@@ -165,8 +157,6 @@ obj.publicField // 'bar'
 obj.#privateMethod() // Uncaught SyntaxError: Private field '#privateMehtod' must be declared in an enclosing class
 obj.publicMethod() // 'foo'
 ```
-
-<br />
 
 ## Reference
 

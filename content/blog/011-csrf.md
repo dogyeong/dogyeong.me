@@ -65,18 +65,18 @@ csrf는 다른 사이트에서 요청을 보내는 공격이기 때문에 다른
 
 ### 1. CORS 적용
 
-CORS를 이용해서 사이트 간 요청을 불가능하게 만든다. <br>
-만약에 CORS를 허용한다면, 사이드 이펙트가 없을 것으로 예상되는 OPTIONS, HEAD, GET 메소드에 대해서만 허용하는 것이 좋다.<br>
+CORS를 이용해서 사이트 간 요청을 불가능하게 만든다.
+만약에 CORS를 허용한다면, 사이드 이펙트가 없을 것으로 예상되는 OPTIONS, HEAD, GET 메소드에 대해서만 허용하는 것이 좋다.
 하지만 CORS는 `<script></script>` 사이에서 생성된 XMLHttpRequest 요청에만 해당되기 때문에 **위에서 예시로 든 공격을 막을 수 없다.**
 
 ### 2. referer 헤더 설정
 
-요청을 한 페이지의 정보가 담긴 Referer 헤더 속성을 검증하여 차단하는 방법.<br>
+요청을 한 페이지의 정보가 담긴 Referer 헤더 속성을 검증하여 차단하는 방법.
 같은 도메인 상에서 요청이 들어오지 않는다면 차단하도록 하는 방법. 일반적으로 이 방법만으로도 대부분 방어가 가능하다고 한다.
 
 ### 3. Synchronizer Token Pattern (csrf token)
 
-랜덤한 값을 사용자의 세션에 저장하여 사용자의 모든 요청(Request)에 대하여 서버 쪽에서 검증하는 방법<br>
+랜덤한 값을 사용자의 세션에 저장하여 사용자의 모든 요청(Request)에 대하여 서버 쪽에서 검증하는 방법
 요청을 받을 때마다 세션에 저장된 토큰값과 요청 파라미터에서 전달되는 토큰값이 같은지 검증한다
 
 서버 사이드 렌더링의 경우 아래와 같이 토큰값을 전달한다 (예시는 handlebar)
@@ -121,10 +121,10 @@ app.all('*', function (req, res) {
 
 ### 4. Double Submit Cookie
 
-Security Token 검증의 한 종류로 세션을 사용할 수 없는 환경에서 사용할 수 있는 방법. 웹브라우저의 Same Origin 정책으로 인해 자바스크립트에서 타 도메인의 쿠키 값을 확인/수정하지 못한다는 것을 이용한 방어 기법입니다.<br>
-스크립트 단에서 요청 시 난수 값을 생성하여 쿠키에 저장하고 동일한 난수 값을 요청 파라미터(혹은 헤더)에도 저장하여 서버로 전송합니다. 서버단에서 쿠키의 토큰값과 파라미터의 토큰값이 일치하는지만 검사하면 됩니다.<br>
-서버에 따로 토큰 값을 저장할 필요가 없어 세션을 이용한 검증보다 개발 공수가 적은 편입니다.<br>
-피싱 사이트에서는 도메인이 달라 쿠키에 값을 저장하지 못하므로(Same Origin 정책) 가능한 방어 기법입니다.<br>
+Security Token 검증의 한 종류로 세션을 사용할 수 없는 환경에서 사용할 수 있는 방법. 웹브라우저의 Same Origin 정책으로 인해 자바스크립트에서 타 도메인의 쿠키 값을 확인/수정하지 못한다는 것을 이용한 방어 기법입니다.
+스크립트 단에서 요청 시 난수 값을 생성하여 쿠키에 저장하고 동일한 난수 값을 요청 파라미터(혹은 헤더)에도 저장하여 서버로 전송합니다. 서버단에서 쿠키의 토큰값과 파라미터의 토큰값이 일치하는지만 검사하면 됩니다.
+서버에 따로 토큰 값을 저장할 필요가 없어 세션을 이용한 검증보다 개발 공수가 적은 편입니다.
+피싱 사이트에서는 도메인이 달라 쿠키에 값을 저장하지 못하므로(Same Origin 정책) 가능한 방어 기법입니다.
 
 - 쿠키 이름이 `__Host-` 로 시작하는 것이 좋다 (보안상 추가적인 이점)
 
@@ -155,4 +155,3 @@ api 서버가 분리된 리액트 환경에서는 csrf를 어떻게 방어할 �
 - [cookie prefix](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#cookie-with-__host-prefix)
 - [login form csrf](https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/cross-site-request-forgery-in-login-form/)
 - [velog@dnjscksdn98](https://velog.io/@dnjscksdn98/Network-CSRF%EB%9E%80)
-  <br>
