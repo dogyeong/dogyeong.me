@@ -16,6 +16,11 @@ html,
 body {
   background-color: rgb(8, 11, 22);
   min-height: 100vh;
+  font-size: 14px;
+
+  @media ($tablet) {
+    font-size: 16px;
+  }
 }
 </style>
 
