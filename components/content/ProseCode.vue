@@ -33,15 +33,20 @@ export default defineComponent({
 <style lang="scss" module>
 .codeblock {
   padding: 2rem 0;
-  margin-bottom: 2rem;
+  border-radius: 0;
+  margin: 0 -10vw 2rem;
   background-color: darken($grey-9, 4%);
-  border-radius: 0.5rem;
   font-size: 0.875rem;
   overflow-x: auto;
   color: $grey-5;
   counter-reset: code-line;
   line-height: 1.4;
   position: relative;
+
+  @media ($tablet) {
+    margin: 0 0 2rem;
+    border-radius: 0.5rem;
+  }
 }
 
 .lang {
