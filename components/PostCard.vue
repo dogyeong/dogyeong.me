@@ -54,7 +54,7 @@ defineProps<{
 .imgWrapper {
   display: block;
   position: relative;
-  padding-top: 62.5%;
+  padding-top: 56.25%;
   width: 100%;
 }
 
