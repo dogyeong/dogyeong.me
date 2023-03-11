@@ -5,7 +5,7 @@ const date = new Date(props.date)
 </script>
 
 <template>
-  <time :class="$style.time" :datetime="date.toISOString()">{{ date.toLocaleDateString() }}</time>
+  <time :class="$style.time" :datetime="date.toISOString()">{{ date.toLocaleDateString('ko-KR') }}</time>
 </template>
 
 <style lang="scss" module>

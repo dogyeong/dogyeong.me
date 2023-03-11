@@ -24,7 +24,7 @@ defineProps<{
           :class="$style.publishedAt"
           aria-label="publish date"
         >
-          {{ publishedAt.toLocaleDateString() }}
+          {{ publishedAt.toLocaleDateString('ko-KR') }}
         </time>
       </div>
     </NuxtLink>
