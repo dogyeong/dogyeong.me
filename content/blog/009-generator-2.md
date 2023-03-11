@@ -8,7 +8,7 @@ thumbnailPlaceholder: WILL_BE_REPLACED
 
 :PublishDate{:date="publishedAt"}
 
-:PostThumbnail{:src="thumbnail"}
+:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 제너레이터, iterator, iterable을 이용하면 함수형 프로그래밍의 대표적인 함수를 쉽게 구현할 수 있다.
 

@@ -8,7 +8,7 @@ thumbnailPlaceholder: WILL_BE_REPLACED
 
 :PublishDate{:date="publishedAt"}
 
-:PostThumbnail{:src="thumbnail"}
+:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 `node.js`, `npm`이 뭔지도 모르고 그냥 코드를 따라 쳐보면서 개발하던 시절부터 어느정도의 시간이 지나 어느덧 현재는 회사에서 node.js 서버 어플리케이션을 개발하기 시작했다. 그동안 노드를 사용하면서 습득한 것들에 대해 정리하고자 한다.
 

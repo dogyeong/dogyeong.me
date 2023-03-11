@@ -8,7 +8,7 @@ thumbnailPlaceholder: WILL_BE_REPLACED
 
 :PublishDate{:date="publishedAt"}
 
-:PostThumbnail{:src="thumbnail"}
+:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 이전 편에서 vue 반응성의 기초가 되는 track, trigger, dep, depsMap, targetMap을 구현하였다.
 

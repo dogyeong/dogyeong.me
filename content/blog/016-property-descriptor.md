@@ -8,7 +8,7 @@ thumbnailPlaceholder: WILL_BE_REPLACED
 
 :PublishDate{:date="publishedAt"}
 
-:PostThumbnail{:src="thumbnail"}
+:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 자바스크립트의 객체 프로퍼티는 키-값 쌍으로 이루어져 있다. 하지만 내부적으로 단순히 키-값 뿐만 아니라 프로퍼티에 대한 추가적인 정보들을 더 가지고 있는데, 이것을 `Property Descriptor`(프로퍼티 서술자)라고 한다.
 

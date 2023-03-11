@@ -8,7 +8,7 @@ thumbnailPlaceholder: WILL_BE_REPLACED
 
 :PublishDate{:date="publishedAt"}
 
-:PostThumbnail{:src="thumbnail"}
+:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 이전 편에서는 vue의 반응성 시스템과 reactive API를 구현해보았다.
 

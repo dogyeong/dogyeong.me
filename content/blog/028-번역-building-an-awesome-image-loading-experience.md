@@ -8,7 +8,7 @@ thumbnailPlaceholder: WILL_BE_REPLACED
 
 :PublishDate{:date="publishedAt"}
 
-:PostThumbnail{:src="thumbnail"}
+:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 > Kent C. Dodds의 [Building an awesome image loading experience](https://kentcdodds.com/blog/building-an-awesome-image-loading-experience)를 번역한 글입니다.
 
