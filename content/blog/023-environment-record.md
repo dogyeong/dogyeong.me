@@ -78,7 +78,7 @@ bazEnvrionmentRecord = {
 
 함수가 평가되면서 생성된 환경 레코드의`[[OuterEnv]]`는 구문적으로 상위의 환경 레코드의 참조가 될 것이고, 다음과 같은 트리구조를 만들게 된다.
 
-```
+```md
                    null
                      |
           GlobalEnvironmentRecord
@@ -87,7 +87,8 @@ bazEnvrionmentRecord = {
                      |
           ------------------------
           |                      |
-barEnvironmentRecord   bazEnvrionmentRecord
+
+barEnvironmentRecord bazEnvrionmentRecord
 ```
 
 ### 스코프, 렉시컬 스코프, 스코프 체인
@@ -104,7 +105,7 @@ barEnvironmentRecord   bazEnvrionmentRecord
 환경 레코드는 몇가지 종류가 있으며 간단한 객체지향의 계층으로 생각할 수 있다.
 상속관계를 나타내면 아래와 같다.
 
-```
+```md
                                      Environment Record(Abstract Class)
                                                     |
                     -----------------------------------------------------------------
@@ -113,7 +114,8 @@ barEnvironmentRecord   bazEnvrionmentRecord
                     |
             --------------------------------
             |                              |
-Function Environment Record     Module Environment Record
+
+Function Environment Record Module Environment Record
 ```
 
 ### Declarative Environment Record
