@@ -6,14 +6,25 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "headers": [{
-      "source": "**/*.@(jpg|jpeg|png|gif|svg|ico|webp|avif)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "max-age=86400"
-        }
-      ]
-    }]
+    "headers": [
+      {
+        "source": "**/*.@(jpg|jpeg|png|gif|svg|ico|webp|avif)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=604800"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(css|js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=86400"
+          }
+        ]
+      }
+    ]
   }
 }
