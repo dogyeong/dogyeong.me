@@ -25,18 +25,13 @@ async function run() {
 
         const { metadata } = await sqip({
           input: path.join(__dirname, './public', imageFilePath),
-          plugins: [
-            { name: 'sqip-plugin-primitive', options: { numberOfPrimitives: 8 } },
-            { name: 'sqip-plugin-blur', options: { blur: 8 } },
-            'sqip-plugin-svgo',
-            'sqip-plugin-data-uri',
-          ],
+          plugins: ['data-uri'],
           width: 10,
         })
 
         const replacedMarkdown = markdown.replace(
           /thumbnailPlaceholder:[ ]?\S*/,
-          `thumbnailPlaceholder: ${metadata.dataURIBase64}`,
+          `thumbnailPlaceholder: ${metadata.dataURIBase64.replace('+xml', '')}`,
         )
 
         await fs.writeFile(path.join(__dirname, `./content/blog/${file}`), replacedMarkdown, {
