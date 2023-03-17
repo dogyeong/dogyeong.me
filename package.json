@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@nuxtjs/robots": "^2.5.0",
+    "firebase": "^9.18.0",
     "sqip": "^1.0.0-alpha.38",
     "sqip-plugin-data-uri": "^1.0.0-alpha.39"
   }

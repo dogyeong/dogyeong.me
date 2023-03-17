@@ -1,7 +1,24 @@
 <script setup lang="ts">
+import { initializeApp } from 'firebase/app'
+import { getAnalytics } from 'firebase/analytics'
 import '~/assets/reset.scss'
 
 useHead({ htmlAttrs: { lang: 'ko' }, title: 'dogyeong.dev' })
+
+onBeforeMount(() => {
+  const firebaseConfig = {
+    apiKey: 'AIzaSyBEMQu611YHqTKRF93u99p4gTPPTFHfTyw',
+    authDomain: 'devpass-30165.firebaseapp.com',
+    projectId: 'devpass-30165',
+    storageBucket: 'devpass-30165.appspot.com',
+    messagingSenderId: '281649795294',
+    appId: '1:281649795294:web:c15383acaadf7a7058324f',
+    measurementId: 'G-LW7FPNPD0S',
+  }
+
+  const app = initializeApp(firebaseConfig)
+  getAnalytics(app)
+})
 </script>
 
 <template>
