@@ -62,22 +62,33 @@ export default defineComponent({
 </style>
 
 <style lang="scss">
-pre code .line {
+pre code {
   display: block;
-  min-height: 1rem;
-  font-family: 'Source Code Pro', monospace;
-  font-weight: 400;
-  counter-increment: code-line;
+  width: fit-content;
 
-  &::before {
-    content: counter(code-line);
-    display: inline-block;
-    width: 2rem;
-    padding: 0;
-    margin: 0;
-    padding-right: 1.5rem;
-    text-align: right;
-    color: $grey-7;
+  .line {
+    display: block;
+    min-height: 1rem;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+    counter-increment: code-line;
+    padding-right: 24px;
+    min-width: 100%;
+    width: max-content;
+
+    &::before {
+      content: counter(code-line);
+      display: inline-block;
+      width: 2rem;
+      padding: 0;
+      margin: 0;
+      padding-right: 1.5rem;
+      text-align: right;
+      color: $grey-7;
+      position: sticky;
+      left: 0;
+      background-color: darken($grey-9, 4%);
+    }
   }
 }
 </style>
