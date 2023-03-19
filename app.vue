@@ -3,9 +3,11 @@ import { initializeApp } from 'firebase/app'
 import { getAnalytics } from 'firebase/analytics'
 import '~/assets/reset.scss'
 
-useHead({ htmlAttrs: { lang: 'ko' }, title: 'dogyeong.dev' })
+useHead({ htmlAttrs: { lang: 'ko' }, title: 'dogyeong.me' })
 
 onBeforeMount(() => {
+  if (process.env.NODE_ENV === 'development') return
+
   const firebaseConfig = {
     apiKey: 'AIzaSyBEMQu611YHqTKRF93u99p4gTPPTFHfTyw',
     authDomain: 'devpass-30165.firebaseapp.com',
