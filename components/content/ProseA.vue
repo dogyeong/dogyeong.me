@@ -24,6 +24,10 @@ defineProps({
   &:hover,
   &:active {
     color: $indigo-5;
+
+    > code {
+      color: $indigo-5;
+    }
   }
 
   &:hover {
