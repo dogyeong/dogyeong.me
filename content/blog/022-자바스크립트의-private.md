@@ -1,6 +1,6 @@
 ---
 publishedAt: 2021-08-28
-thumbnail: /images/022-thumb.png
+thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/022-thumb.png
 thumbnailPlaceholder: WILL_BE_REPLACED
 ---
 
