@@ -3,6 +3,8 @@ const props = defineProps<{
   src: string
   alt?: string
   placeholderDataUri?: string
+  widths: number[]
+  sizes: string[]
 }>()
 
 const imgRef = ref<HTMLImageElement | null>(null)
@@ -10,6 +12,7 @@ const imgLoaded = ref(false)
 const imgOpacity = computed(() => (imgLoaded.value ? 1 : 0))
 const isDev = computed(() => props.placeholderDataUri === 'WILL_BE_REPLACED')
 
+// 이미지가 로딩되면 opacity를 1로 변경
 onMounted(() => {
   if (!imgRef.value || imgRef.value.complete) {
     return (imgLoaded.value = true)
@@ -19,6 +22,25 @@ onMounted(() => {
     imgLoaded.value = true
   }
 })
+
+// cloudinary 이미지를 불러오기 위한 src, srcset, sizes 계산
+const computedSrcsetList = computed(() => {
+  const [baseUrl, thumbUrl] = props.src.split('/upload/')
+
+  if (!props.widths.length || !baseUrl || !thumbUrl) return undefined
+
+  return props.widths.map((width) => `${baseUrl}/upload/w_${width},q_auto/${thumbUrl} ${width}w`)
+})
+const computedSrcset = computed(() =>
+  computedSrcsetList.value ? computedSrcsetList.value.join(', ') : undefined,
+)
+const computedSrc = computed(() => {
+  if (!computedSrcsetList.value?.length) return props.src
+
+  const [lastSrcset] = computedSrcsetList.value.slice(-1)
+  return lastSrcset.split(' ')[0]
+})
+const computedSizes = computed(() => (props.sizes.length ? props.sizes.join(', ') : undefined))
 </script>
 
 <template>
@@ -27,7 +49,15 @@ onMounted(() => {
     :class="$style.wrapper"
   >
     <div :class="$style.imageWrapper">
-      <img ref="imgRef" :src="src" :alt="alt" :class="$style.image" loading="lazy" />
+      <img
+        ref="imgRef"
+        :src="computedSrc"
+        :alt="alt"
+        :class="$style.image"
+        loading="lazy"
+        :srcset="computedSrcset"
+        :sizes="computedSizes"
+      />
     </div>
   </div>
 </template>

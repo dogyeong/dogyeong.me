@@ -13,7 +13,13 @@ defineProps<{
     <NuxtLink :to="to" :class="$style.link">
       <span :class="$style.imgWrapper">
         <span :class="$style.img">
-          <BlurrableImage :src="imageSrc" :alt="title" :placeholder-data-uri="thumbnailPlaceholder" />
+          <BlurrableImage
+            :src="imageSrc"
+            :alt="title"
+            :placeholder-data-uri="thumbnailPlaceholder"
+            :widths="[280, 560, 840, 1120, 1400, 1568]"
+            :sizes="['(max-width: 639px) 80vw', '(max-width: 1680px) 40vw', '1120px']"
+          />
         </span>
       </span>
       <div :class="$style.description">
