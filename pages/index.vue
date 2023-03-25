@@ -21,6 +21,6 @@ const { data } = await useAsyncData('articles', () => queryContent('/blog').sort
 <style lang="scss" module>
 .main {
   margin: 0 10vw;
-  padding: 120px 0;
+  padding: 160px 0;
 }
 </style>
