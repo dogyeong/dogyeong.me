@@ -18,7 +18,7 @@ import Logo from '~/assets/svg/logo.svg'
           ></path>
         </svg>
       </a>
-      <a :class="$style.iconLink" href="mailto:shroad1802@gamil.com" target="_blank" title="Mail">
+      <a :class="$style.iconLink" href="mailto:shroad1802@gmail.com" target="_blank" title="Mail">
         <svg stroke-width="1.8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M7 9l5 3.5L17 9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
           <path
