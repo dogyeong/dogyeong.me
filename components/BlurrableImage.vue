@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   src: string
   alt?: string
   placeholderDataUri?: string
@@ -8,6 +8,7 @@ defineProps<{
 const imgRef = ref<HTMLImageElement | null>(null)
 const imgLoaded = ref(false)
 const imgOpacity = computed(() => (imgLoaded.value ? 1 : 0))
+const isDev = computed(() => props.placeholderDataUri === 'WILL_BE_REPLACED')
 
 onMounted(() => {
   if (!imgRef.value || imgRef.value.complete) {
@@ -22,7 +23,7 @@ onMounted(() => {
 
 <template>
   <div
-    :style="placeholderDataUri && { 'background-image': `url('${placeholderDataUri}')` }"
+    :style="placeholderDataUri && !isDev ? { 'background-image': `url('${placeholderDataUri}')` } : {}"
     :class="$style.wrapper"
   >
     <div :class="$style.imageWrapper">
