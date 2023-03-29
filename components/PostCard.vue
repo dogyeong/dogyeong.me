@@ -97,6 +97,7 @@ defineProps<{
   margin-top: -0.7em;
   z-index: 3;
   word-break: keep-all;
+  text-shadow: 0 0 12px rgba($grey-9, 0.5);
 }
 
 .publishedAt {
