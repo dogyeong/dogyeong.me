@@ -18,60 +18,65 @@ async function run() {
 
         if (!needThumbnailPlaceholder) return
 
-        const thumbnailUrlmatchResult = markdown.match(/thumbnail:[ ]?\S+/)
+        const thumbnailUrl = extractThumbnailUrlFromMarkdown(markdown)
 
-        if (!thumbnailUrlmatchResult) return
-
-        const [matched] = thumbnailUrlmatchResult
-        const thumbnailUrl = matched.split('thumbnail:')[1].trim()
+        if (!thumbnailUrl) return
 
         const { etag: cachedEtag, dataURIBase64: cachedBase64 } = (await cache.get(thumbnailUrl)) || {}
         const etag = await fetch(thumbnailUrl, { method: 'HEAD' }).then((r) => r.headers.get('etag'))
+        const cacheHit = cachedEtag === etag
 
-        // cache hit
-        if (cachedEtag === etag) {
-          const replacedMarkdown = markdown.replace(
-            /thumbnailPlaceholder:[ ]?\S*/,
-            `thumbnailPlaceholder: ${cachedBase64}`,
-          )
-
-          await fs.writeFile(path.join(__dirname, `../content/blog/${file}`), replacedMarkdown, {
-            encoding: 'utf-8',
-          })
-
-          console.log('Using cache for', file)
-          return
+        if (cacheHit) {
+          await writePlaceholderToMarkdown(markdown, file, cachedBase64)
+          return console.log('Used cache for', file)
         }
 
-        // cache miss
         const image = await fetch(thumbnailUrl)
         const imageEtag = image.headers.get('etag')
 
-        const { metadata } = await sqip({
-          input: Buffer.from(await image.arrayBuffer()),
-          plugins: ['data-uri'],
-          width: 10,
-          outputFileName: file,
-        })
-        const refinedDataURIBase64 = metadata.dataURIBase64.replace('+xml', '')
+        const dataURIBase64 = generatePlaceholderDataURI(file, await image.arrayBuffer())
 
-        await cache.set(thumbnailUrl, { etag: imageEtag, dataURIBase64: refinedDataURIBase64 })
-
-        const replacedMarkdown = markdown.replace(
-          /thumbnailPlaceholder:[ ]?\S*/,
-          `thumbnailPlaceholder: ${refinedDataURIBase64}`,
-        )
-
-        await fs.writeFile(path.join(__dirname, `../content/blog/${file}`), replacedMarkdown, {
-          encoding: 'utf-8',
-        })
+        await cache.set(thumbnailUrl, { etag: imageEtag, dataURIBase64 })
+        await writePlaceholderToMarkdown(markdown, file, dataURIBase64)
 
         console.log('Generated placeholder for', file)
       } catch (e) {
-        console.log(e)
+        console.log('unexpected error while generating placeholder', e)
       }
     }),
   )
+}
+
+function writePlaceholderToMarkdown(originalMarkdown, filename, placeholderDataURI) {
+  const replacedMarkdown = originalMarkdown.replace(
+    /thumbnailPlaceholder:[ ]?\S*/,
+    `thumbnailPlaceholder: ${placeholderDataURI}`,
+  )
+
+  return fs.writeFile(path.join(__dirname, `../content/blog/${filename}`), replacedMarkdown, {
+    encoding: 'utf-8',
+  })
+}
+
+function extractThumbnailUrlFromMarkdown(markdown) {
+  const thumbnailUrlmatchResult = markdown.match(/thumbnail:[ ]?\S+/)
+
+  if (!thumbnailUrlmatchResult) return null
+
+  const [matched] = thumbnailUrlmatchResult
+  const thumbnailUrl = matched.split('thumbnail:')[1].trim()
+
+  return thumbnailUrl
+}
+
+async function generatePlaceholderDataURI(filename, imageArrayBuffer) {
+  const { metadata } = await sqip({
+    input: Buffer.from(imageArrayBuffer),
+    plugins: ['data-uri'],
+    width: 10,
+    outputFileName: filename,
+  })
+  return metadata.dataURIBase64.replace('+xml', '')
 }
 
 run().then(cache.saveFile)
