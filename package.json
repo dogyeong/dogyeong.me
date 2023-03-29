@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "generate-thumbnail-placeholder": "node ./generate-thumbnail-placeholder.js",
+    "generate-thumbnail-placeholder": "node ./thumbnail-placeholder/generator.js",
     "dev": "nuxt dev --open",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
