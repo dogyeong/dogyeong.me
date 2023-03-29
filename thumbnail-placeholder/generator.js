@@ -34,7 +34,7 @@ async function run() {
         const image = await fetch(thumbnailUrl)
         const imageEtag = image.headers.get('etag')
 
-        const dataURIBase64 = generatePlaceholderDataURI(file, await image.arrayBuffer())
+        const dataURIBase64 = await generatePlaceholderDataURI(file, await image.arrayBuffer())
 
         await cache.set(thumbnailUrl, { etag: imageEtag, dataURIBase64 })
         await writePlaceholderToMarkdown(markdown, file, dataURIBase64)
