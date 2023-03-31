@@ -14,7 +14,7 @@ async function run() {
     markdownFiles.map(async (file) => {
       try {
         const markdown = (await fs.readFile(path.join(__dirname, `../content/blog/${file}`))).toString()
-        const needThumbnailPlaceholder = markdown.includes('thumbnailPlaceholder:')
+        const needThumbnailPlaceholder = decidePlaceholderNeeded(markdown)
 
         if (!needThumbnailPlaceholder) return
 
@@ -23,8 +23,7 @@ async function run() {
         if (!thumbnailUrl) return
 
         const { etag: cachedEtag, dataURIBase64: cachedBase64 } = (await cache.get(thumbnailUrl)) || {}
-        const etag = await fetch(thumbnailUrl, { method: 'HEAD' }).then((r) => r.headers.get('etag'))
-        const cacheHit = cachedEtag === etag
+        const cacheHit = await decideCacheHit(thumbnailUrl, cachedEtag)
 
         if (cacheHit) {
           await writePlaceholderToMarkdown(markdown, file, cachedBase64)
@@ -45,6 +44,17 @@ async function run() {
       }
     }),
   )
+}
+
+function decidePlaceholderNeeded(markdown) {
+  return markdown.includes('thumbnailPlaceholder:')
+}
+
+async function decideCacheHit(thumbnailUrl, cachedEtag) {
+  if (!cachedEtag) return false
+
+  const etag = await fetch(thumbnailUrl, { method: 'HEAD' }).then((r) => r.headers.get('etag'))
+  return etag === cachedEtag
 }
 
 function writePlaceholderToMarkdown(originalMarkdown, filename, placeholderDataURI) {
