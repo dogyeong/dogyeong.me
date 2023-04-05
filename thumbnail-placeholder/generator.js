@@ -2,48 +2,44 @@ const path = require('path')
 const fs = require('fs/promises')
 const { sqip } = require('sqip')
 const cache = require('./cache')
+const { forEachBlogArticles } = require('./file')
 
 /**
  * 블로그 컨텐츠 마크다운 파일의 썸네일 이미지를 기반으로 플레이스홀더 svg uri를 생성하고
  * 해당 uri를 마크다운 파일에 추가한다.
  */
-async function run() {
-  const markdownFiles = await fs.readdir(path.join(__dirname, '../content/blog'))
+run().then(cache.saveFile)
 
-  await Promise.allSettled(
-    markdownFiles.map(async (file) => {
-      try {
-        const markdown = (await fs.readFile(path.join(__dirname, `../content/blog/${file}`))).toString()
-        const needThumbnailPlaceholder = decidePlaceholderNeeded(markdown)
+function run() {
+  return forEachBlogArticles(generatePlaceholderAndWriteToMarkdown)
+}
 
-        if (!needThumbnailPlaceholder) return
+async function generatePlaceholderAndWriteToMarkdown(filename, markdown) {
+  const needThumbnailPlaceholder = decidePlaceholderNeeded(markdown)
 
-        const thumbnailUrl = extractThumbnailUrlFromMarkdown(markdown)
+  if (!needThumbnailPlaceholder) return
 
-        if (!thumbnailUrl) return
+  const thumbnailUrl = extractThumbnailUrlFromMarkdown(markdown)
 
-        const { etag: cachedEtag, dataURIBase64: cachedBase64 } = (await cache.get(thumbnailUrl)) || {}
-        const cacheHit = await decideCacheHit(thumbnailUrl, cachedEtag)
+  if (!thumbnailUrl) return
 
-        if (cacheHit) {
-          await writePlaceholderToMarkdown(markdown, file, cachedBase64)
-          return console.log('Used cache for', file)
-        }
+  const { etag: cachedEtag, dataURIBase64: cachedBase64 } = (await cache.get(thumbnailUrl)) || {}
+  const cacheHit = await decideCacheHit(thumbnailUrl, cachedEtag)
 
-        const image = await fetch(thumbnailUrl)
-        const imageEtag = image.headers.get('etag')
+  if (cacheHit) {
+    await writePlaceholderToMarkdown(markdown, filename, cachedBase64)
+    return console.log('Used cache for', filename)
+  }
 
-        const dataURIBase64 = await generatePlaceholderDataURI(file, await image.arrayBuffer())
+  const image = await fetch(thumbnailUrl)
+  const imageEtag = image.headers.get('etag')
 
-        await cache.set(thumbnailUrl, { etag: imageEtag, dataURIBase64 })
-        await writePlaceholderToMarkdown(markdown, file, dataURIBase64)
+  const dataURIBase64 = await generatePlaceholderDataURI(filename, await image.arrayBuffer())
 
-        console.log('Generated placeholder for', file)
-      } catch (e) {
-        console.log('unexpected error while generating placeholder', e)
-      }
-    }),
-  )
+  await cache.set(thumbnailUrl, { etag: imageEtag, dataURIBase64 })
+  await writePlaceholderToMarkdown(markdown, filename, dataURIBase64)
+
+  console.log('Generated placeholder for', filename)
 }
 
 function decidePlaceholderNeeded(markdown) {
@@ -88,5 +84,3 @@ async function generatePlaceholderDataURI(filename, imageArrayBuffer) {
   })
   return metadata.dataURIBase64.replace('+xml', '')
 }
-
-run().then(cache.saveFile)
