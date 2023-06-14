@@ -1,5 +1,8 @@
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
+// https://v3.nuxtjs.org/api/configuration/nuxt.confi
 export default defineNuxtConfig({
+  devtools: {
+    enabled: true,
+  },
   typescript: {
     strict: true,
   },
