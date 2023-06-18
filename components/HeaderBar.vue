@@ -51,7 +51,9 @@ import Logo from '~/assets/svg/logo.svg'
 
   .logo {
     width: 32px;
+    height: 32px;
     fill: $grey-0;
+    color: $grey-0;
   }
 }
 
