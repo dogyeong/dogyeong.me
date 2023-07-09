@@ -15,7 +15,7 @@ const { data } = await useAsyncData('articles', () => queryContent('/blog').sort
         :to="article._path || '/'"
         :image-src="
           article.thumbnail ||
-          'https://res.cloudinary.com/dpefbi4ts/image/upload/v1688877804/thumb/sample.png'
+          'https://res.cloudinary.com/dpefbi4ts/image/upload/v1688878315/thumb/sample.png'
         "
         :title="article.title || ''"
         :published-at="article.publishedAt ? new Date(article.publishedAt) : undefined"
