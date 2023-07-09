@@ -13,7 +13,10 @@ const { data } = await useAsyncData('articles', () => queryContent('/blog').sort
         v-for="article in data"
         :key="article._id"
         :to="article._path || '/'"
-        :image-src="article.thumbnail || '/images/sample.jpeg'"
+        :image-src="
+          article.thumbnail ||
+          'https://res.cloudinary.com/dpefbi4ts/image/upload/v1688877804/thumb/sample.png'
+        "
         :title="article.title || ''"
         :published-at="article.publishedAt ? new Date(article.publishedAt) : undefined"
         :thumbnail-placeholder="article.thumbnailPlaceholder"
