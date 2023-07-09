@@ -29,7 +29,7 @@ const computedSrcsetList = computed(() => {
 
   if (!props.widths.length || !baseUrl || !thumbUrl) return undefined
 
-  return props.widths.map((width) => `${baseUrl}/upload/w_${width},q_auto/${thumbUrl} ${width}w`)
+  return props.widths.map((width) => `${baseUrl}/upload/w_${width},q_auto,f_auto/${thumbUrl} ${width}w`)
 })
 const computedSrcset = computed(() =>
   computedSrcsetList.value ? computedSrcsetList.value.join(', ') : undefined,
