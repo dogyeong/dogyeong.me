@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Link from '@/components/Link'
+
 defineProps<{
   title: string
   to: string
@@ -10,7 +12,7 @@ defineProps<{
 
 <template>
   <article :class="$style.wrapper">
-    <NuxtLink :to="to" :class="$style.link">
+    <Link :to="to" :class="$style.link">
       <span :class="$style.imgWrapper">
         <span :class="$style.img">
           <BlurrableImage
@@ -33,7 +35,7 @@ defineProps<{
           {{ publishedAt.toLocaleDateString('ko-KR') }}
         </time>
       </div>
-    </NuxtLink>
+    </Link>
   </article>
 </template>
 

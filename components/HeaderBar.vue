@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import Logo from '~/assets/svg/logo.svg'
+import Link from '@/components/Link'
 </script>
 
 <template>
   <header :class="$style.header">
-    <NuxtLink to="/" :class="$style.logoWrapper">
+    <Link to="/" :class="$style.logoWrapper">
       <Logo :class="$style.logo" aria-label="Go Home" />
-    </NuxtLink>
+    </Link>
     <div :class="$style.menuBar">
       <a :class="$style.iconLink" href="https://github.com/dogyeong" target="_blank" title="GitHub">
         <svg stroke-width="1.8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

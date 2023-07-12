@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Link from '@/components/Link'
+
 defineProps({
   href: {
     type: String,
@@ -12,9 +14,9 @@ defineProps({
 </script>
 
 <template>
-  <NuxtLink :href="href" :class="$style.anchor">
+  <Link :href="href" :class="$style.anchor">
     <slot />
-  </NuxtLink>
+  </Link>
 </template>
 
 <style lang="scss" module>
