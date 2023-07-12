@@ -10,6 +10,10 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
+      htmlAttrs: { lang: 'ko' },
+      title: 'dogyeong.me',
       link: [
         { rel: 'apple-touch-icon-precomposed', sizes: '57x57', href: 'favicon/apple-touch-icon-57x57.png' },
         {

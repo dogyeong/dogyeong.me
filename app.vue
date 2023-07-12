@@ -3,8 +3,6 @@ import { initializeApp } from 'firebase/app'
 import { getAnalytics } from 'firebase/analytics'
 import '~/assets/reset.scss'
 
-useHead({ htmlAttrs: { lang: 'ko' }, title: 'dogyeong.me' })
-
 onBeforeMount(() => {
   if (process.env.NODE_ENV === 'development') return
 
