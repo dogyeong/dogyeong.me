@@ -9,19 +9,19 @@
   margin: 0 10vw;
   padding: 10rem 0;
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 1.5rem;
+  grid-template-columns: repeat(24, minmax(0, 1fr));
+  column-gap: 0.75rem;
   overflow-wrap: break-word;
 
   > * {
-    grid-column: 1 / span 12;
+    grid-column: 1 / span 24;
 
     @media ($tablet) {
-      grid-column: 2 / span 10;
+      grid-column: 3 / span 20;
     }
 
     @media ($desktop) {
-      grid-column: 3 / span 8;
+      grid-column: 7 / span 12;
     }
   }
 }
