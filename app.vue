@@ -53,24 +53,24 @@ body {
   transform: translate(0, 10px);
 }
 
-body {
-  --sb-track-color: #{$grey-9};
+* {
+  --sb-track-color: transparent;
   --sb-thumb-color: #{$grey-6};
   --sb-size: 10px;
 
   scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
 }
 
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: var(--sb-size);
 }
 
-body::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: var(--sb-track-color);
   border-radius: 10px;
 }
 
-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
   border-radius: 10px;
 }
