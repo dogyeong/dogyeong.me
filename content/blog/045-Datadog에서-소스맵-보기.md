@@ -97,7 +97,7 @@ RUN yarn workspace @my/app upload:sourcemap:datadog --release-version=${DATADOG_
 
 ### 4. 로그에 배포 버전 지정
 
-앞에서 지정한 `NEXT_PUBLIC_DATADOG_RELEASE_VERSION` 환경변수를 datadogLog logger 초기화할 때 버전으로 ㄴ지정한다.
+앞에서 지정한 `NEXT_PUBLIC_DATADOG_RELEASE_VERSION` 환경변수를 datadogLog logger 초기화할 때 버전으로 지정한다.
 
 ```ts
 const releaseVersion = process.env.NEXT_PUBLIC_DATADOG_RELEASE_VERSION
