@@ -12,6 +12,7 @@
   grid-template-columns: repeat(24, minmax(0, 1fr));
   column-gap: 0.75rem;
   overflow-wrap: break-word;
+  word-break: keep-all;
 
   > * {
     grid-column: 1 / span 24;
