@@ -12,13 +12,13 @@ thumbnailPlaceholder: WILL_BE_REPLACED
 
 제품을 개발할 때 에러나 로그를 모니터링하기 위한 도구는 거의 필수적이다. 이러한 도구를 사용하지 않는다면 서비스의 상태를 트래킹하거나 에러를 디버깅하는 것은 매우 힘들다.
 
-방법으로는 [Datadog](https://www.datadoghq.com/ko/dg/monitor/personalized-demo-request)이나 [Sentry](https://sentry.io/welcome)같은 SaaS 제품을 많이 사용하고,
-이 서비스들은 모니터링뿐 만 아니라 테스트 자동화, 커버리지 측정 등 다양한 기능들을 제공하고 있다.
+방법으로는 [Datadog](https://www.datadoghq.com/ko/dg/monitor/personalized-demo-request)이나 [Sentry](https://sentry.io/welcome) 같은 SaaS 제품을 많이 사용하고,
+이 서비스들은 모니터링뿐만 아니라 테스트 자동화, 커버리지 측정 등 다양한 기능들을 제공하고 있다.
 
-모니터링 서비스에서 에러를 디버깅할 때 에러의 스택 트레이스를 볼 수 있는데, 유저의 브라우저에서 실행되는 자바스크립트가 minified된 형태라면 읽기 어려운 점이 있다.
+모니터링 서비스에서 에러를 디버깅할 때 에러의 스택 트레이스를 볼 수 있는데, 유저의 브라우저에서 실행되는 자바스크립트가 minified 된 형태라면 읽기 어려운 점이 있다.
 이럴 때 [소스맵](https://web.dev/articles/source-maps)을 연결하면 원래 작성한 코드를 볼 수 있기 때문에 편하다.
 
-이 글에서는 Datadog으로 소스맵을 업로드하는 방법에 대해 설명한다.
+이 글에서는 Datadog으로 소스맵을 업로드하는 방법에 관해 설명한다.
 
 ## 소스맵 생성 설정
 
