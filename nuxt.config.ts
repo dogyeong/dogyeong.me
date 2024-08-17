@@ -3,10 +3,13 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true,
   },
+
   typescript: {
     strict: true,
   },
+
   modules: ['@nuxt/content', '@nuxtjs/robots', 'nuxt-svgo'],
+
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
@@ -56,11 +59,13 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   nitro: {
     prerender: {
       routes: ['/sitemap.xml'],
     },
   },
+
   vite: {
     css: {
       preprocessorOptions: {
@@ -70,6 +75,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   content: {
     highlight: {
       theme: 'github-dark',
@@ -89,6 +95,7 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   svgo: {
     svgoConfig: {
       plugins: [
@@ -103,4 +110,6 @@ export default defineNuxtConfig({
       ],
     },
   },
+
+  compatibilityDate: '2024-08-17',
 })
