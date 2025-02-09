@@ -16,7 +16,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-nuxt": "^4.0.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "nuxt": "^3.12.4",
+    "nuxt": "^3.15.4",
     "nuxt-svgo": "^3.1.0",
     "postcss": "^8.4.17",
     "postcss-custom-properties": "^12.1.9",
@@ -30,5 +30,6 @@
     "firebase": "^9.18.0",
     "sqip": "^1.0.0-alpha.38",
     "sqip-plugin-data-uri": "^1.0.0-alpha.39"
-  }
+  },
+  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 }
