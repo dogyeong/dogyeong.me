@@ -57,6 +57,10 @@ defineProps<{
   @media ($desktop) {
     font-size: 2rem;
   }
+
+  &:hover .title {
+    text-decoration: underline;
+  }
 }
 
 .imgWrapper {
