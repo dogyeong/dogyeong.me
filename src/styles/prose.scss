@@ -1,0 +1,281 @@
+// components/content/Prose*.vue 26개(정확히는 Prose* 24개 + PublishDate/PostThumbnail 2개,
+// 후자 둘은 src/layouts/ArticleLayout.astro에 직접 스코프)를 여기 하나로 접었다.
+// 셀렉터 매핑은 task-5-brief.md의 표를 따른다. 값·단위·색상·미디어쿼리는 원본 그대로 옮기고
+// 새로 다듬지 않는다 — 이 파일의 목적은 마이그레이션 이전 화면과 픽셀 단위로 같게 만드는 것이다.
+//
+// ProseH1(.h1)은 여기 포함하지 않는다. 글 제목 h1은 이제 프론트매터에서 바로 렌더되고
+// (ArticleLayout.astro), 본문 마크다운에는 h1이 전혀 없다(타이틀 라인은 Task 2에서 frontmatter로
+// 옮겨졌다) — 따라서 ProseH1의 스타일은 ArticleLayout.astro의 스코프 스타일로 옮겼다.
+// 표 상의 매핑을 문서화하는 차원에서 `.prose h1` 규칙 자체는 아래에도 남겨둔다(현재는 매치되는
+// 요소가 없어 죽은 규칙이지만, 원본과 동일한 시각 결과를 위해 실제로 쓰이는 곳은 ArticleLayout이다).
+//
+// h1/h2/h3의 `> a { color: inherit; }`가 필요한 이유: 원본 ProseH2/H3.vue는 헤딩을 감싸는
+// <a>에 별도 클래스를 주지 않았고, reset.scss의 `a{color:inherit}` 덕에 앵커가 헤딩 색을
+// 그대로 물려받았다(즉 헤딩 텍스트는 늘 $grey-1로 보였다). 지금은 ProseA의 `.prose a` 규칙도
+// 같은 스타일시트 안에 있고 그건 순수 elemenet 셀렉터라 specificity가 `.prose h2 > a` 보다
+// 낮긴 하지만, 명시적으로 상속을 선언해두지 않으면 유지보수 중 순서가 바뀌었을 때 헤딩
+// 앵커가 다시 인디고색으로 새는 걸 놓치기 쉽다. 실제로 이 override 없이 빌드했을 때
+// "1. branch" 같은 h2 제목이 본문 링크와 같은 파란색(#5c7cfa)으로 렌더되는 회귀를
+// 스크린샷 대조 중 발견했다.
+.prose {
+  h1 {
+    color: $grey-1;
+    font-size: 2.5rem;
+    font-weight: 400;
+
+    > a {
+      color: inherit;
+    }
+  }
+
+  // ProseH2.vue
+  h2 {
+    font-size: 1.875rem;
+    font-weight: 500;
+    margin-top: 5rem;
+    margin-bottom: 2.5rem;
+    color: $grey-1;
+
+    > a {
+      color: inherit;
+    }
+
+    > a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // ProseH3.vue
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: $grey-1;
+
+    > a {
+      color: inherit;
+    }
+
+    > a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // ProseH4/H5/H6.vue: 원본에 <style> 블록이 없다. 브라우저 기본값 그대로였으므로
+  // 여기서도 아무 규칙도 추가하지 않는다.
+
+  // ProseP.vue
+  p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    color: $grey-5;
+  }
+
+  // ProseA.vue (Link 래퍼는 trailingSlash: 'always' 전역 설정으로 대체됨, CSS만 이전)
+  a {
+    &,
+    &:visited,
+    &:hover,
+    &:active {
+      color: $indigo-5;
+
+      > code {
+        color: $indigo-5;
+      }
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // ProseUl.vue
+  ul {
+    margin-bottom: 2rem;
+    padding-left: 1.625rem;
+    list-style-type: disc;
+  }
+
+  li > ul {
+    margin-bottom: 0;
+  }
+
+  // ProseOl.vue
+  ol {
+    margin-bottom: 2rem;
+    padding-left: 1.625rem;
+    list-style-type: decimal;
+  }
+
+  // ProseLi.vue
+  li {
+    margin: 0.5rem 0;
+    padding-left: 0.375rem;
+    color: $grey-5;
+    font-size: 1rem;
+  }
+
+  // ProseBlockquote.vue
+  blockquote {
+    background-color: darken($grey-9, 4%);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border: 0;
+    border-radius: 0.5rem;
+    font-style: italic;
+    font-weight: 400;
+    white-space: pre-wrap;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  // ProseCode.vue의 .codeblock 모듈 스타일. 원본은 <pre>를 감싸는 별도 div였지만
+  // Astro 내장 Shiki는 <pre>를 직접 emit하므로 이 규칙을 .prose pre로 옮긴다.
+  //
+  // background-color/color에 !important가 붙는 이유: Astro 7.1.3의 Shiki 출력은
+  // <pre style="background-color:#24292e;color:#e1e4e8;...">처럼 인라인 스타일을 직접
+  // 박아 넣는다(측정 확인함). 반면 마이그레이션 이전 사이트는 <pre style="">로 인라인이
+  // 비어 있었고, 배경/기본 텍스트 색은 감싸는 .codeblock div의 외부 스타일시트 규칙
+  // (#181b1e / $grey-5)이 담당했다. 인라인 스타일은 일반 규칙보다 항상 우선하므로
+  // !important 없이는 코드블록 배경이 Shiki 테마의 #24292e로 보여 원본(#181b1e)과
+  // 육안으로 다르게 렌더된다. 토큰별 색상(각 span의 인라인 color)은 !important로
+  // 건드리지 않으므로 문법 강조 자체는 그대로 유지된다.
+  pre {
+    padding: 2rem 0;
+    border-radius: 0;
+    margin: 0 -10vw 2rem;
+    background-color: darken($grey-9, 4%) !important;
+    font-size: 0.875rem;
+    overflow-x: auto;
+    color: $grey-5 !important;
+    counter-reset: code-line;
+    line-height: 1.4;
+    position: relative;
+
+    @media ($tablet) {
+      margin: 0 0 2rem;
+      border-radius: 0.5rem;
+    }
+  }
+
+  // ProseCode.vue의 두번째(전역) <style> 블록: 코드블록 줄 번호.
+  // Astro 내장 Shiki가 emit하는 <span class="line">을 그대로 타겟한다.
+  //
+  // white-space 관련 추가 규칙(원본에는 없던 것): <pre>는 브라우저 기본값으로
+  // white-space: pre를 상속하는데, Astro Shiki는 <span class="line">...</span> 사이에
+  // 줄바꿈 문자를 형제 텍스트 노드로 그대로 남긴다(원본 Nuxt Content의 shiki 출력은 그
+  // 줄바꿈을 직전 줄의 마지막 span 안쪽 끝에 넣어서 같은 문제가 없었다 — 즉 원본 HTML
+  // 구조 차이 때문에 생긴 문제다). .line이 display:block인 상태에서 그 사이 줄바꿈까지
+  // pre로 보존되면 매 줄 사이에 빈 줄 하나만큼(줄 높이 전체) 간격이 추가로 벌어진다.
+  // 실제로 스크린샷 대조 중 코드블록 두 줄 사이에 원본에는 없는 여백이 보여 발견했다.
+  // code 자체는 white-space: normal로 되돌리고(그래야 .line 사이의 줄바꿈 텍스트 노드가
+  // 보통 공백처럼 접힌다), 각 .line에 다시 white-space: pre를 줘서 그 줄 내부의 들여쓰기·
+  // 연속 공백은 그대로 보존한다.
+  pre code {
+    display: block;
+    width: fit-content;
+    white-space: normal;
+
+    .line {
+      display: block;
+      min-height: 1rem;
+      font-family: 'Source Code Pro', monospace;
+      font-weight: 400;
+      counter-increment: code-line;
+      padding-right: 24px;
+      min-width: 100%;
+      width: max-content;
+      white-space: pre;
+
+      &::before {
+        content: counter(code-line);
+        display: inline-block;
+        width: 2rem;
+        padding: 0;
+        margin: 0;
+        padding-right: 1.5rem;
+        text-align: right;
+        color: $grey-7;
+        position: sticky;
+        left: 0;
+        background-color: darken($grey-9, 4%);
+      }
+    }
+  }
+
+  // ProseCodeInline.vue: 인라인 코드는 <pre> 밖에 있는 <code>. Shiki 코드블록은
+  // <pre><code>...</code></pre> 구조이므로 :not(pre) > code로 인라인만 골라낸다.
+  :not(pre) > code {
+    font-family: 'Source Code Pro', monospace;
+    color: $grey-3;
+    font-weight: 600;
+    background-color: $grey-9;
+    font-size: 0.875em;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  // ProseTable.vue
+  table {
+    table-layout: auto;
+    width: 100%;
+    border-spacing: 0;
+    border-radius: 8px;
+    color: $grey-5;
+    border: 1px solid $grey-8;
+    border-collapse: unset;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  // ProseThead.vue: 원본에 스타일 없음.
+
+  // ProseTr.vue
+  tr:not(:last-child) > td {
+    border-bottom: 1px solid $grey-8;
+  }
+
+  // ProseTh.vue
+  th {
+    padding: 0.5rem 1rem;
+    background-color: $grey-9;
+
+    &:not(:last-child) {
+      border-right: 1px solid $grey-8;
+    }
+  }
+
+  // ProseTd.vue
+  td {
+    padding: 0.5rem 1rem;
+
+    &:not(:last-child) {
+      border-right: 1px solid $grey-8;
+    }
+  }
+
+  // ProseTbody.vue: 원본에 스타일 없음.
+
+  // ProseImg.vue
+  img {
+    padding: 2rem 0;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  // ProseHr.vue
+  hr {
+    border: 0.5px solid $grey-5;
+    margin: 1rem 0;
+  }
+
+  // ProseStrong.vue
+  strong {
+    font-weight: 500;
+    color: $grey-3;
+  }
+
+  // ProseEm.vue: 원본에 스타일 없음.
+}

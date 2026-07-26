@@ -1,5 +1,6 @@
 ---
 // src/pages/blog/[...slug].astro
+import ArticleLayout from '../../layouts/ArticleLayout.astro'
 import { getCollection, render } from 'astro:content'
 
 export async function getStaticPaths() {
@@ -11,15 +12,11 @@ const { post } = Astro.props
 const { Content } = await render(post)
 ---
 
-<html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <title>{post.data.title}</title>
-  </head>
-  <body>
-    <main>
-      <h1>{post.data.title}</h1>
-      <Content />
-    </main>
-  </body>
-</html>
+<ArticleLayout
+  title={post.data.title}
+  publishedAt={post.data.publishedAt}
+  thumbnail={post.data.thumbnail}
+  thumbnailPlaceholder={post.data.thumbnailPlaceholder}
+>
+  <Content />
+</ArticleLayout>
