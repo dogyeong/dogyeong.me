@@ -31,5 +31,9 @@
     "sqip": "^1.0.0-alpha.38",
     "sqip-plugin-data-uri": "^1.0.0-alpha.39"
   },
-  "packageManager": "pnpm@11.17.0"
+  "packageManager": "pnpm@11.17.0",
+  "engines": {
+    "node": ">=22.13",
+    "pnpm": ">=11"
+  }
 }
