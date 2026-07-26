@@ -98,11 +98,6 @@
         "type": 301
       },
       {
-        "source": "/blog/039{,/}",
-        "destination": "/blog/039-system-design-interview/",
-        "type": 301
-      },
-      {
         "source": "/blog/040{,/}",
         "destination": "/blog/040-objects-and-data-structures/",
         "type": 301
@@ -145,6 +140,11 @@
       {
         "source": "/blog/051-ai{,/}",
         "destination": "/blog/051-ai-and-testing/",
+        "type": 301
+      },
+      {
+        "source": "/sitemap.xml",
+        "destination": "/sitemap-index.xml",
         "type": 301
       }
     ]
