@@ -17,6 +17,13 @@
 // 앵커가 다시 인디고색으로 새는 걸 놓치기 쉽다. 실제로 이 override 없이 빌드했을 때
 // "1. branch" 같은 h2 제목이 본문 링크와 같은 파란색(#5c7cfa)으로 렌더되는 회귀를
 // 스크린샷 대조 중 발견했다.
+
+// 전역 darken()은 Dart Sass 3.0에서 제거된다. color.adjust($c, $lightness: -N%)가
+// darken()의 정의 그대로이므로 계산 결과값은 동일하다(color.scale()은 다른 계산이라
+// 대체재가 아니다). 전역 변수 주입은 astro.config.mjs의 additionalData가 이 파일
+// 앞에 @use를 붙이는 방식이라, 여기 @use는 그 뒤에 오는 두 번째 @use가 된다.
+@use 'sass:color';
+
 .prose {
   h1 {
     color: $grey-1;
@@ -117,7 +124,7 @@
 
   // ProseBlockquote.vue
   blockquote {
-    background-color: darken($grey-9, 4%);
+    background-color: color.adjust($grey-9, $lightness: -4%);
     margin-bottom: 2.5rem;
     padding: 2rem;
     border: 0;
@@ -141,7 +148,7 @@
     padding: 2rem 0;
     border-radius: 0;
     margin: 0 -10vw 2rem;
-    background-color: darken($grey-9, 4%);
+    background-color: color.adjust($grey-9, $lightness: -4%);
     font-size: 0.875rem;
     overflow-x: auto;
     color: $grey-5;
@@ -218,7 +225,7 @@
         color: $grey-7;
         position: sticky;
         left: 0;
-        background-color: darken($grey-9, 4%);
+        background-color: color.adjust($grey-9, $lightness: -4%);
       }
     }
   }

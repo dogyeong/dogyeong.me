@@ -21,10 +21,12 @@ pnpm format:check                   # Prettier 검사 (배포 게이트)
 - `node_modules`는 pnpm 기본값인 격리 레이아웃이다. `package.json`에 선언하지 않은 패키지는 import할 수 없다. 필요하면 의존성으로 추가한다.
 - 의존성이 설치 시 빌드 스크립트를 실행해야 하면 `pnpm-workspace.yaml`의 `allowBuilds`에 명시해야 한다. pnpm은 기본적으로 이를 차단하며, 미검토 항목이 남아 있으면 `pnpm install`이 실패한다.
 - lint는 `pnpm lint`(ESLint), 포맷은 `pnpm format:check` / `pnpm format`(Prettier)이다. 자동 수정은 `pnpm lint:fix`. **둘 다 배포 워크플로의 게이트이므로 실패하면 배포가 중단된다.** 테스트 프레임워크는 없다.
-- ESLint 설정은 `eslint.config.mjs`(flat config) 하나뿐이다. `.eslintrc.json`은 없다. `eslint-plugin-astro`의 recommended·jsx-a11y-recommended 설정을 기반으로 하며 포맷 규칙은 끄고 Prettier(`eslint-config-prettier`)에 맡긴다.
+- ESLint 설정은 `eslint.config.mjs`(flat config) 하나뿐이다. `.eslintrc.json`은 없다. `@eslint/js`의 recommended(코어 규칙) + `typescript-eslint`의 recommended + `eslint-plugin-astro`의 recommended·jsx-a11y-recommended를 쌓고, 포맷 규칙은 끄고 Prettier(`eslint-config-prettier`, 반드시 마지막)에 맡긴다. **앞의 두 개가 없으면 `no-unused-vars`·`no-undef` 같은 코어 규칙이 하나도 켜지지 않는다** — `eslint-plugin-astro`는 `astro/*` 규칙만 켜므로, Nuxt 시절 `@nuxt/eslint-config`가 담당하던 몫을 대신할 것이 필요하다.
+- `no-undef`는 `.ts`/`.astro` 프론트매터에서는 typescript-eslint가 의도적으로 끈다(타입 검사기가 담당). `.mjs`에서는 살아 있으므로 루트 설정 파일들은 `globals.node`를 선언해야 한다.
 - `thumbnail-placeholder/**/*.js`는 CommonJS Node 스크립트로 예외 처리되어 있다. `require`와 `console.log`가 허용된다.
 - Prettier는 `content/`의 마크다운도 포맷한다. `.prettierignore`에는 빌드 산출물을 적지 않는다 — Prettier 3이 `.gitignore`를 기본 참조하기 때문이다.
-- 배포 파이프라인은 `.github/workflows/firebase-hosting-merge.yml` 하나뿐이다: Node 24.18.0에서 `pnpm install --frozen-lockfile` → `pnpm lint` → `pnpm format:check` → `pnpm generate-thumbnail-placeholder` → `pnpm build` 후 `dist/`를 Firebase Hosting(`firebase.json`의 `hosting.public`)에 배포한다. `firebase.json`의 `hosting.redirects`에는 Nuxt→Astro 마이그레이션으로 슬러그가 바뀐 23편의 301 리다이렉트가 있다 — **기존 글의 `slug`를 바꿀 때는 이 목록도 같이 고쳐야 한다.**
+- 배포 파이프라인은 `.github/workflows/firebase-hosting-merge.yml` 하나뿐이다: Node 24.18.0에서 `pnpm install --frozen-lockfile` → `pnpm lint` → `pnpm format:check` → `pnpm generate-thumbnail-placeholder` → `pnpm build` 후 `dist/`를 Firebase Hosting(`firebase.json`의 `hosting.public`)에 배포한다. `firebase.json`의 `hosting.redirects`에는 Nuxt→Astro 마이그레이션으로 슬러그가 바뀐 22편의 301 리다이렉트와 `/sitemap.xml` → `/sitemap-index.xml` 리다이렉트가 있다 — **기존 글의 `slug`를 바꿀 때는 이 목록도 같이 고쳐야 한다.** `source`는 `/blog/013{,/}` 형태로 슬래시 유무를 모두 잡아야 한다. 실제 유입은 슬래시가 붙은 형태이므로 `{,/}`를 빼면 리다이렉트가 통째로 무력해진다.
+- 워크플로의 액션은 이동 가능한 태그가 아니라 **커밋 SHA로 고정**돼 있고 뒤에 `# v7.0.1` 같은 주석이 붙는다. 이 워크플로는 Firebase 서비스 계정 시크릿을 액션에 넘기므로 태그 재지정이 곧 시크릿 유출이다. 버전을 올릴 때는 SHA와 주석을 함께 바꾼다. 참고로 `actions/setup-node`는 v6부터 pnpm의 _암묵적_ 캐싱이 기본 비활성이다 — 이 워크플로처럼 `cache: pnpm`을 명시하면 종전대로 동작한다.
 - Node 버전은 `.nvmrc`(`24.18.0`)가 CI 핀과 같은 값을 가리킨다. nvm/fnm을 쓰면 `nvm use`로 맞출 수 있다. `package.json`의 `engines`는 실제 하한(`node >=22.13`, `pnpm >=11`)을 선언한 것이고 핀이 아니다. 하한은 pnpm 11이 정하며 Astro(`>=22.12.0`)와 sqip(`>=18.12.1`)보다 높다.
 - **하한에 어긋나면 `pnpm install`이 `ERR_PNPM_UNSUPPORTED_ENGINE`으로 실패한다.** `pnpm-workspace.yaml`의 `engineStrict: true` 때문이다. 이 값이 없으면 pnpm은 경고만 내고 설치를 마치므로, 버전이 어긋난 채로 빌드가 진행되어 뒤늦게 이상한 곳에서 터진다. Node를 올리거나 내려야 하면 `.nvmrc`, `engines`, CI 워크플로의 `node-version` 세 곳을 같이 고쳐야 한다.
 
@@ -64,10 +66,11 @@ pnpm format:check                   # Prettier 검사 (배포 게이트)
 git -c core.quotePath=false ls-files --others --exclude-standard content/ \
   | tar -czf /tmp/content-drafts.tar.gz -T -
 # (생성기 실행)
-git restore content/                          # 추적 파일만 원복
-tar -xzf /tmp/content-drafts.tar.gz           # untracked 초안 복구
-rm -f public/thumbnail-placeholder-cache.json # git 미추적·미ignore 상태라 git add . 시 실수로 커밋될 수 있다
+git restore content/                # 추적 파일만 원복
+tar -xzf /tmp/content-drafts.tar.gz # untracked 초안 복구
 ```
+
+`public/thumbnail-placeholder-cache.json`은 `.gitignore`에 있으므로 실수로 커밋될 걱정은 없다. 정본은 배포된 사이트에 있는 사본이다.
 
 ## 아키텍처 관례
 

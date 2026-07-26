@@ -13,19 +13,10 @@ engineStrict: true
 allowBuilds:
   # libvips 바이너리를 받아온다. 없으면 썸네일 생성기가 런타임에 실패한다.
   sharp: true
-  # 플랫폼 바이너리를 설치한다. 없으면 Nuxt 빌드가 불가능하다.
+  # 플랫폼 바이너리를 설치한다. 없으면 Astro 빌드가 불가능하다.
   esbuild: true
   # prebuild가 없을 때 소스에서 빌드한다. dev 파일 감시에 쓰인다.
   '@parcel/watcher': true
-  # 설치된 Vue 버전에 맞춰 dist를 교체한다.
-  vue-demi: true
-  # postinstall.js를 실행한다. 실제 플랫폼별 네이티브 바이너리
-  # (예: @unrs/resolver-binding-linux-x64-gnu)는 이 스크립트가 따로
-  # 받아오는 게 아니라 일반 optionalDependency로 레지스트리에서 설치되며,
-  # 그 자체는 별도 스크립트를 갖지 않는다.
-  # @nuxt/eslint-config가 끌어오는 의존성이다.
-  unrs-resolver: true
   # 스크립트 내용이 cli/node_modules 디렉토리 생성과 버전 스킴 경고뿐이다.
+  # firebase가 끌어오는 의존성이다.
   protobufjs: false
-  # Sysinternals du(Windows 전용)를 내려받는다. @nuxt/devtools 의존성이라 macOS/Linux에선 무의미하다.
-  fast-folder-size: false

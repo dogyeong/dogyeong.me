@@ -1,3 +1,5 @@
+import js from '@eslint/js'
+import tseslint from 'typescript-eslint'
 import astro from 'eslint-plugin-astro'
 import prettier from 'eslint-config-prettier'
 import globals from 'globals'
@@ -9,6 +11,13 @@ export default [
     // .astro/는 Astro의 content collection 타입 생성 디렉토리다.
     ignores: ['dist/', '.astro/', 'node_modules/', '.superpowers/'],
   },
+  // 코어 규칙셋. eslint-plugin-astro의 recommended는 astro/* 규칙만 켜고
+  // no-unused-vars·no-undef 같은 코어 규칙은 하나도 켜지 않는다. Nuxt 시절에는
+  // @nuxt/eslint-config가 이걸 끌어왔으나 제거되면서 함께 사라졌다.
+  js.configs.recommended,
+  // TypeScript용. no-unused-vars 등 코어 규칙 중 TS에서 오탐이 나는 것들을
+  // ts 전용 버전으로 교체한다. 타입 정보를 요구하지 않는 recommended를 쓴다.
+  ...tseslint.configs.recommended,
   // eslint-plugin-astro의 recommended 설정. .astro 파일용 파서·플러그인 등록과
   // 기본 규칙셋을 포함한다. @typescript-eslint/parser가 설치되어 있으면
   // frontmatter 스크립트도 타입 인식 파싱으로 처리한다(선택적 peer).
@@ -16,6 +25,16 @@ export default [
   // jsx-a11y 규칙을 Astro 컴포넌트용으로 확장한 설정. eslint-plugin-jsx-a11y가
   // 설치되어 있어야 활성화된다.
   ...astro.configs['jsx-a11y-recommended'],
+  {
+    // 루트의 설정 파일들은 Node가 ESM으로 실행한다. no-undef를 켜기 전에는 아무도
+    // 전역을 선언할 필요가 없었으나, 이제 astro.config.mjs가 쓰는 URL 같은 전역이
+    // 선언되지 않으면 오탐이 된다.
+    files: ['*.config.mjs'],
+    languageOptions: {
+      sourceType: 'module',
+      globals: globals.node,
+    },
+  },
   {
     // eslint-plugin-astro의 base 설정은 .astro 파일(과 그 안의 embedded script)에만
     // 파서를 등록한다. 순수 .ts 파일(src/content.config.ts)은 어떤 config 객체의
