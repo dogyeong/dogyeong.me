@@ -20,7 +20,7 @@ jobs:
       - run: pnpm lint
       - run: pnpm format:check
       - run: pnpm generate-thumbnail-placeholder
-      - run: pnpm generate
+      - run: pnpm build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
