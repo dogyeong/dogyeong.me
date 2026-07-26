@@ -10,7 +10,8 @@ export default createConfigForNuxt({
 }).append(
   {
     // 빌드 산출물과 생성 파일. .gitignore를 자동 반영하지 않으므로 직접 적는다.
-    ignores: ['dist/', '.output/', '.nuxt/', 'node_modules/', '.superpowers/'],
+    // .astro/는 Astro의 content collection 타입 생성 디렉토리(.nuxt와 동급)다.
+    ignores: ['dist/', '.output/', '.nuxt/', '.astro/', 'node_modules/', '.superpowers/'],
   },
   {
     // @nuxt/eslint-config는 no-console을 설정하지 않는다(resolved config에
