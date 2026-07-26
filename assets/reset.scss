@@ -105,8 +105,20 @@ section {
   display: block;
 }
 body {
-  font-family: 'Inter', 'Noto Sans KR', 'NotoSansKR', 'Helvetica Neue', Helvetica, Arial, '맑은 고딕',
-    malgun gothic, '돋움', Dotum, sans-serif, 'Apple Color Emoji', 'Noto Color Emoji';
+  font-family:
+    'Inter',
+    'Noto Sans KR',
+    'NotoSansKR',
+    'Helvetica Neue',
+    Helvetica,
+    Arial,
+    '맑은 고딕',
+    malgun gothic,
+    '돋움',
+    Dotum,
+    sans-serif,
+    'Apple Color Emoji',
+    'Noto Color Emoji';
 }
 ol,
 ul {
@@ -143,5 +155,3 @@ input[type='checkbox'] {
 button {
   font-family: inherit;
 }
-
-

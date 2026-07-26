@@ -17,6 +17,8 @@ jobs:
           node-version: 24.18.0
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm format:check
       - run: pnpm generate-thumbnail-placeholder
       - run: pnpm generate
       - uses: FirebaseExtended/action-hosting-deploy@v0

@@ -14,13 +14,19 @@ pnpm generate                       # 정적 빌드 → .output/public
 pnpm preview                        # 빌드 결과 미리보기
 pnpm serve                          # sirv로 .output/public 서빙
 pnpm generate-thumbnail-placeholder # 썸네일 플레이스홀더 생성 (아래 참고, 보통 CI에서만 실행)
+pnpm lint                           # ESLint (배포 게이트)
+pnpm format:check                   # Prettier 검사 (배포 게이트)
 ```
 
 - 패키지 매니저는 **pnpm 11** (`packageManager` 필드가 유일한 버전 소스이며, 로컬은 corepack으로 활성화하고 CI는 `pnpm/action-setup`이 같은 필드를 읽는다). npm/yarn 사용 금지.
 - `node_modules`는 pnpm 기본값인 격리 레이아웃이다. `package.json`에 선언하지 않은 패키지는 import할 수 없다. 필요하면 의존성으로 추가한다.
 - 의존성이 설치 시 빌드 스크립트를 실행해야 하면 `pnpm-workspace.yaml`의 `allowBuilds`에 명시해야 한다. pnpm은 기본적으로 이를 차단하며, 미검토 항목이 남아 있으면 `pnpm install`이 실패한다.
-- lint/test 스크립트는 정의되어 있지 않다. ESLint/Prettier 설정만 존재하므로 필요하면 `pnpm exec eslint .` / `pnpm exec prettier --write` 를 직접 호출한다. 테스트 프레임워크는 없다.
-- 배포 파이프라인은 `.github/workflows/firebase-hosting-merge.yml` 하나뿐이다: Node 24.18.0에서 `pnpm install --frozen-lockfile` → `pnpm generate-thumbnail-placeholder` → `pnpm generate` 후 `.output/public` 배포.
+- lint는 `pnpm lint`(ESLint), 포맷은 `pnpm format:check` / `pnpm format`(Prettier)이다. 자동 수정은 `pnpm lint:fix`. **둘 다 배포 워크플로의 게이트이므로 실패하면 배포가 중단된다.** 테스트 프레임워크는 없다.
+- ESLint 설정은 `eslint.config.mjs`(flat config) 하나뿐이다. `.eslintrc.json`은 없다. `@nuxt/eslint-config`를 기반으로 하며 포맷 규칙은 끄고 Prettier에 맡긴다.
+- `@nuxt/eslint-config`는 현재 `eslint-plugin-import-lite`를 쓰는데 이 플러그인엔 TypeScript path resolver가 없다. 그래서 `pnpm lint`가 `.nuxt/tsconfig.json` 없이도, 즉 `nuxt prepare`/`nuxt generate` 이전에도 CI에서 그대로 돌아간다. 나중에 TS resolver가 있는 `eslint-plugin-import-x`로 바꾸면 `./.nuxt/tsconfig.json`이 있어야 하므로, CI에 prepare 단계를 먼저 추가하지 않으면 lint가 깨진다.
+- `thumbnail-placeholder/**/*.js`는 CommonJS Node 스크립트로 예외 처리되어 있다. `require`와 `console.log`가 허용된다.
+- Prettier는 `content/`의 마크다운도 포맷한다. `.prettierignore`에는 빌드 산출물을 적지 않는다 — Prettier 3이 `.gitignore`를 기본 참조하기 때문이다.
+- 배포 파이프라인은 `.github/workflows/firebase-hosting-merge.yml` 하나뿐이다: Node 24.18.0에서 `pnpm install --frozen-lockfile` → `pnpm lint` → `pnpm format:check` → `pnpm generate-thumbnail-placeholder` → `pnpm generate` 후 `.output/public` 배포.
 - Node 버전은 `.nvmrc`(`24.18.0`)가 CI 핀과 같은 값을 가리킨다. nvm/fnm을 쓰면 `nvm use`로 맞출 수 있다. `package.json`의 `engines`는 실제 하한(`node >=22.13`, `pnpm >=11`)을 선언한 것이고 핀이 아니다. 하한은 pnpm 11이 정하며 Nuxt(`>=22.0.0`)와 sqip(`>=18.12.1`)보다 높다.
 - **하한에 어긋나면 `pnpm install`이 `ERR_PNPM_UNSUPPORTED_ENGINE`으로 실패한다.** `pnpm-workspace.yaml`의 `engineStrict: true` 때문이다. 이 값이 없으면 pnpm은 경고만 내고 설치를 마치므로, 버전이 어긋난 채로 빌드가 진행되어 뒤늦게 이상한 곳에서 터진다. Node를 올리거나 내려야 하면 `.nvmrc`, `engines`, CI 워크플로의 `node-version` 세 곳을 같이 고쳐야 한다.
 
@@ -51,6 +57,7 @@ pnpm generate-thumbnail-placeholder # 썸네일 플레이스홀더 생성 (아�
    :PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
    ```
 5. 본문 이미지는 `public/images/NNN-01.png` 로 넣고 `![](/images/NNN-01.png)` 로 참조한다. 썸네일만 Cloudinary에 올린다 (`BlurrableImage`가 Cloudinary URL의 `/upload/` 를 쪼개 `w_*,q_auto,f_auto` srcset을 생성하므로, 썸네일은 반드시 Cloudinary URL이어야 반응형 이미지가 동작한다).
+6. 커밋 전 `pnpm format`을 실행한다. Prettier는 이제 `content/`의 마크다운도 검사하고, `pnpm format:check`는 배포 게이트다 — 새 글이 Prettier 기준에 어긋나면 배포가 그 자리에서 막힌다. `pnpm format`은 공백만 건드리는 게 아니라 마크다운 소스 자체를 고칠 수 있다(이 브랜치에서 실제로 `~취소선~`이 `~~취소선~~`로 바뀐 사례가 있다). 그러니 실행 후 diff를 다시 읽고 의도한 내용이 맞는지 확인한다.
 
 ### thumbnailPlaceholder는 손대지 않는다
 
