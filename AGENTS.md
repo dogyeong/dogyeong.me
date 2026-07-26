@@ -21,6 +21,7 @@ pnpm generate-thumbnail-placeholder # 썸네일 플레이스홀더 생성 (아�
 - 의존성이 설치 시 빌드 스크립트를 실행해야 하면 `pnpm-workspace.yaml`의 `allowBuilds`에 명시해야 한다. pnpm은 기본적으로 이를 차단하며, 미검토 항목이 남아 있으면 `pnpm install`이 실패한다.
 - lint/test 스크립트는 정의되어 있지 않다. ESLint/Prettier 설정만 존재하므로 필요하면 `pnpm exec eslint .` / `pnpm exec prettier --write` 를 직접 호출한다. 테스트 프레임워크는 없다.
 - 배포 파이프라인은 `.github/workflows/firebase-hosting-merge.yml` 하나뿐이다: Node 24.18.0에서 `pnpm install --frozen-lockfile` → `pnpm generate-thumbnail-placeholder` → `pnpm generate` 후 `.output/public` 배포.
+- Node 버전은 `.nvmrc`(`24.18.0`)가 CI 핀과 같은 값을 가리킨다. nvm/fnm을 쓰면 `nvm use`로 맞출 수 있다. `package.json`의 `engines`는 실제 하한(`node >=22.13`, `pnpm >=11`)을 선언한 것이고 핀이 아니다. 하한은 pnpm 11이 정하며 Nuxt(`>=22.0.0`)와 sqip(`>=18.12.1`)보다 높다. 어긋나도 `pnpm install`은 경고만 내고 진행한다.
 
 ## 콘텐츠 구조
 
