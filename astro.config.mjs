@@ -62,6 +62,12 @@ export default defineConfig({
   build: { format: 'directory' },
   integrations: [sitemap()],
   markdown: {
+    // @astrojs/markdown-remark는 remark-smartypants를 기본으로 켜서 곧은 따옴표,
+    // 아포스트로피, 말줄임표(...), 대시(--)를 각각 굽은 따옴표, 줄임표, 대시 기호로
+    // 바꾼다. Nuxt Content는 이런 변환을 하지 않았으므로 끄지 않으면 글 본문 텍스트
+    // 자체가 바뀐다(fix round 2: 47개 글 중 15개에서 실측됨, 예: 014-cors의 곧은
+    // 따옴표로 감싼 문장이 굽은 따옴표로 렌더됨).
+    smartypants: false,
     // Nuxt 설정의 shiki 테마를 그대로 옮긴다.
     shikiConfig: { theme: 'github-dark', transformers: [codeBlockLanguageBadge] },
     rehypePlugins: [
