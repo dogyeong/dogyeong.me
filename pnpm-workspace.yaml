@@ -19,6 +19,9 @@ allowBuilds:
   '@parcel/watcher': true
   # 설치된 Vue 버전에 맞춰 dist를 교체한다.
   vue-demi: true
+  # napi-postinstall로 플랫폼별 네이티브 리졸버 바이너리를 받아온다.
+  # @nuxt/eslint-config가 끌어오는 의존성이다.
+  unrs-resolver: true
   # 스크립트 내용이 cli/node_modules 디렉토리 생성과 버전 스킴 경고뿐이다.
   protobufjs: false
   # Sysinternals du(Windows 전용)를 내려받는다. @nuxt/devtools 의존성이라 macOS/Linux에선 무의미하다.
