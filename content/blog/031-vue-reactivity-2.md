@@ -1,14 +1,10 @@
 ---
+title: "Vue Reactivity (2)"
+slug: 031-vue-reactivity-2
 publishedAt: 2022-02-28
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/030-thumb.png
 thumbnailPlaceholder: WILL_BE_REPLACED
 ---
-
-# Vue Reactivity (2)
-
-:PublishDate{:date="publishedAt"}
-
-:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 이전 편에서 vue 반응성의 기초가 되는 track, trigger, dep, depsMap, targetMap을 구현하였다.
 

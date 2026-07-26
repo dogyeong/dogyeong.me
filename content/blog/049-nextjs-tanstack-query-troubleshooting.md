@@ -1,14 +1,10 @@
 ---
+title: "Next.js + TanStack Query 메모리 이슈 트러블슈팅"
+slug: 049-nextjs-tanstack-query-troubleshooting
 publishedAt: 2025-02-09
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1739069874/thumb/049-thumb.png
 thumbnailPlaceholder: WILL_BE_REPLACED
 ---
-
-# Next.js + TanStack Query 메모리 이슈 트러블슈팅
-
-:PublishDate{:date="publishedAt"}
-
-:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 ## 배경
 

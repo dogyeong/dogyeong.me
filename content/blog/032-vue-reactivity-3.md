@@ -1,14 +1,10 @@
 ---
+title: "Vue Reactivity (3)"
+slug: 032-vue-reactivity-3
 publishedAt: 2022-03-06
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/030-thumb.png
 thumbnailPlaceholder: WILL_BE_REPLACED
 ---
-
-# Vue Reactivity (3)
-
-:PublishDate{:date="publishedAt"}
-
-:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 이전 편에서는 vue의 반응성 시스템과 reactive API를 구현해보았다.
 

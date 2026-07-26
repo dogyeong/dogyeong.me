@@ -1,14 +1,10 @@
 ---
+title: "async await"
+slug: 005-async-await
 publishedAt: 2020-04-18
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/005-thumb.png
 thumbnailPlaceholder: WILL_BE_REPLACED
 ---
-
-# async await
-
-:PublishDate{:date="publishedAt"}
-
-:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 > async await는 비동기 프로그래밍을 동기 프로그래밍처럼 작성할 수 있도록 함수에 추가된 기능이다. ES2017에서 자바스크립트 표준이 되었으며, async await를 이용해서 코드를 작성하면 가독성이 좋아진다.
 

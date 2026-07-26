@@ -1,14 +1,10 @@
 ---
+title: "Vue Reactivity (1)"
+slug: 030-vue-reactivity-1
 publishedAt: 2022-02-19
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/030-thumb.png
 thumbnailPlaceholder: WILL_BE_REPLACED
 ---
-
-# Vue Reactivity (1)
-
-:PublishDate{:date="publishedAt"}
-
-:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 Vue의 핵심요소라고 할 수 있는 반응성 시스템을 단계별로 구현해 볼 것이다.
 

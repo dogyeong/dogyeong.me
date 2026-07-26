@@ -1,14 +1,10 @@
 ---
+title: "Generator(2) - 제너레이터 활용하기"
+slug: 009-generator-2
 publishedAt: 2020-05-18
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/008-thumb.png
 thumbnailPlaceholder: WILL_BE_REPLACED
 ---
-
-# Generator(2) - 제너레이터 활용하기
-
-:PublishDate{:date="publishedAt"}
-
-:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 제너레이터, iterator, iterable을 이용하면 함수형 프로그래밍의 대표적인 함수를 쉽게 구현할 수 있다.
 

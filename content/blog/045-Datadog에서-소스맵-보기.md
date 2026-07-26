@@ -1,14 +1,10 @@
 ---
+title: "Datadog에 소스맵 적용하기"
+slug: 045-datadog-sourcemaps
 publishedAt: 2024-04-13
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1712978326/thumb/045-thumb.png
 thumbnailPlaceholder: WILL_BE_REPLACED
 ---
-
-# Datadog에 소스맵 적용하기
-
-:PublishDate{:date="publishedAt"}
-
-:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 제품을 개발할 때 에러나 로그를 모니터링하기 위한 도구는 거의 필수적이다. 이러한 도구를 사용하지 않는다면 서비스의 상태를 트래킹하거나 에러를 디버깅하는 것은 매우 힘들다.
 

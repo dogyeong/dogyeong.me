@@ -1,14 +1,10 @@
 ---
+title: "Promise(1) - 프로미스의 이해"
+slug: 006-promise-1
 publishedAt: 2020-04-23
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/006-thumb.png
 thumbnailPlaceholder: WILL_BE_REPLACED
 ---
-
-# Promise(1) - 프로미스의 이해
-
-:PublishDate{:date="publishedAt"}
-
-:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 ## 콜백 함수 vs 프로미스
 
