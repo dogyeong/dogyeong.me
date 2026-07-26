@@ -131,25 +131,20 @@
     }
   }
 
-  // ProseCode.vue의 .codeblock 모듈 스타일. 원본은 <pre>를 감싸는 별도 div였지만
-  // Astro 내장 Shiki는 <pre>를 직접 emit하므로 이 규칙을 .prose pre로 옮긴다.
-  //
-  // background-color/color에 !important가 붙는 이유: Astro 7.1.3의 Shiki 출력은
-  // <pre style="background-color:#24292e;color:#e1e4e8;...">처럼 인라인 스타일을 직접
-  // 박아 넣는다(측정 확인함). 반면 마이그레이션 이전 사이트는 <pre style="">로 인라인이
-  // 비어 있었고, 배경/기본 텍스트 색은 감싸는 .codeblock div의 외부 스타일시트 규칙
-  // (#181b1e / $grey-5)이 담당했다. 인라인 스타일은 일반 규칙보다 항상 우선하므로
-  // !important 없이는 코드블록 배경이 Shiki 테마의 #24292e로 보여 원본(#181b1e)과
-  // 육안으로 다르게 렌더된다. 토큰별 색상(각 span의 인라인 color)은 !important로
-  // 건드리지 않으므로 문법 강조 자체는 그대로 유지된다.
-  pre {
+  // ProseCode.vue의 .codeblock 모듈 스타일 + 언어 배지(.lang). 원본 구조
+  // `<div class="codeblock"><pre>…</pre><span class="lang">bash</span></div>`를
+  // astro.config.mjs의 커스텀 shiki transformer(codeBlockLanguageBadge)로 그대로
+  // 복원했다 — Astro 내장 Shiki는 이 wrapper div와 배지 span을 만들어주지 않기 때문에
+  // CSS만으로는 불가능했다(fix round 1: 코디네이터가 보고한 회귀, 아래 astro.config.mjs
+  // 변경 이유 참고).
+  .codeblock {
     padding: 2rem 0;
     border-radius: 0;
     margin: 0 -10vw 2rem;
-    background-color: darken($grey-9, 4%) !important;
+    background-color: darken($grey-9, 4%);
     font-size: 0.875rem;
     overflow-x: auto;
-    color: $grey-5 !important;
+    color: $grey-5;
     counter-reset: code-line;
     line-height: 1.4;
     position: relative;
@@ -158,6 +153,29 @@
       margin: 0 0 2rem;
       border-radius: 0.5rem;
     }
+  }
+
+  .lang {
+    position: absolute;
+    bottom: 8px;
+    right: 24px;
+    display: inline-block;
+    font-size: 0.75rem;
+    text-align: right;
+    font-family: 'Source Code Pro', monospace;
+    color: $grey-6;
+  }
+
+  // Astro Shiki가 <pre>에 직접 박아넣는 인라인 background-color/color를 무력화한다
+  // (측정: style="background-color:#24292e;color:#e1e4e8;...". 원본은 <pre style="">로
+  // 비어 있었고 배경/기본색은 위 .codeblock이 전담했다). transparent/inherit로 되돌려
+  // .codeblock의 값이 그대로 보이게 한다 — 이게 원본 구조(감싸는 div가 색을 담당하고
+  // pre 자신은 색이 없음)에 더 가깝다. !important가 필요한 이유는 인라인 스타일이
+  // 외부 스타일시트보다 항상 우선하기 때문이다. 토큰별 색상(각 span의 인라인 color)은
+  // 건드리지 않으므로 문법 강조 자체는 그대로 유지된다.
+  pre {
+    background-color: transparent !important;
+    color: inherit !important;
   }
 
   // ProseCode.vue의 두번째(전역) <style> 블록: 코드블록 줄 번호.
