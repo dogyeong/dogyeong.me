@@ -19,7 +19,10 @@ allowBuilds:
   '@parcel/watcher': true
   # 설치된 Vue 버전에 맞춰 dist를 교체한다.
   vue-demi: true
-  # napi-postinstall로 플랫폼별 네이티브 리졸버 바이너리를 받아온다.
+  # postinstall.js를 실행한다. 실제 플랫폼별 네이티브 바이너리
+  # (예: @unrs/resolver-binding-linux-x64-gnu)는 이 스크립트가 따로
+  # 받아오는 게 아니라 일반 optionalDependency로 레지스트리에서 설치되며,
+  # 그 자체는 별도 스크립트를 갖지 않는다.
   # @nuxt/eslint-config가 끌어오는 의존성이다.
   unrs-resolver: true
   # 스크립트 내용이 cli/node_modules 디렉토리 생성과 버전 스킴 경고뿐이다.

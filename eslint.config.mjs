@@ -13,9 +13,23 @@ export default createConfigForNuxt({
     ignores: ['dist/', '.output/', '.nuxt/', 'node_modules/', '.superpowers/'],
   },
   {
+    // @nuxt/eslint-config는 no-console을 설정하지 않는다(resolved config에
+    // 해당 규칙이 아예 없음을 확인함). 마이그레이션 전 .eslintrc는 모든 파일에
+    // no-console: warn을 걸었고 실제로 thumbnail-placeholder/*.js에서 4번
+    // 발생했다. 그 동작을 복원한다. error가 아닌 warn인 이유는 예전 설정 그대로를
+    // 유지하기 위함이며, lint 스크립트에 --max-warnings 0이 없으므로 warn은
+    // 배포를 막지 않는다.
+    rules: {
+      'no-console': 'warn',
+    },
+  },
+  {
     // thumbnail-placeholder/*.js 는 CommonJS Node 스크립트다.
     // require와 console.log는 여기서 올바른 코드이므로 파일을 고치지 않고
     // 환경을 선언해 처리한다.
+    // no-console은 바로 위 규칙에서 전체 파일에 켰으므로(warn), 여기서는 그
+    // 규칙을 이 파일들에 한해 다시 끈다 — CLI 스크립트라 콘솔 출력이 의도된
+    // 동작이기 때문이다.
     files: ['thumbnail-placeholder/**/*.js'],
     languageOptions: {
       sourceType: 'commonjs',
