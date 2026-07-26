@@ -1,4 +1,13 @@
-# pnpm 설정 파일. 워크스페이스 용도가 아니라 allowBuilds 설정을 담기 위한 파일이다.
+# pnpm 설정 파일. 워크스페이스 용도가 아니라 pnpm 설정을 담기 위한 파일이다.
+
+# package.json의 engines를 실제로 강제한다. 기본값(false)에서는 pnpm 11.17.0이
+# 루트 프로젝트의 engines 불일치에 [WARN]만 내고 종료 코드 0으로 설치를 마친다.
+# (문서에는 루트 engines가 항상 실패한다고 되어 있으나 실측 동작은 경고였다.)
+# 켜면 의존성의 engines도 함께 검사한다. 현재 트리에서 engines.node를 선언한
+# 2572개 패키지 중 상한(<)이 있는 것은 fs-extra@8.1.0(">=6 <7 || >=8")뿐이고
+# Node 24는 ">=8"을 만족하므로 걸리지 않는다.
+engineStrict: true
+
 # pnpm은 의존성의 라이프사이클 스크립트를 기본 차단하며, strictDepBuilds 기본값이 true라
 # 미검토 항목이 남아 있으면 pnpm install이 non-zero로 종료한다.
 allowBuilds:
