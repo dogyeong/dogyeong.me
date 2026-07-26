@@ -33,117 +33,117 @@
     ],
     "redirects": [
       {
-        "source": "/blog/004",
+        "source": "/blog/004{,/}",
         "destination": "/blog/004-primitive-types-and-objects/",
         "type": 301
       },
       {
-        "source": "/blog/013",
+        "source": "/blog/013{,/}",
         "destination": "/blog/013-google-webmaster-conference/",
         "type": 301
       },
       {
-        "source": "/blog/017-git",
+        "source": "/blog/017-git{,/}",
         "destination": "/blog/017-git-learnings/",
         "type": 301
       },
       {
-        "source": "/blog/022-private",
+        "source": "/blog/022-private{,/}",
         "destination": "/blog/022-javascript-private/",
         "type": 301
       },
       {
-        "source": "/blog/026",
+        "source": "/blog/026{,/}",
         "destination": "/blog/026-arrow-functions/",
         "type": 301
       },
       {
-        "source": "/blog/027-catch",
+        "source": "/blog/027-catch{,/}",
         "destination": "/blog/027-typescript-catch-error-handling/",
         "type": 301
       },
       {
-        "source": "/blog/029",
+        "source": "/blog/029{,/}",
         "destination": "/blog/029-web-compression-algorithms/",
         "type": 301
       },
       {
-        "source": "/blog/033",
+        "source": "/blog/033{,/}",
         "destination": "/blog/033-pragmatic-programmer/",
         "type": 301
       },
       {
-        "source": "/blog/034",
+        "source": "/blog/034{,/}",
         "destination": "/blog/034-object-oriented-object/",
         "type": 301
       },
       {
-        "source": "/blog/035",
+        "source": "/blog/035{,/}",
         "destination": "/blog/035-domain-driven-design/",
         "type": 301
       },
       {
-        "source": "/blog/036-css",
+        "source": "/blog/036-css{,/}",
         "destination": "/blog/036-new-css-features/",
         "type": 301
       },
       {
-        "source": "/blog/037",
+        "source": "/blog/037{,/}",
         "destination": "/blog/037-new-blog/",
         "type": 301
       },
       {
-        "source": "/blog/038",
+        "source": "/blog/038{,/}",
         "destination": "/blog/038-naming-considerations/",
         "type": 301
       },
       {
-        "source": "/blog/039",
+        "source": "/blog/039{,/}",
         "destination": "/blog/039-system-design-interview/",
         "type": 301
       },
       {
-        "source": "/blog/040",
+        "source": "/blog/040{,/}",
         "destination": "/blog/040-objects-and-data-structures/",
         "type": 301
       },
       {
-        "source": "/blog/041",
+        "source": "/blog/041{,/}",
         "destination": "/blog/041-clean-classes/",
         "type": 301
       },
       {
-        "source": "/blog/042",
+        "source": "/blog/042{,/}",
         "destination": "/blog/042-types-and-abstraction/",
         "type": 301
       },
       {
-        "source": "/blog/043",
+        "source": "/blog/043{,/}",
         "destination": "/blog/043-object-oriented-design/",
         "type": 301
       },
       {
-        "source": "/blog/044",
+        "source": "/blog/044{,/}",
         "destination": "/blog/044-micro-frontends/",
         "type": 301
       },
       {
-        "source": "/blog/045-datadog",
+        "source": "/blog/045-datadog{,/}",
         "destination": "/blog/045-datadog-sourcemaps/",
         "type": 301
       },
       {
-        "source": "/blog/047",
+        "source": "/blog/047{,/}",
         "destination": "/blog/047-polyfill/",
         "type": 301
       },
       {
-        "source": "/blog/048-ci",
+        "source": "/blog/048-ci{,/}",
         "destination": "/blog/048-turborepo-cache-ci/",
         "type": 301
       },
       {
-        "source": "/blog/051-ai",
+        "source": "/blog/051-ai{,/}",
         "destination": "/blog/051-ai-and-testing/",
         "type": 301
       }
