@@ -30,10 +30,11 @@ pnpm format:check                   # Prettier 검사 (배포 게이트)
 - Prettier는 `content/`의 마크다운도 포맷한다. `.prettierignore`에는 빌드 산출물을 적지 않는다 — Prettier 3이 `.gitignore`를 기본 참조하기 때문이다.
 - 배포 파이프라인은 `.github/workflows/firebase-hosting-merge.yml` 하나뿐이다: Node 24.18.0에서 `pnpm install --frozen-lockfile` → `pnpm lint` → `pnpm format:check` → `pnpm generate-thumbnail-placeholder` → `pnpm build` 후 `dist/`를 Firebase Hosting(`firebase.json`의 `hosting.public`)에 배포한다. `firebase.json`의 `hosting.redirects`에는 Nuxt→Astro 마이그레이션으로 슬러그가 바뀐 22편의 301 리다이렉트와 `/sitemap.xml` → `/sitemap-index.xml` 리다이렉트가 있다 — **기존 글의 `slug`를 바꿀 때는 이 목록도 같이 고쳐야 한다.** `source`는 `/blog/013{,/}` 형태로 슬래시 유무를 모두 잡아야 한다. 실제 유입은 슬래시가 붙은 형태이므로 `{,/}`를 빼면 리다이렉트가 통째로 무력해진다.
 - 워크플로의 액션은 이동 가능한 태그가 아니라 **커밋 SHA로 고정**돼 있고 뒤에 `# v7.0.1` 같은 주석이 붙는다. 이 워크플로는 Firebase 서비스 계정 시크릿을 액션에 넘기므로 태그 재지정이 곧 시크릿 유출이다. 버전을 올릴 때는 SHA와 주석을 함께 바꾼다. 참고로 `actions/setup-node`는 v6부터 pnpm의 _암묵적_ 캐싱이 기본 비활성이다 — 이 워크플로처럼 `cache: pnpm`을 명시하면 종전대로 동작한다.
-- Node 버전은 `.nvmrc`(`24.18.0`)가 CI 핀과 같은 값을 가리킨다. nvm/fnm을 쓰면 `nvm use`로 맞출 수 있다. `package.json`의 `engines`는 하한 선언이고 핀이 아니다.
-- **`engines.node`의 `>=22.13`은 실제 하한보다 낮다.** 이 값은 pnpm 11의 요구사항(`>=22.13`)에서 왔지만, 트리에서 가장 까다로운 건 `eslint-plugin-astro@3.0.1`(+`astro-eslint-parser`)의 **`^22.22.3 || ^24.16.0 || >=26.3.0`**이다. 즉 Node 22.13\~22.22.2, 23.x, 24.0\~24.15는 선언상 통과하지만 설치가 깨진다. CI 핀 24.18.0은 `^24.16.0`을 만족한다.
-- **이 실패는 `node_modules`가 비어 있을 때만 드러난다.** `node_modules`가 이미 있으면 같은 명령이 Node 22.20.0에서도 그냥 성공한다(실측). 그래서 로컬에서 Node를 바꾼 뒤 설치가 잘 되는 걸 보고 안심했다가, 새로 클론한 환경이나 CI에서 처음 터진다. Node를 바꿨으면 `rm -rf node_modules` 후 설치해 확인한다.
-- 하한에 어긋나면 `pnpm install`이 `ERR_PNPM_UNSUPPORTED_ENGINE`으로 실패한다. `pnpm-workspace.yaml`의 `engineStrict: true`가 **의존성의 `engines`까지** 검사하기 때문이다(실측: Node 22.20.0 클린 설치가 `eslint-plugin-astro`에서 중단). 이 값이 없으면 pnpm은 경고만 내고 설치를 마치므로, 버전이 어긋난 채로 빌드가 진행되어 뒤늦게 이상한 곳에서 터진다. Node를 올리거나 내려야 하면 `.nvmrc`, `engines`, CI 워크플로의 `node-version` 세 곳을 같이 고쳐야 한다.
+- Node 버전은 `.nvmrc`(`24.18.0`)가 CI 핀과 같은 값을 가리킨다. nvm/fnm을 쓰면 `nvm use`로 맞출 수 있다. `package.json`의 `engines`(`node >=24.16`, `pnpm >=11`)는 하한 선언이고 핀이 아니다.
+- **하한이 `>=24.16`인 이유는 pnpm이 아니라 `eslint-plugin-astro@3.0.1`(+`astro-eslint-parser`)이다.** 이쪽이 `^22.22.3 || ^24.16.0 || >=26.3.0`을 요구한다(pnpm 11은 `>=22.13`, Astro는 `>=22.12.0`, sqip은 `>=18.12.1`로 훨씬 낮다). Node 22를 지원하려면 `^22.22.3`까지 올려야 하므로, 어차피 CI와 `.nvmrc`가 24를 가리키는 만큼 24로 통일했다.
+- 하한에 어긋나면 `pnpm install`이 `ERR_PNPM_UNSUPPORTED_ENGINE`으로 실패한다. `pnpm-workspace.yaml`의 `engineStrict: true` 때문이다. 이 값이 없으면 pnpm은 경고만 내고 설치를 마치므로, 버전이 어긋난 채로 빌드가 진행되어 뒤늦게 이상한 곳에서 터진다. Node를 올리거나 내려야 하면 `.nvmrc`, `engines`, CI 워크플로의 `node-version` 세 곳을 같이 고쳐야 한다.
+- **루트 `engines` 검사는 즉시 걸리지만 의존성 `engines` 검사는 클린 설치에서만 걸린다**(둘 다 실측). `engineStrict: true`는 의존성의 `engines`도 보는데, `node_modules`가 이미 있으면 그 단계를 건너뛰므로 같은 명령이 그냥 성공한다. 그래서 루트 `engines`를 실제 하한과 맞춰두는 것이 중요하다 — 맞아 있으면 어긋난 Node가 `node_modules` 상태와 무관하게 프로젝트 이름과 함께 바로 잡히고, 낮게 적어두면 로컬에서는 조용히 성공했다가 새 클론이나 CI에서 처음 터진다.
+- `>=24.16`은 Node 25.x와 26.0\~26.2를 허용하지만 `eslint-plugin-astro`는 이 범위를 거부한다(`^24.16.0 || >=26.3.0`). 둘 다 LTS가 아니라 그대로 뒀다. 해당 버전을 쓰면 루트가 아니라 그 패키지 이름으로 설치가 멈춘다.
 
 ## 콘텐츠 구조
 
