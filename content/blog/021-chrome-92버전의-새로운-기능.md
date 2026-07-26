@@ -1,5 +1,5 @@
 ---
-title: "Chrome 92버전의 새로운 기능"
+title: 'Chrome 92버전의 새로운 기능'
 slug: 021-chrome-92
 publishedAt: 2021-08-20
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/021-thumb.png

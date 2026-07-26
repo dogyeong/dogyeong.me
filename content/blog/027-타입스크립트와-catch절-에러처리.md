@@ -1,5 +1,5 @@
 ---
-title: "타입스크립트와 catch절 에러 처리"
+title: '타입스크립트와 catch절 에러 처리'
 slug: 027-typescript-catch-error-handling
 publishedAt: 2021-11-28
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/027-thumb.png

@@ -1,5 +1,5 @@
 ---
-title: "Vue Reactivity (1)"
+title: 'Vue Reactivity (1)'
 slug: 030-vue-reactivity-1
 publishedAt: 2022-02-19
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/030-thumb.png

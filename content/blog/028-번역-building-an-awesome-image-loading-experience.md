@@ -1,5 +1,5 @@
 ---
-title: "Building an awesome image loading experience"
+title: 'Building an awesome image loading experience'
 slug: 028-building-an-awesome-image-loading-experience
 publishedAt: 2021-12-26
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/028-thumb.png

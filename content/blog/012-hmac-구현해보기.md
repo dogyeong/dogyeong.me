@@ -1,5 +1,5 @@
 ---
-title: "HMAC 구현해보기 (feat. 함수형 프로그래밍)"
+title: 'HMAC 구현해보기 (feat. 함수형 프로그래밍)'
 slug: 012-hmac
 publishedAt: 2020-12-17
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/012-thumb.png

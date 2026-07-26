@@ -1,5 +1,5 @@
 ---
-title: "Execution Context"
+title: 'Execution Context'
 slug: 025-execution-context
 publishedAt: 2021-09-26
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1701010033/thumb/025-2-thumb.png

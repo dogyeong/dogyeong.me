@@ -1,5 +1,5 @@
 ---
-title: "Datadog에 소스맵 적용하기"
+title: 'Datadog에 소스맵 적용하기'
 slug: 045-datadog-sourcemaps
 publishedAt: 2024-04-13
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1712978326/thumb/045-thumb.png

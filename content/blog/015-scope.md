@@ -1,5 +1,5 @@
 ---
-title: "JavaScript - Scope"
+title: 'JavaScript - Scope'
 slug: 015-scope
 publishedAt: 2021-03-17
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/015-thumb.png

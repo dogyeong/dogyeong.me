@@ -1,5 +1,5 @@
 ---
-title: "iterable protocol, iterator protocol"
+title: 'iterable protocol, iterator protocol'
 slug: 024-iterable-protocol-iterator-protocol
 publishedAt: 2021-09-12
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/024-thumb.png

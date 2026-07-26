@@ -1,5 +1,5 @@
 ---
-title: "CORS"
+title: 'CORS'
 slug: 014-cors
 publishedAt: 2021-01-18
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/014-thumb.png

@@ -1,5 +1,5 @@
 ---
-title: "JavaScript - Property Descriptor"
+title: 'JavaScript - Property Descriptor'
 slug: 016-property-descriptor
 publishedAt: 2021-04-11
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/016-thumb.png

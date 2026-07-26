@@ -1,5 +1,5 @@
 ---
-title: "Environment Record"
+title: 'Environment Record'
 slug: 023-environment-record
 publishedAt: 2021-09-06
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/023-thumb.png

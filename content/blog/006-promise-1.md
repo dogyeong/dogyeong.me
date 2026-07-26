@@ -1,5 +1,5 @@
 ---
-title: "Promise(1) - 프로미스의 이해"
+title: 'Promise(1) - 프로미스의 이해'
 slug: 006-promise-1
 publishedAt: 2020-04-23
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/006-thumb.png

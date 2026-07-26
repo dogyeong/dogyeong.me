@@ -1,5 +1,5 @@
 ---
-title: "Signals"
+title: 'Signals'
 slug: 046-signals
 publishedAt: 2024-05-15
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1715484201/thumb/046-thumb.png

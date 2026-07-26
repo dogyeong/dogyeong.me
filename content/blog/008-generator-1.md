@@ -1,5 +1,5 @@
 ---
-title: "Generator(1) - 제너레이터 이해하기"
+title: 'Generator(1) - 제너레이터 이해하기'
 slug: 008-generator-1
 publishedAt: 2020-05-05
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1701010033/thumb/008-2-thumb.png

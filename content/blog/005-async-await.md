@@ -1,5 +1,5 @@
 ---
-title: "async await"
+title: 'async await'
 slug: 005-async-await
 publishedAt: 2020-04-18
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/005-thumb.png

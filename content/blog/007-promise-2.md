@@ -1,5 +1,5 @@
 ---
-title: "Promise(2) - 프로미스 활용하기"
+title: 'Promise(2) - 프로미스 활용하기'
 slug: 007-promise-2
 publishedAt: 2020-04-26
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/006-thumb.png

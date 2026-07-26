@@ -1,5 +1,5 @@
 ---
-title: "stacking workflow"
+title: 'stacking workflow'
 slug: 050-stacking-workflow
 publishedAt: 2025-07-12
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1752328558/thumb/050-thumb.png

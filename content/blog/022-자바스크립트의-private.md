@@ -1,5 +1,5 @@
 ---
-title: "자바스크립트의 private"
+title: '자바스크립트의 private'
 slug: 022-javascript-private
 publishedAt: 2021-08-28
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/022-thumb.png
