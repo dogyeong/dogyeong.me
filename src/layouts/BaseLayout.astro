@@ -63,36 +63,36 @@ const { title } = Astro.props
 </html>
 
 <style is:global lang="scss">
-html,
-body {
-  background-color: rgb(8, 11, 22);
-  min-height: 100vh;
-  font-size: 14px;
+  html,
+  body {
+    background-color: rgb(8, 11, 22);
+    min-height: 100vh;
+    font-size: 14px;
 
-  @media ($tablet) {
-    font-size: 16px;
+    @media ($tablet) {
+      font-size: 16px;
+    }
   }
-}
 
-* {
-  --sb-track-color: transparent;
-  --sb-thumb-color: #{$grey-6};
-  --sb-size: 10px;
+  * {
+    --sb-track-color: transparent;
+    --sb-thumb-color: #{$grey-6};
+    --sb-size: 10px;
 
-  scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
-}
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
 
-::-webkit-scrollbar {
-  width: var(--sb-size);
-}
+  ::-webkit-scrollbar {
+    width: var(--sb-size);
+  }
 
-::-webkit-scrollbar-track {
-  background: var(--sb-track-color);
-  border-radius: 10px;
-}
+  ::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 10px;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: var(--sb-thumb-color);
-  border-radius: 10px;
-}
+  ::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 10px;
+  }
 </style>
