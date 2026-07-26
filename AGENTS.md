@@ -14,12 +14,17 @@ pnpm generate                       # 정적 빌드 → .output/public
 pnpm preview                        # 빌드 결과 미리보기
 pnpm serve                          # sirv로 .output/public 서빙
 pnpm generate-thumbnail-placeholder # 썸네일 플레이스홀더 생성 (아래 참고, 보통 CI에서만 실행)
+pnpm lint                           # ESLint (배포 게이트)
+pnpm format:check                   # Prettier 검사 (배포 게이트)
 ```
 
 - 패키지 매니저는 **pnpm 11** (`packageManager` 필드가 유일한 버전 소스이며, 로컬은 corepack으로 활성화하고 CI는 `pnpm/action-setup`이 같은 필드를 읽는다). npm/yarn 사용 금지.
 - `node_modules`는 pnpm 기본값인 격리 레이아웃이다. `package.json`에 선언하지 않은 패키지는 import할 수 없다. 필요하면 의존성으로 추가한다.
 - 의존성이 설치 시 빌드 스크립트를 실행해야 하면 `pnpm-workspace.yaml`의 `allowBuilds`에 명시해야 한다. pnpm은 기본적으로 이를 차단하며, 미검토 항목이 남아 있으면 `pnpm install`이 실패한다.
-- lint/test 스크립트는 정의되어 있지 않다. ESLint/Prettier 설정만 존재하므로 필요하면 `pnpm exec eslint .` / `pnpm exec prettier --write` 를 직접 호출한다. 테스트 프레임워크는 없다.
+- lint는 `pnpm lint`(ESLint), 포맷은 `pnpm format:check` / `pnpm format`(Prettier)이다. 자동 수정은 `pnpm lint:fix`. **둘 다 배포 워크플로의 게이트이므로 실패하면 배포가 중단된다.** 테스트 프레임워크는 없다.
+- ESLint 설정은 `eslint.config.mjs`(flat config) 하나뿐이다. `.eslintrc.json`은 없다. `@nuxt/eslint-config`를 기반으로 하며 포맷 규칙은 끄고 Prettier에 맡긴다.
+- `thumbnail-placeholder/**/*.js`는 CommonJS Node 스크립트로 예외 처리되어 있다. `require`와 `console.log`가 허용된다.
+- Prettier는 `content/`의 마크다운도 포맷한다. `.prettierignore`에는 빌드 산출물을 적지 않는다 — Prettier 3이 `.gitignore`를 기본 참조하기 때문이다.
 - 배포 파이프라인은 `.github/workflows/firebase-hosting-merge.yml` 하나뿐이다: Node 24.18.0에서 `pnpm install --frozen-lockfile` → `pnpm generate-thumbnail-placeholder` → `pnpm generate` 후 `.output/public` 배포.
 - Node 버전은 `.nvmrc`(`24.18.0`)가 CI 핀과 같은 값을 가리킨다. nvm/fnm을 쓰면 `nvm use`로 맞출 수 있다. `package.json`의 `engines`는 실제 하한(`node >=22.13`, `pnpm >=11`)을 선언한 것이고 핀이 아니다. 하한은 pnpm 11이 정하며 Nuxt(`>=22.0.0`)와 sqip(`>=18.12.1`)보다 높다.
 - **하한에 어긋나면 `pnpm install`이 `ERR_PNPM_UNSUPPORTED_ENGINE`으로 실패한다.** `pnpm-workspace.yaml`의 `engineStrict: true` 때문이다. 이 값이 없으면 pnpm은 경고만 내고 설치를 마치므로, 버전이 어긋난 채로 빌드가 진행되어 뒤늦게 이상한 곳에서 터진다. Node를 올리거나 내려야 하면 `.nvmrc`, `engines`, CI 워크플로의 `node-version` 세 곳을 같이 고쳐야 한다.
