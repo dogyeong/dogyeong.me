@@ -16,7 +16,7 @@ pnpm serve                          # sirv로 .output/public 서빙
 pnpm generate-thumbnail-placeholder # 썸네일 플레이스홀더 생성 (아래 참고, 보통 CI에서만 실행)
 ```
 
-- 패키지 매니저는 **pnpm 11** (`packageManager` 필드 고정, corepack으로 활성화). npm/yarn 사용 금지.
+- 패키지 매니저는 **pnpm 11** (`packageManager` 필드가 유일한 버전 소스이며, 로컬은 corepack으로 활성화하고 CI는 `pnpm/action-setup`이 같은 필드를 읽는다). npm/yarn 사용 금지.
 - `node_modules`는 pnpm 기본값인 격리 레이아웃이다. `package.json`에 선언하지 않은 패키지는 import할 수 없다. 필요하면 의존성으로 추가한다.
 - 의존성이 설치 시 빌드 스크립트를 실행해야 하면 `pnpm-workspace.yaml`의 `allowBuilds`에 명시해야 한다. pnpm은 기본적으로 이를 차단하며, 미검토 항목이 남아 있으면 `pnpm install`이 실패한다.
 - lint/test 스크립트는 정의되어 있지 않다. ESLint/Prettier 설정만 존재하므로 필요하면 `pnpm exec eslint .` / `pnpm exec prettier --write` 를 직접 호출한다. 테스트 프레임워크는 없다.
@@ -54,7 +54,16 @@ pnpm generate-thumbnail-placeholder # 썸네일 플레이스홀더 생성 (아�
 
 `thumbnailPlaceholder: WILL_BE_REPLACED`는 **저장소에 그대로 커밋된 상태로 둔다.** 빌드 시 `thumbnail-placeholder/generator.js`가 썸네일을 내려받아 SQIP로 10px SVG 데이터 URI를 만들고, 마크다운 파일의 이 값을 in-place로 치환한다. 캐시는 `public/thumbnail-placeholder-cache.json`에 etag와 함께 저장되며, 이전 캐시는 **배포된 사이트에서 fetch해온다**(`https://dogyeong.me/thumbnail-placeholder-cache.json`) — 로컬 상태가 아니다. `BlurrableImage`는 값이 `WILL_BE_REPLACED`면 개발 모드로 간주해 블러 배경을 건너뛴다.
 
-로컬에서 이 스크립트를 실행하면 마크다운 파일들이 수정되므로, 커밋 전에 되돌려야 한다.
+로컬에서 이 스크립트를 실행하면 마크다운 파일들이 수정되므로 커밋 전에 되돌려야 한다. 단, `git restore content/`는 **git이 추적하는 파일만 복구한다** — 아직 커밋하지 않은 초안(untracked)이 `content/blog/`에 있으면 그대로 덮어써진다. `git status`는 실행 전후 동일하게 `?? <파일>`만 보여주므로 손상 여부가 드러나지 않는다. 실행 전 추적되지 않은 초안을 먼저 백업해둔다:
+
+```bash
+git -c core.quotePath=false ls-files --others --exclude-standard content/ \
+  | tar -czf /tmp/content-drafts.tar.gz -T -
+# (생성기 실행)
+git restore content/                          # 추적 파일만 원복
+tar -xzf /tmp/content-drafts.tar.gz           # untracked 초안 복구
+rm -f public/thumbnail-placeholder-cache.json # git 미추적·미ignore 상태라 git add . 시 실수로 커밋될 수 있다
+```
 
 ## 아키텍처 관례
 
