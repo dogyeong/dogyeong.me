@@ -1,14 +1,10 @@
 ---
+title: 'Environment Record'
+slug: 023-environment-record
 publishedAt: 2021-09-06
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/023-thumb.png
 thumbnailPlaceholder: WILL_BE_REPLACED
 ---
-
-# Environment Record
-
-:PublishDate{:date="publishedAt"}
-
-:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 > ECMAScript의 명세 중 Environment Record에 대해 정리해봤습니다.
 > ECMAScript 2022를 기준으로 작성하고자 했고, 틀린 점은 댓글로 알려주시면 감사하겠습니다.

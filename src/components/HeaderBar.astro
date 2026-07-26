@@ -1,0 +1,104 @@
+---
+
+---
+
+<header class="header">
+  <a href="/" class="logoWrapper">
+    <svg
+      width="32"
+      height="32"
+      viewBox="0 0 32 32"
+      xmlns="http://www.w3.org/2000/svg"
+      class="logo"
+      aria-label="Go Home"
+    >
+      <path
+        d="M12.9905 24.4006C13.1257 24.429 13.2745 24.4432 13.4368 24.4432C13.599 24.4432 13.7478 24.4432 13.8831 24.4432C15.0191 24.4432 15.9658 24.2161 16.7232 23.7618C17.5076 23.3076 18.1297 22.683 18.5895 21.888C19.0764 21.0931 19.4145 20.1562 19.6038 19.0773C19.8202 17.97 19.9284 16.7634 19.9284 15.4574C19.9284 14.3218 19.8473 13.2145 19.685 12.1356C19.5227 11.0568 19.2387 10.1057 18.8329 9.28233C18.4272 8.45899 17.8727 7.80599 17.1695 7.32334C16.4662 6.8123 15.5601 6.55678 14.4511 6.55678C14.2347 6.55678 13.9912 6.57098 13.7208 6.59937C13.4503 6.59937 13.2068 6.62776 12.9905 6.68454V24.4006ZM25 15.4574C25 17.8991 24.7025 19.9858 24.1074 21.7177C23.5394 23.4211 22.7414 24.8123 21.7136 25.8912C20.6858 26.97 19.4551 27.765 18.0215 28.276C16.615 28.7587 15.0597 29 13.3556 29C12.463 29 11.5839 28.9432 10.7184 28.8297C9.87987 28.7445 8.97375 28.5883 8 28.3612V2.6388C9.13604 2.38328 10.2045 2.21294 11.2053 2.12776C12.206 2.04259 13.1392 2 14.0048 2C15.6547 2 17.1559 2.25552 18.5084 2.76656C19.8878 3.2776 21.0509 4.08675 21.9976 5.19401C22.9443 6.27287 23.6746 7.66404 24.1885 9.36751C24.7295 11.0426 25 13.0726 25 15.4574Z"
+      ></path>
+    </svg>
+  </a>
+  <div class="menuBar">
+    <a class="iconLink" href="https://github.com/dogyeong" target="_blank" title="GitHub">
+      <svg stroke-width="1.8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M16 22.027v-2.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7a5.44 5.44 0 00-1.5-3.75 5.07 5.07 0 00-.09-3.77s-1.18-.35-3.91 1.48a13.38 13.38 0 00-7 0c-2.73-1.83-3.91-1.48-3.91-1.48A5.07 5.07 0 005 5.797a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7a3.37 3.37 0 00-.94 2.58v2.87M9 20.027c-3 .973-5.5 0-7-3"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </a>
+    <a class="iconLink" href="mailto:shroad1802@gmail.com" target="_blank" title="Mail">
+      <svg stroke-width="1.8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 9l5 3.5L17 9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M2 17V7a2 2 0 012-2h16a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2z" stroke-width="1.8"
+        ></path>
+      </svg>
+    </a>
+  </div>
+</header>
+
+<style lang="scss">
+  .header {
+    position: relative;
+    z-index: 100;
+  }
+
+  .logoWrapper {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 100;
+    display: flex;
+
+    @media ($tablet) {
+      top: 32px;
+      left: 32px;
+    }
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      fill: $grey-0;
+      color: $grey-0;
+    }
+  }
+
+  .menuBar {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+
+    @media ($tablet) {
+      top: 32px;
+      right: 32px;
+      column-gap: 16px;
+    }
+
+    a {
+      display: inline-flex;
+    }
+  }
+
+  .iconLink {
+    padding: 4px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      stroke: $grey-5;
+      transition: stroke 0.1s ease-in-out;
+
+      @media ($tablet) {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    &:hover svg {
+      stroke: $grey-0;
+    }
+  }
+</style>

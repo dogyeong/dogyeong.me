@@ -1,14 +1,10 @@
 ---
+title: 'Building an awesome image loading experience'
+slug: 028-building-an-awesome-image-loading-experience
 publishedAt: 2021-12-26
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/028-thumb.png
 thumbnailPlaceholder: WILL_BE_REPLACED
 ---
-
-# Building an awesome image loading experience
-
-:PublishDate{:date="publishedAt"}
-
-:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 > Kent C. Dodds의 [Building an awesome image loading experience](https://kentcdodds.com/blog/building-an-awesome-image-loading-experience)를 번역한 글입니다.
 

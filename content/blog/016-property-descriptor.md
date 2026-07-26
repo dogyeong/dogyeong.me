@@ -1,14 +1,10 @@
 ---
+title: 'JavaScript - Property Descriptor'
+slug: 016-property-descriptor
 publishedAt: 2021-04-11
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/016-thumb.png
 thumbnailPlaceholder: WILL_BE_REPLACED
 ---
-
-# JavaScript - Property Descriptor
-
-:PublishDate{:date="publishedAt"}
-
-:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 자바스크립트의 객체 프로퍼티는 키-값 쌍으로 이루어져 있다. 하지만 내부적으로 단순히 키-값 뿐만 아니라 프로퍼티에 대한 추가적인 정보들을 더 가지고 있는데, 이것을 `Property Descriptor`(프로퍼티 서술자)라고 한다.
 

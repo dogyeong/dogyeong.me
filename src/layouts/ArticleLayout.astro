@@ -1,0 +1,105 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import BlurrableImage from '../components/BlurrableImage.astro'
+import '../styles/prose.scss'
+
+interface Props {
+  title: string
+  publishedAt: Date
+  thumbnail: string
+  thumbnailPlaceholder: string
+}
+const { title, publishedAt, thumbnail, thumbnailPlaceholder } = Astro.props
+---
+
+<BaseLayout title={title}>
+  <main class="article">
+    <div>
+      <h1>{title}</h1>
+      <time class="publishedAt" datetime={publishedAt.toISOString()}>
+        {publishedAt.toLocaleDateString('ko-KR')}
+      </time>
+      <div class="thumbnail">
+        <BlurrableImage
+          src={thumbnail}
+          alt={title}
+          placeholderDataUri={thumbnailPlaceholder}
+          widths={[280, 560, 840, 1120, 1400, 1568]}
+          sizes={[
+            '(max-width: 639px) 90vw',
+            '(max-width: 1023px) 77vw',
+            '(min-width: 1024px) 63vw',
+            '1120px',
+          ]}
+        />
+      </div>
+      <div class="prose">
+        <slot />
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style lang="scss">
+  // pages/blog/[...slug].vue의 .main 그리드를 그대로 옮겼다(24열, 태블릿 3/span20,
+  // 데스크톱 7/span12). 원본은 ContentDoc이 만드는 단일 wrapper div가 .main > *의 유일한
+  // 자식이어서 이 그리드 배치가 그 div 하나에만 적용됐고, 내부의 h1/time/thumbnail/본문은
+  // 모두 그 안에서 보통의 블록 흐름으로 쌓였다.
+  //
+  // fix round 2: 처음에는 h1/time/thumbnail/.prose 넷을 .article의 직접 자식으로 두고
+  // 넷 다 같은 grid-column을 받게 했었다. 그런데 grid item은 서로 마진을 상쇄하지
+  // 않는다 — .publishedAt의 margin-bottom(4rem=64px)과 .thumbnail의 margin-top(40px)이
+  // 그리드 아래서는 그대로 더해져 104px 간격이 됐지만, 원본은 보통의 블록 흐름이라 둘 중
+  // 큰 값(64px)으로 상쇄됐다. 지금처럼 이 넷을 스타일 없는 <div> 하나로 감싸 그 div만
+  // .article의 그리드 아이템이 되게 하면, 원본과 완전히 같은 DOM 모양(그리드 셀 안에
+  // 보통의 블록 흐름)이 되어 마진 상쇄가 자연스럽게 원본과 같아진다. 그리드 컬럼 배치
+  // 자체(24열/3~20/7~12)는 이 wrapper div 하나가 그대로 받으므로 바뀌지 않는다.
+  .article {
+    margin: 0 10vw;
+    padding: 10rem 0;
+    display: grid;
+    grid-template-columns: repeat(24, minmax(0, 1fr));
+    column-gap: 0.75rem;
+    overflow-wrap: break-word;
+    word-break: keep-all;
+
+    > * {
+      grid-column: 1 / span 24;
+
+      @media ($tablet) {
+        grid-column: 3 / span 20;
+      }
+
+      @media ($desktop) {
+        grid-column: 7 / span 12;
+      }
+    }
+  }
+
+  // ProseH1.vue의 .h1. 글 제목은 이제 프론트매터에서 바로 렌더되며(본문 마크다운에는
+  // h1이 없다) Astro 스코프 스타일이라 이 h1 셀렉터는 <Content />가 슬롯으로 렌더하는
+  // 내용에는 적용되지 않는다.
+  h1 {
+    color: $grey-1;
+    font-size: 2.5rem;
+    font-weight: 400;
+  }
+
+  // PublishDate.vue의 .time
+  .publishedAt {
+    display: block;
+    margin-top: 1.5rem;
+    margin-bottom: 4rem;
+    color: $grey-5;
+    font-size: 1rem;
+  }
+
+  // PostThumbnail.vue의 #thumbnail
+  .thumbnail {
+    display: flex;
+    overflow: hidden;
+    border-radius: 8px;
+    margin: 40px -5vw 80px;
+    aspect-ratio: 16 / 9;
+  }
+</style>

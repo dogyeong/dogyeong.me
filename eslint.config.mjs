@@ -1,24 +1,39 @@
-import { createConfigForNuxt } from '@nuxt/eslint-config/flat'
+import astro from 'eslint-plugin-astro'
 import prettier from 'eslint-config-prettier'
 import globals from 'globals'
+import tsParser from '@typescript-eslint/parser'
 
-export default createConfigForNuxt({
-  features: {
-    // 포맷은 Prettier가 전담한다. ESLint의 스타일 규칙을 켜면 두 도구가 충돌한다.
-    stylistic: false,
-  },
-}).append(
+export default [
   {
     // 빌드 산출물과 생성 파일. .gitignore를 자동 반영하지 않으므로 직접 적는다.
-    ignores: ['dist/', '.output/', '.nuxt/', 'node_modules/', '.superpowers/'],
+    // .astro/는 Astro의 content collection 타입 생성 디렉토리다.
+    ignores: ['dist/', '.astro/', 'node_modules/', '.superpowers/'],
+  },
+  // eslint-plugin-astro의 recommended 설정. .astro 파일용 파서·플러그인 등록과
+  // 기본 규칙셋을 포함한다. @typescript-eslint/parser가 설치되어 있으면
+  // frontmatter 스크립트도 타입 인식 파싱으로 처리한다(선택적 peer).
+  ...astro.configs.recommended,
+  // jsx-a11y 규칙을 Astro 컴포넌트용으로 확장한 설정. eslint-plugin-jsx-a11y가
+  // 설치되어 있어야 활성화된다.
+  ...astro.configs['jsx-a11y-recommended'],
+  {
+    // eslint-plugin-astro의 base 설정은 .astro 파일(과 그 안의 embedded script)에만
+    // 파서를 등록한다. 순수 .ts 파일(src/content.config.ts)은 어떤 config 객체의
+    // files 패턴에도 걸리지 않아 ESLint가 아예 건너뛴다 — .astro가 겪던 것과 같은
+    // 종류의 사각지대다. @typescript-eslint/parser는 astro 프론트매터 파싱용으로
+    // 이미 설치돼 있으므로, 그걸 재사용해 .ts 파일도 실제로 파싱되게 한다.
+    files: ['**/*.ts'],
+    languageOptions: {
+      parser: tsParser,
+      sourceType: 'module',
+    },
   },
   {
-    // @nuxt/eslint-config는 no-console을 설정하지 않는다(resolved config에
-    // 해당 규칙이 아예 없음을 확인함). 마이그레이션 전 .eslintrc는 모든 파일에
-    // no-console: warn을 걸었고 실제로 thumbnail-placeholder/*.js에서 4번
-    // 발생했다. 그 동작을 복원한다. error가 아닌 warn인 이유는 예전 설정 그대로를
-    // 유지하기 위함이며, lint 스크립트에 --max-warnings 0이 없으므로 warn은
-    // 배포를 막지 않는다.
+    // eslint-plugin-astro의 recommended/jsx-a11y-recommended는 no-console을
+    // 설정하지 않는다. 마이그레이션 전 .eslintrc는 모든 파일에 no-console: warn을
+    // 걸었고 실제로 thumbnail-placeholder/*.js에서 4번 발생했다. 그 동작을
+    // 복원한다. error가 아닌 warn인 이유는 예전 설정 그대로를 유지하기 위함이며,
+    // lint 스크립트에 --max-warnings 0이 없으므로 warn은 배포를 막지 않는다.
     rules: {
       'no-console': 'warn',
     },
@@ -42,22 +57,4 @@ export default createConfigForNuxt({
   },
   // 반드시 마지막. Prettier와 충돌하는 규칙을 끈다.
   prettier,
-  {
-    // vue/first-attribute-linebreak는 layout 규칙(type: "layout",
-    // fixable: "whitespace")이며 eslint-plugin-vue 자체의
-    // no-layout-rules 목록에 포함되어 있다. 즉 외부 포맷터를 쓸 때는
-    // 꺼야 하는 규칙으로 플러그인이 스스로 지정한 것이다. 하지만
-    // eslint-config-prettier의 vue 비활성화 목록이 아직 이 규칙을
-    // 따라잡지 못해 stylistic: false와 prettier 둘 다를 통과해
-    // 살아남는다. 포맷은 Prettier가 전담하므로 여기서 직접 끈다.
-    //
-    // 이 객체가 prettier 뒤에 오는 것은 "prettier는 마지막이어야
-    // 한다"는 규칙을 어기는 것이 아니다. 그 규칙은 prettier가 끈
-    // 스타일 규칙을 뒤에서 다시 켜는 것을 막기 위한 것이고, 이
-    // 객체는 규칙을 끄기만 하므로 뒤에 와도 안전하다. 순서를
-    // "바로잡는다"며 prettier 앞으로 옮기지 말 것.
-    rules: {
-      'vue/first-attribute-linebreak': 'off',
-    },
-  },
-)
+]

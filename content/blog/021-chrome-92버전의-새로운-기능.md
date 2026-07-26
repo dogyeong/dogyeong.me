@@ -1,14 +1,10 @@
 ---
+title: 'Chrome 92버전의 새로운 기능'
+slug: 021-chrome-92
 publishedAt: 2021-08-20
 thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/021-thumb.png
 thumbnailPlaceholder: WILL_BE_REPLACED
 ---
-
-# Chrome 92버전의 새로운 기능
-
-:PublishDate{:date="publishedAt"}
-
-:PostThumbnail{:src="thumbnail" :placeholder-data-uri="thumbnailPlaceholder"}
 
 > 크롬 92에서 등장한 새로운 기능/기술들을 알아보자
 > 자세한 내용은 아래 문서 참조

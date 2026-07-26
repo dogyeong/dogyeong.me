@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { getCollection, render } from 'astro:content'
+import '../../styles/prose.scss'
+
+const [about] = await getCollection('about')
+const { Content } = await render(about)
+---
+
+<BaseLayout title="dogyeong.me">
+  <main>
+    <div class="prose">
+      <Content />
+    </div>
+  </main>
+</BaseLayout>
