@@ -12,26 +12,22 @@ This file provides guidance to Claude Code (claude.ai/code) and other coding age
 pnpm dev                            # 개발 서버
 pnpm build                          # 정적 빌드 → dist
 pnpm preview                        # 빌드 결과 미리보기
-pnpm generate-thumbnail-placeholder # 썸네일 플레이스홀더 생성 (아래 참고, 보통 CI에서만 실행)
 pnpm lint                           # ESLint (배포 게이트)
 pnpm format:check                   # Prettier 검사 (배포 게이트)
 ```
 
 - 패키지 매니저는 **pnpm 11** (`packageManager` 필드가 유일한 버전 소스이며, 로컬은 corepack으로 활성화하고 CI는 `pnpm/action-setup`이 같은 필드를 읽는다). npm/yarn 사용 금지.
 - `node_modules`는 pnpm 기본값인 격리 레이아웃이다. `package.json`에 선언하지 않은 패키지는 import할 수 없다. 필요하면 의존성으로 추가한다.
-- **아무 코드도 import하지 않지만 지우면 안 되는 의존성이 둘 있다.** "미사용 의존성 정리"를 돌리면 둘 다 후보로 뜨는데, 둘 다 실패가 로컬에서 안 보인다.
-  - `sqip-plugin-data-uri`: `generator.js`가 `plugins: ['data-uri']`로 넘기면 sqip이 런타임에 `sqip-plugin-${name}`으로 해석해 CWD에서 찾는다. 지우면 CI의 썸네일 생성 단계에서만 터진다.
-  - `@astrojs/markdown-remark`: astro의 **optional peer**다. 지워도 pnpm이 자동 설치해서 빌드가 그대로 통과하지만(실측: dist 바이트 동일), 그러면 마크다운 렌더링이 pnpm의 자동 설치 동작에 매달리게 된다. 아래 "마크다운 렌더링" 항목 참고.
+- **아무 코드도 import하지 않지만 지우면 안 되는 의존성이 하나 있다.** `@astrojs/markdown-remark`는 astro의 **optional peer**다. "미사용 의존성 정리"를 돌리면 후보로 뜨고, 지워도 pnpm이 자동 설치해서 빌드가 그대로 통과하지만(실측: dist 바이트 동일), 그러면 마크다운 렌더링이 pnpm의 자동 설치 동작에 매달리게 된다. 아래 "마크다운 렌더링" 항목 참고.
 - 의존성이 설치 시 빌드 스크립트를 실행해야 하면 `pnpm-workspace.yaml`의 `allowBuilds`에 명시해야 한다. pnpm은 기본적으로 이를 차단하며, 미검토 항목이 남아 있으면 `pnpm install`이 실패한다.
 - lint는 `pnpm lint`(ESLint), 포맷은 `pnpm format:check` / `pnpm format`(Prettier)이다. 자동 수정은 `pnpm lint:fix`. **둘 다 배포 워크플로의 게이트이므로 실패하면 배포가 중단된다.** 테스트 프레임워크는 없다.
 - ESLint 설정은 `eslint.config.mjs`(flat config) 하나뿐이다. `.eslintrc.json`은 없다. `@eslint/js`의 recommended(코어 규칙) + `typescript-eslint`의 recommended + `eslint-plugin-astro`의 recommended·jsx-a11y-recommended를 쌓고, 포맷 규칙은 끄고 Prettier(`eslint-config-prettier`, 반드시 마지막)에 맡긴다. **앞의 두 개가 없으면 `no-unused-vars`·`no-undef` 같은 코어 규칙이 하나도 켜지지 않는다** — `eslint-plugin-astro`는 `astro/*` 규칙만 켜므로, Nuxt 시절 `@nuxt/eslint-config`가 담당하던 몫을 대신할 것이 필요하다.
 - `no-undef`는 `.ts`/`.astro` 프론트매터에서는 typescript-eslint가 의도적으로 끈다(타입 검사기가 담당). `.mjs`에서는 살아 있으므로 루트 설정 파일들은 `globals.node`를 선언해야 한다.
-- `thumbnail-placeholder/**/*.js`는 CommonJS Node 스크립트로 예외 처리되어 있다. `require`와 `console.log`가 허용된다.
 - Prettier는 `content/`의 마크다운도 포맷한다. `.prettierignore`에는 빌드 산출물을 적지 않는다 — Prettier 3이 `.gitignore`를 기본 참조하기 때문이다.
-- 배포 파이프라인은 `.github/workflows/firebase-hosting-merge.yml` 하나뿐이다: Node 24.18.0에서 `pnpm install --frozen-lockfile` → `pnpm lint` → `pnpm format:check` → `pnpm generate-thumbnail-placeholder` → `pnpm build` 후 `dist/`를 Firebase Hosting(`firebase.json`의 `hosting.public`)에 배포한다. `firebase.json`의 `hosting.redirects`에는 Nuxt→Astro 마이그레이션으로 슬러그가 바뀐 22편의 301 리다이렉트와 `/sitemap.xml` → `/sitemap-index.xml` 리다이렉트가 있다 — **기존 글의 `slug`를 바꿀 때는 이 목록도 같이 고쳐야 한다.** `source`는 `/blog/013{,/}` 형태로 슬래시 유무를 모두 잡아야 한다. 실제 유입은 슬래시가 붙은 형태이므로 `{,/}`를 빼면 리다이렉트가 통째로 무력해진다.
+- 배포 파이프라인은 `.github/workflows/firebase-hosting-merge.yml` 하나뿐이다: Node 24.18.0에서 `pnpm install --frozen-lockfile` → `pnpm lint` → `pnpm format:check` → `pnpm build` 후 `dist/`를 Firebase Hosting(`firebase.json`의 `hosting.public`)에 배포한다. `firebase.json`의 `hosting.redirects`에는 Nuxt→Astro 마이그레이션으로 슬러그가 바뀐 22편의 301 리다이렉트와 `/sitemap.xml` → `/sitemap-index.xml` 리다이렉트가 있다 — **기존 글의 `slug`를 바꿀 때는 이 목록도 같이 고쳐야 한다.** `source`는 `/blog/013{,/}` 형태로 슬래시 유무를 모두 잡아야 한다. 실제 유입은 슬래시가 붙은 형태이므로 `{,/}`를 빼면 리다이렉트가 통째로 무력해진다.
 - 워크플로의 액션은 이동 가능한 태그가 아니라 **커밋 SHA로 고정**돼 있고 뒤에 `# v7.0.1` 같은 주석이 붙는다. 이 워크플로는 Firebase 서비스 계정 시크릿을 액션에 넘기므로 태그 재지정이 곧 시크릿 유출이다. 버전을 올릴 때는 SHA와 주석을 함께 바꾼다. 참고로 `actions/setup-node`는 v6부터 pnpm의 _암묵적_ 캐싱이 기본 비활성이다 — 이 워크플로처럼 `cache: pnpm`을 명시하면 종전대로 동작한다.
 - Node 버전은 `.nvmrc`(`24.18.0`)가 CI 핀과 같은 값을 가리킨다. nvm/fnm을 쓰면 `nvm use`로 맞출 수 있다. `package.json`의 `engines`(`node >=24.16`, `pnpm >=11`)는 하한 선언이고 핀이 아니다.
-- **하한이 `>=24.16`인 이유는 pnpm이 아니라 `eslint-plugin-astro@3.0.1`(+`astro-eslint-parser`)이다.** 이쪽이 `^22.22.3 || ^24.16.0 || >=26.3.0`을 요구한다(pnpm 11은 `>=22.13`, Astro는 `>=22.12.0`, sqip은 `>=18.12.1`로 훨씬 낮다). Node 22를 지원하려면 `^22.22.3`까지 올려야 하므로, 어차피 CI와 `.nvmrc`가 24를 가리키는 만큼 24로 통일했다.
+- **하한이 `>=24.16`인 이유는 pnpm이 아니라 `eslint-plugin-astro@3.0.1`(+`astro-eslint-parser`)이다.** 이쪽이 `^22.22.3 || ^24.16.0 || >=26.3.0`을 요구한다(pnpm 11은 `>=22.13`, Astro는 `>=22.12.0`으로 훨씬 낮다). Node 22를 지원하려면 `^22.22.3`까지 올려야 하므로, 어차피 CI와 `.nvmrc`가 24를 가리키는 만큼 24로 통일했다.
 - 하한에 어긋나면 `pnpm install`이 `ERR_PNPM_UNSUPPORTED_ENGINE`으로 실패한다. `pnpm-workspace.yaml`의 `engineStrict: true` 때문이다. 이 값이 없으면 pnpm은 경고만 내고 설치를 마치므로, 버전이 어긋난 채로 빌드가 진행되어 뒤늦게 이상한 곳에서 터진다. Node를 올리거나 내려야 하면 `.nvmrc`, `engines`, CI 워크플로의 `node-version` 세 곳을 같이 고쳐야 한다.
 - **루트 `engines` 검사는 즉시 걸리지만 의존성 `engines` 검사는 클린 설치에서만 걸린다**(둘 다 실측). `engineStrict: true`는 의존성의 `engines`도 보는데, `node_modules`가 이미 있으면 그 단계를 건너뛰므로 같은 명령이 그냥 성공한다. 그래서 루트 `engines`를 실제 하한과 맞춰두는 것이 중요하다 — 맞아 있으면 어긋난 Node가 `node_modules` 상태와 무관하게 프로젝트 이름과 함께 바로 잡히고, 낮게 적어두면 로컬에서는 조용히 성공했다가 새 클론이나 CI에서 처음 터진다.
 - `>=24.16`은 Node 25.x와 26.0\~26.2를 허용하지만 `eslint-plugin-astro`는 이 범위를 거부한다(`^24.16.0 || >=26.3.0`). 둘 다 LTS가 아니라 그대로 뒀다. 해당 버전을 쓰면 루트가 아니라 그 패키지 이름으로 설치가 멈춘다.
@@ -47,36 +43,30 @@ pnpm format:check                   # Prettier 검사 (배포 게이트)
 ### 새 글 추가 절차
 
 1. `content/blog/`에서 가장 큰 번호 + 1로 `NNN-제목.md` 생성 (번호는 3자리, 이미지 파일명 접두사로도 쓰인다). 파일명은 라우트에 영향을 주지 않지만 관례를 유지한다.
-2. 프론트매터에 다음 5필드를 모두 채운다:
+2. 프론트매터에 다음 3필드를 모두 채운다. 스키마(`src/content.config.ts`)가 이 셋만 받으며, 셋 다 필수다:
    ```markdown
    ---
    title: '글 제목'
    slug: NNN-my-post-slug
    publishedAt: 2026-06-20
-   thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v.../thumb/NNN-thumb.png
-   thumbnailPlaceholder: WILL_BE_REPLACED
    ---
    ```
    `slug`가 실제 URL(`/blog/<slug>/`)이 된다. 한 번 배포된 글의 `slug`를 바꾸려면 `firebase.json`의 `hosting.redirects`에도 301 리다이렉트를 추가해야 한다.
 3. 본문에 h1(`# 제목`)을 쓰지 않는다. 제목은 프론트매터의 `title`을 `ArticleLayout.astro`가 렌더하므로, 본문은 `##`(h2) 이하로 시작한다.
-4. 본문 이미지는 `public/images/NNN-01.png` 로 넣고 `![](/images/NNN-01.png)` 로 참조한다. 썸네일만 Cloudinary에 올린다 (`BlurrableImage`가 Cloudinary URL의 `/upload/` 를 쪼개 `w_*,q_auto,f_auto` srcset을 생성하므로, 썸네일은 반드시 Cloudinary URL이어야 반응형 이미지가 동작한다).
+4. 본문 이미지는 `public/images/NNN-01.png` 로 넣고 `![](/images/NNN-01.png)` 로 참조한다. **썸네일은 없다** — 목록 페이지와 글 상세 페이지 어디에도 대표 이미지를 쓰지 않으므로 Cloudinary 업로드가 필요 없다.
 5. 커밋 전 `pnpm format`을 실행한다. Prettier는 이제 `content/`의 마크다운도 검사하고, `pnpm format:check`는 배포 게이트다 — 새 글이 Prettier 기준에 어긋나면 배포가 그 자리에서 막힌다. `pnpm format`은 공백만 건드리는 게 아니라 마크다운 소스 자체를 고칠 수 있다(이 브랜치에서 실제로 `~취소선~`이 `~~취소선~~`로 바뀐 사례가 있다). 그러니 실행 후 diff를 다시 읽고 의도한 내용이 맞는지 확인한다.
 
-### thumbnailPlaceholder는 손대지 않는다
+### content/를 일괄 수정할 때는 초안부터 백업한다
 
-`thumbnailPlaceholder: WILL_BE_REPLACED`는 **저장소에 그대로 커밋된 상태로 둔다.** 빌드 시 `thumbnail-placeholder/generator.js`가 썸네일을 내려받아 SQIP로 폭 10px짜리 데이터 URI를 만들고, 마크다운 파일의 이 값을 in-place로 치환한다. 이름과 달리 내용물은 SVG가 아니라 **PNG**다 — `generator.js`가 `.replace('+xml', '')`로 MIME을 `image/svg`로 깎아내는데, 실제 바이트는 PNG 시그니처(`89504e47`)다. 브라우저가 콘텐츠 스니핑으로 정상 렌더하므로(실측) 동작에는 문제가 없다. 고치려 든다면 라벨을 `image/png`로 바로잡는 쪽이지, 반대가 아니다. 캐시는 `public/thumbnail-placeholder-cache.json`에 etag와 함께 저장되며, 이전 캐시는 **배포된 사이트에서 fetch해온다**(`https://dogyeong.me/thumbnail-placeholder-cache.json`) — 로컬 상태가 아니다. `BlurrableImage`는 값이 `WILL_BE_REPLACED`면 개발 모드로 간주해 블러 배경을 건너뛴다.
-
-로컬에서 이 스크립트를 실행하면 마크다운 파일들이 수정되므로 커밋 전에 되돌려야 한다. 단, `git restore content/`는 **git이 추적하는 파일만 복구한다** — 아직 커밋하지 않은 초안(untracked)이 `content/blog/`에 있으면 그대로 덮어써진다. `git status`는 실행 전후 동일하게 `?? <파일>`만 보여주므로 손상 여부가 드러나지 않는다. 실행 전 추적되지 않은 초안을 먼저 백업해둔다:
+`content/` 전체를 건드리는 작업(스크립트 일괄 치환, `pnpm format` 결과 되돌리기 등)을 하고 `git restore content/`로 원복하면, 그 명령은 **git이 추적하는 파일만 복구한다** — 아직 커밋하지 않은 초안(untracked)이 `content/blog/`에 있으면 그대로 덮어써진다. `git status`는 실행 전후 동일하게 `?? <파일>`만 보여주므로 손상 여부가 드러나지 않는다. 실행 전 추적되지 않은 초안을 먼저 백업해둔다:
 
 ```bash
 git -c core.quotePath=false ls-files --others --exclude-standard content/ \
   | tar -czf /tmp/content-drafts.tar.gz -T -
-# (생성기 실행)
+# (일괄 수정 실행)
 git restore content/                # 추적 파일만 원복
 tar -xzf /tmp/content-drafts.tar.gz # untracked 초안 복구
 ```
-
-`public/thumbnail-placeholder-cache.json`은 `.gitignore`에 있으므로 실수로 커밋될 걱정은 없다. 정본은 배포된 사이트에 있는 사본이다.
 
 ## 아키텍처 관례
 
