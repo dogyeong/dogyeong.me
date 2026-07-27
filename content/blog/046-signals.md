@@ -2,8 +2,6 @@
 title: 'Signals'
 slug: 046-signals
 publishedAt: 2024-05-15
-thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1715484201/thumb/046-thumb.png
-thumbnailPlaceholder: WILL_BE_REPLACED
 ---
 
 > 시그널이 무엇인지 알아보고, 그 구현체 중 preact의 코드를 보면서 어떻게 구현했는지 살펴본다.

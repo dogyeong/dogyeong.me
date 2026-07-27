@@ -2,8 +2,6 @@
 title: 'stacking workflow'
 slug: 050-stacking-workflow
 publishedAt: 2025-07-12
-thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1752328558/thumb/050-thumb.png
-thumbnailPlaceholder: WILL_BE_REPLACED
 ---
 
 여러 개발자가 협업하는 프로젝트에서 코드 리뷰를 잘 하는 것은 어려운 부분중에 하나다.

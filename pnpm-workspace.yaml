@@ -11,7 +11,8 @@ engineStrict: true
 # pnpm은 의존성의 라이프사이클 스크립트를 기본 차단하며, strictDepBuilds 기본값이 true라
 # 미검토 항목이 남아 있으면 pnpm install이 non-zero로 종료한다.
 allowBuilds:
-  # libvips 바이너리를 받아온다. 없으면 썸네일 생성기가 런타임에 실패한다.
+  # libvips 바이너리를 받아온다. astro가 이미지 서비스용으로 직접 의존한다
+  # (astro@7.1.3 → sharp@0.35.3). 썸네일 생성기를 걷어낸 뒤에도 남아야 한다.
   sharp: true
   # 플랫폼 바이너리를 설치한다. 없으면 Astro 빌드가 불가능하다.
   esbuild: true

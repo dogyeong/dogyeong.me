@@ -2,8 +2,6 @@
 title: 'iterable protocol, iterator protocol'
 slug: 024-iterable-protocol-iterator-protocol
 publishedAt: 2021-09-12
-thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/024-thumb.png
-thumbnailPlaceholder: WILL_BE_REPLACED
 ---
 
 > ES2015 자바스크립트에서는 이터러블 프로토콜(iterable protocol), 이터레이터 프로토콜(iterator protocol)이라는 개념들이 추가되었다.

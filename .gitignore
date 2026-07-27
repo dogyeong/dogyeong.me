@@ -4,7 +4,3 @@ node_modules
 .env
 dist
 .astro
-
-# 썸네일 생성기가 빌드 때 public/ 아래에 쓰는 캐시. 배포된 사이트에서 받아오는
-# 것이 정본이므로 저장소에 커밋하지 않는다.
-public/thumbnail-placeholder-cache.json

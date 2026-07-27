@@ -2,8 +2,6 @@
 title: 'Execution Context'
 slug: 025-execution-context
 publishedAt: 2021-09-26
-thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1701010033/thumb/025-2-thumb.png
-thumbnailPlaceholder: WILL_BE_REPLACED
 ---
 
 > Execution Context는 자바스크립트 코어에서 가장 중요한 부분 중 하나인데, 구글링해보면 옛날 자료를 기반으로 한게 대부분입니다. (절반정도가 ES3...)

@@ -2,8 +2,6 @@
 title: 'CSRF'
 slug: 011-csrf
 publishedAt: 2020-12-12
-thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/011-thumb.png
-thumbnailPlaceholder: WILL_BE_REPLACED
 ---
 
 ## csrf란?

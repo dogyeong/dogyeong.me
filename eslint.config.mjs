@@ -9,7 +9,7 @@ export default [
   {
     // 빌드 산출물과 생성 파일. .gitignore를 자동 반영하지 않으므로 직접 적는다.
     // .astro/는 Astro의 content collection 타입 생성 디렉토리다.
-    ignores: ['dist/', '.astro/', 'node_modules/', '.superpowers/'],
+    ignores: ['dist/', '.astro/', 'node_modules/'],
   },
   // 코어 규칙셋. eslint-plugin-astro의 recommended는 astro/* 규칙만 켜고
   // no-unused-vars·no-undef 같은 코어 규칙은 하나도 켜지 않는다. Nuxt 시절에는
@@ -50,28 +50,11 @@ export default [
   {
     // eslint-plugin-astro의 recommended/jsx-a11y-recommended는 no-console을
     // 설정하지 않는다. 마이그레이션 전 .eslintrc는 모든 파일에 no-console: warn을
-    // 걸었고 실제로 thumbnail-placeholder/*.js에서 4번 발생했다. 그 동작을
-    // 복원한다. error가 아닌 warn인 이유는 예전 설정 그대로를 유지하기 위함이며,
-    // lint 스크립트에 --max-warnings 0이 없으므로 warn은 배포를 막지 않는다.
+    // 걸었으므로 그 동작을 복원한다. error가 아닌 warn인 이유는 예전 설정 그대로를
+    // 유지하기 위함이며, lint 스크립트에 --max-warnings 0이 없으므로 warn은
+    // 배포를 막지 않는다.
     rules: {
       'no-console': 'warn',
-    },
-  },
-  {
-    // thumbnail-placeholder/*.js 는 CommonJS Node 스크립트다.
-    // require와 console.log는 여기서 올바른 코드이므로 파일을 고치지 않고
-    // 환경을 선언해 처리한다.
-    // no-console은 바로 위 규칙에서 전체 파일에 켰으므로(warn), 여기서는 그
-    // 규칙을 이 파일들에 한해 다시 끈다 — CLI 스크립트라 콘솔 출력이 의도된
-    // 동작이기 때문이다.
-    files: ['thumbnail-placeholder/**/*.js'],
-    languageOptions: {
-      sourceType: 'commonjs',
-      globals: globals.node,
-    },
-    rules: {
-      '@typescript-eslint/no-require-imports': 'off',
-      'no-console': 'off',
     },
   },
   // 반드시 마지막. Prettier와 충돌하는 규칙을 끈다.

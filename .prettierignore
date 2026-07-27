@@ -1,10 +1,6 @@
 # Prettier 3부터 --ignore-path 기본값에 .gitignore가 포함된다.
-# 따라서 dist/, node_modules/, public/thumbnail-placeholder-cache.json 은
-# 여기 적지 않는다. .gitignore가 덮지 못하는 것만 나열한다.
+# 따라서 dist/, node_modules/ 같은 빌드 산출물은 여기 적지 않는다.
+# .gitignore가 덮지 못하는 것만 나열한다.
 
 # pnpm이 생성·관리하는 파일. Prettier가 다시 포맷하면 안 된다.
 pnpm-lock.yaml
-
-# 로컬 에이전트 작업 디렉토리. .git/info/exclude에만 있어 Prettier가
-# .gitignore 기반으로는 걸러내지 못한다.
-.superpowers/

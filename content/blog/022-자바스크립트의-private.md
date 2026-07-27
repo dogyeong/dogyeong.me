@@ -2,8 +2,6 @@
 title: '자바스크립트의 private'
 slug: 022-javascript-private
 publishedAt: 2021-08-28
-thumbnail: https://res.cloudinary.com/dpefbi4ts/image/upload/v1679722820/thumb/022-thumb.png
-thumbnailPlaceholder: WILL_BE_REPLACED
 ---
 
 요즘 리팩토링에 관한 책을 읽고 있는데 객체를 캡슐화하는 방법을 보면서 어떤 방법들이 있을 지 호기심이 생겼다. 그래서 자바스크립트에서 정보를 은닉할 수 있는 방법에 대해 알아보았다.
