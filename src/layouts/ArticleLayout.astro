@@ -1,15 +1,12 @@
 ---
 import BaseLayout from './BaseLayout.astro'
-import BlurrableImage from '../components/BlurrableImage.astro'
 import '../styles/prose.scss'
 
 interface Props {
   title: string
   publishedAt: Date
-  thumbnail: string
-  thumbnailPlaceholder: string
 }
-const { title, publishedAt, thumbnail, thumbnailPlaceholder } = Astro.props
+const { title, publishedAt } = Astro.props
 ---
 
 <BaseLayout title={title}>
@@ -19,20 +16,6 @@ const { title, publishedAt, thumbnail, thumbnailPlaceholder } = Astro.props
       <time class="publishedAt" datetime={publishedAt.toISOString()}>
         {publishedAt.toLocaleDateString('ko-KR')}
       </time>
-      <div class="thumbnail">
-        <BlurrableImage
-          src={thumbnail}
-          alt={title}
-          placeholderDataUri={thumbnailPlaceholder}
-          widths={[280, 560, 840, 1120, 1400, 1568]}
-          sizes={[
-            '(max-width: 639px) 90vw',
-            '(max-width: 1023px) 77vw',
-            '(min-width: 1024px) 63vw',
-            '1120px',
-          ]}
-        />
-      </div>
       <div class="prose">
         <slot />
       </div>
@@ -43,17 +26,15 @@ const { title, publishedAt, thumbnail, thumbnailPlaceholder } = Astro.props
 <style lang="scss">
   // pages/blog/[...slug].vue의 .main 그리드를 그대로 옮겼다(24열, 태블릿 3/span20,
   // 데스크톱 7/span12). 원본은 ContentDoc이 만드는 단일 wrapper div가 .main > *의 유일한
-  // 자식이어서 이 그리드 배치가 그 div 하나에만 적용됐고, 내부의 h1/time/thumbnail/본문은
-  // 모두 그 안에서 보통의 블록 흐름으로 쌓였다.
+  // 자식이어서 이 그리드 배치가 그 div 하나에만 적용됐고, 내부의 h1/time/본문은 모두
+  // 그 안에서 보통의 블록 흐름으로 쌓였다.
   //
-  // fix round 2: 처음에는 h1/time/thumbnail/.prose 넷을 .article의 직접 자식으로 두고
-  // 넷 다 같은 grid-column을 받게 했었다. 그런데 grid item은 서로 마진을 상쇄하지
-  // 않는다 — .publishedAt의 margin-bottom(4rem=64px)과 .thumbnail의 margin-top(40px)이
-  // 그리드 아래서는 그대로 더해져 104px 간격이 됐지만, 원본은 보통의 블록 흐름이라 둘 중
-  // 큰 값(64px)으로 상쇄됐다. 지금처럼 이 넷을 스타일 없는 <div> 하나로 감싸 그 div만
-  // .article의 그리드 아이템이 되게 하면, 원본과 완전히 같은 DOM 모양(그리드 셀 안에
-  // 보통의 블록 흐름)이 되어 마진 상쇄가 자연스럽게 원본과 같아진다. 그리드 컬럼 배치
-  // 자체(24열/3~20/7~12)는 이 wrapper div 하나가 그대로 받으므로 바뀌지 않는다.
+  // 안쪽의 스타일 없는 <div> wrapper를 지우면 안 된다. h1/time/.prose를 .article의
+  // 직접 자식으로 두면 셋 다 그리드 아이템이 되는데, grid item은 서로 마진을 상쇄하지
+  // 않는다 — .publishedAt의 margin-bottom(5rem=80px)과 .prose 첫 h2의
+  // margin-top(5rem=80px)이 그대로 더해져 160px이 된다. 지금처럼 wrapper div 하나만
+  // 그리드 아이템이 되게 하면 그 안은 보통의 블록 흐름이라 둘 중 큰 값(80px)으로
+  // 상쇄된다. 그리드 컬럼 배치 자체(24열/3~20/7~12)는 이 wrapper div가 그대로 받는다.
   .article {
     margin: 0 10vw;
     padding: 10rem 0;
@@ -89,17 +70,12 @@ const { title, publishedAt, thumbnail, thumbnailPlaceholder } = Astro.props
   .publishedAt {
     display: block;
     margin-top: 1.5rem;
-    margin-bottom: 4rem;
+    // 원본은 4rem이었고, 그 아래 썸네일의 margin-bottom(80px)이 본문 앞 간격을
+    // 결정했다 — 첫 요소가 h2든 인용문이든 47편 모두 80px로 일정했다(실측). 썸네일이
+    // 빠진 지금 4rem을 두면 h2로 시작하는 11편만 80px(h2의 margin-top과 상쇄), 나머지
+    // 36편은 64px이 되어 글마다 달라진다. 5rem으로 올려 이전 간격을 그대로 복원한다.
+    margin-bottom: 5rem;
     color: $grey-5;
     font-size: 1rem;
-  }
-
-  // PostThumbnail.vue의 #thumbnail
-  .thumbnail {
-    display: flex;
-    overflow: hidden;
-    border-radius: 8px;
-    margin: 40px -5vw 80px;
-    aspect-ratio: 16 / 9;
   }
 </style>

@@ -12,11 +12,6 @@ const { post } = Astro.props
 const { Content } = await render(post)
 ---
 
-<ArticleLayout
-  title={post.data.title}
-  publishedAt={post.data.publishedAt}
-  thumbnail={post.data.thumbnail}
-  thumbnailPlaceholder={post.data.thumbnailPlaceholder}
->
+<ArticleLayout title={post.data.title} publishedAt={post.data.publishedAt}>
   <Content />
 </ArticleLayout>

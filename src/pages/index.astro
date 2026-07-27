@@ -7,7 +7,6 @@ import { getCollection } from 'astro:content'
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
 )
-const FALLBACK = 'https://res.cloudinary.com/dpefbi4ts/image/upload/v1688878315/thumb/sample.png'
 ---
 
 <BaseLayout title="dogyeong.me">
@@ -15,13 +14,7 @@ const FALLBACK = 'https://res.cloudinary.com/dpefbi4ts/image/upload/v1688878315/
     <PostCardList>
       {
         posts.map((post) => (
-          <PostCard
-            to={`/blog/${post.id}/`}
-            imageSrc={post.data.thumbnail || FALLBACK}
-            title={post.data.title}
-            publishedAt={post.data.publishedAt}
-            thumbnailPlaceholder={post.data.thumbnailPlaceholder}
-          />
+          <PostCard to={`/blog/${post.id}/`} title={post.data.title} publishedAt={post.data.publishedAt} />
         ))
       }
     </PostCardList>

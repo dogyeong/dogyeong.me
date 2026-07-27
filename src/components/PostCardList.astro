@@ -7,17 +7,10 @@
 </section>
 
 <style lang="scss">
+  // 항목 간 간격과 구분은 PostCard의 padding + border-top이 담당한다.
+  // 여기서는 목록의 최대 너비만 잡는다.
   .section {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    row-gap: 40px;
-    column-gap: 32px;
     max-width: 1280px;
     margin: 0 auto;
-
-    @media ($tablet) {
-      grid-template-columns: repeat(2, 1fr);
-      row-gap: 20vh;
-    }
   }
 </style>

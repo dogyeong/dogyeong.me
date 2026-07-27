@@ -1,112 +1,69 @@
 ---
-import BlurrableImage from './BlurrableImage.astro'
-
 interface Props {
   title: string
   to: string
-  imageSrc: string
   publishedAt?: Date
-  thumbnailPlaceholder?: string
 }
-const { title, to, imageSrc, publishedAt, thumbnailPlaceholder } = Astro.props
+const { title, to, publishedAt } = Astro.props
 ---
 
 <article class="wrapper">
   <a href={to} class="link">
-    <span class="imgWrapper">
-      <span class="img">
-        <BlurrableImage
-          src={imageSrc}
-          alt={title}
-          placeholderDataUri={thumbnailPlaceholder}
-          widths={[280, 560, 840, 1120, 1400, 1568]}
-          sizes={['(max-width: 639px) 80vw', '(max-width: 1680px) 40vw', '1120px']}
-        />
-      </span>
-    </span>
-    <div class="description">
-      <h2 class="title">{title}</h2>
-      {
-        publishedAt && (
-          <time datetime={publishedAt.toISOString()} class="publishedAt" aria-label="publish date">
-            {publishedAt.toLocaleDateString('ko-KR')}
-          </time>
-        )
-      }
-    </div>
+    {
+      publishedAt && (
+        <time datetime={publishedAt.toISOString()} class="publishedAt" aria-label="publish date">
+          {publishedAt.toLocaleDateString('ko-KR')}
+        </time>
+      )
+    }
+    <h2 class="title">{title}</h2>
   </a>
 </article>
 
 <style lang="scss">
-  .wrapper {
-    width: 100%;
+  // 행 구분선은 목록의 첫 항목 위에는 붙지 않아야 하므로 인접 형제에만 준다.
+  // PostCard 인스턴스들은 같은 스코프 해시를 공유하므로 이 선택자가 동작한다.
+  .wrapper + .wrapper {
+    border-top: 1px solid rgba($grey-0, 0.09);
   }
 
   .link {
-    position: relative;
     display: block;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+    padding: 26px 0;
     font-size: 1.5rem;
 
     @media ($desktop) {
+      padding: 32px 0;
       font-size: 2rem;
     }
 
     &:hover .title {
       text-decoration: underline;
     }
-  }
 
-  .imgWrapper {
-    display: block;
-    position: relative;
-    padding-top: 56.25%;
-    width: 100%;
-  }
-
-  .img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-    z-index: 1;
-    background-size: cover;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    &:hover .publishedAt {
+      color: $indigo-3;
     }
   }
 
-  .description {
-    padding: 0 32px;
+  .publishedAt {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.8125rem;
+    font-weight: 300;
+    color: $grey-6;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.03em;
+    transition: color 0.15s ease-in-out;
   }
 
   .title {
-    display: flex;
-    position: relative;
-    justify-content: flex-start;
-    align-items: center;
     font-size: inherit;
     font-weight: 600;
+    line-height: 1.35;
     color: $grey-0;
-    margin-top: -0.7em;
-    z-index: 3;
     word-break: keep-all;
-    text-shadow: 0 0 12px rgba($grey-9, 0.5);
-  }
-
-  .publishedAt {
-    font-size: 1rem;
-    font-weight: 300;
-    color: $grey-2;
+    text-underline-offset: 7px;
+    text-decoration-thickness: 1px;
   }
 </style>
